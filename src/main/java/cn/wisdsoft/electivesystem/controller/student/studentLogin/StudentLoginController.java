@@ -1,5 +1,6 @@
 package cn.wisdsoft.electivesystem.controller.student.studentLogin;
 
+import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemConfig;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -12,6 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  **/
 
 @Controller
-@RequestMapping("/studentLogin")
+@RequestMapping(value = ElectiveSystemConfig.STUDENT_LOGIN_MAPPING)
 public class StudentLoginController {
 }

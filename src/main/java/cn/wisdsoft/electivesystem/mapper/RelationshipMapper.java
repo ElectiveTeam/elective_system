@@ -3,6 +3,8 @@ package cn.wisdsoft.electivesystem.mapper;
 import cn.wisdsoft.electivesystem.pojo.Relationship;
 import cn.wisdsoft.electivesystem.pojo.RelationshipExample;
 import java.util.List;
+
+import cn.wisdsoft.electivesystem.pojo.StudentDo;
 import org.apache.ibatis.annotations.Param;
 
 public interface RelationshipMapper {
@@ -27,4 +29,11 @@ public interface RelationshipMapper {
     int updateByPrimaryKeySelective(Relationship record);
 
     int updateByPrimaryKey(Relationship record);
+
+    /**
+     * 查询学生已选课程
+     * @param stuId  学生ID
+     * @return  自定义Vo类
+     */
+    List<StudentDo> selectUserCurriculum(String stuId);
 }

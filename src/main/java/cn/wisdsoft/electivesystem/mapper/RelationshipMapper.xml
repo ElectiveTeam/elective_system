@@ -193,4 +193,23 @@
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!--
+    查询学生已选课程
+  -->
+  <select id="selectUserCurriculum" resultType="cn.wisdsoft.electivesystem.pojo.StudentDo">
+    select
+	c.cu_name as cuName,
+	s.class_time as classTime,
+	s.place as place,
+	s.cu_id as cuId,
+	c.class_hour as classHour,
+	c.credit as credit,
+	c.`describe` as `describe`,
+	c.grade as grade,
+	c.teacher_id as teacherId
+	from selection s,curriculum c
+	where
+	s.id in (select select_id from relationship where stu_id = #{stuId}) and s.cu_id = c.id
+  </select>
 </mapper>
