@@ -225,4 +225,10 @@
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <update id="editStuAchieve">
+    update achievement set achieve = #{achieve,jdbcType=INTEGER} where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="saveAchieve" parameterType="Integer">
+    update achievement set status = 1 where select_id = #{selectId,jdbcType=INTEGER}
+  </update>
 </mapper>

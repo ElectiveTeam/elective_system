@@ -28,4 +28,9 @@ public interface AchievementMapper {
     int updateByPrimaryKeySelective(Achievement record);
 
     int updateByPrimaryKey(Achievement record);
+
+    int editStuAchieve(@Param("id") int id, @Param("achieve")int achieve);
+
+    int saveAchieve(int selectId);
+
 }
