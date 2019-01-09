@@ -1,0 +1,7 @@
+{
+    "version": "v1.0.0",
+    "author": "智软工作室",
+    "server": "Tomcat7+Nginx",
+    "dataBase": "MySQL5.5+Redis",
+    "maxUpload": "5M"
+}

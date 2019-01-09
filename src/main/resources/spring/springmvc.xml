@@ -17,6 +17,11 @@
     <!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
     <context:component-scan base-package="cn.wisdsoft.electivesystem.controller"/>
 
+    <mvc:resources mapping="/elective/js/**" location="/WEB-INF/js/" />
+    <mvc:resources mapping="/elective/css/**" location="/WEB-INF/css/" />
+    <mvc:resources mapping="/elective/img/**" location="/WEB-INF/img/" />
+    <mvc:resources mapping="/elective/layui/**" location="/WEB-INF/layui/" />
+
     <!-- 定义跳转的文件的前后缀 ，视图模式配置 -->
     <bean
             class="org.springframework.web.servlet.view.InternalResourceViewResolver">
