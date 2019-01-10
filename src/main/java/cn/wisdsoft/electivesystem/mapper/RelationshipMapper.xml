@@ -197,19 +197,45 @@
   <!--
     查询学生已选课程
   -->
-  <select id="selectUserCurriculum" resultType="cn.wisdsoft.electivesystem.pojo.StudentDo">
-    select
-	c.cu_name as cuName,
-	s.class_time as classTime,
-	s.place as place,
-	s.cu_id as cuId,
-	c.class_hour as classHour,
-	c.credit as credit,
-	c.`describe` as `describe`,
-	c.grade as grade,
-	c.teacher_id as teacherId
-	from selection s,curriculum c
-	where
-	s.id in (select select_id from relationship where stu_id = #{stuId}) and s.cu_id = c.id
+  <select id="selectUserCurriculum" resultMap="myMap">
+    SELECT
+      t.id AS termId,
+      term_name AS termName,
+      college AS college,
+      t.`status` AS termStatus,
+      cu.id AS curriculumId,
+      cu.cu_name AS cuName,
+      class_time AS classTime,
+      place AS place,
+      class_hour AS classHour,
+      credit AS credit,
+      grade AS grade,
+      r.select_id AS selectId,
+      teacher_id AS teacherId
+    FROM term_resource AS t,course AS c, curriculum AS cu,selection AS s, relationship AS r
+    WHERE
+      t.id = c.tr_id AND
+      c.id = cu.cou_id AND
+      cu.id = s.cu_id AND
+      s.id = r.select_id AND
+      r.stu_id = #{stuId}
+    ORDER BY t.id ASC
   </select>
+  <resultMap id="myMap" type="cn.wisdsoft.electivesystem.pojo.TermResource">
+    <id property="id" column="termId" />
+    <result property="termName" column="termName" />
+    <result property="college" column="college" />
+    <result property="status" column="termStatus" />
+    <collection property="studentDos" ofType="cn.wisdsoft.electivesystem.pojo.StudentDo">
+      <result property="curriculumId" column="curriculumId" />
+      <result property="cuName" column="cuName" />
+      <result property="place" column="place" />
+      <result property="classTime" column="classTime" />
+      <result property="classHour" column="classHour" />
+      <result property="credit" column="credit" />
+      <result property="grade" column="grade" />
+      <result property="selectId" column="selectId" />
+      <result property="teacherId" column="teacherId" />
+    </collection>
+  </resultMap>
 </mapper>

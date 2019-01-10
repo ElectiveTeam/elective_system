@@ -77,7 +77,7 @@
     id, cu_name, teacher_id, class_hour, credit, grade, status, cou_id, remark
   </sql>
   <sql id="Blob_Column_List">
-    describe
+    `describe`
   </sql>
   <select id="selectByExampleWithBLOBs" parameterType="cn.wisdsoft.electivesystem.pojo.CurriculumExample" resultMap="ResultMapWithBLOBs">
     select
@@ -168,7 +168,7 @@
         remark,
       </if>
       <if test="describe != null">
-        describe,
+        `describe`,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -241,7 +241,7 @@
         remark = #{record.remark,jdbcType=VARCHAR},
       </if>
       <if test="record.describe != null">
-        describe = #{record.describe,jdbcType=LONGVARCHAR},
+        `describe` = #{record.describe,jdbcType=LONGVARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -307,7 +307,7 @@
         remark = #{remark,jdbcType=VARCHAR},
       </if>
       <if test="describe != null">
-        describe = #{describe,jdbcType=LONGVARCHAR},
+        `describe` = #{describe,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -337,4 +337,30 @@
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectAllCurriculum" resultType="cn.wisdsoft.electivesystem.pojo.CurriculumDo">
+    select
+      t.term_name as termName,
+      t.college as college,
+      co.id as courseId,
+      c.id as curriculumId,
+      c.cu_name as curriculumName,
+      c.teacher_id as teacherId,
+      c.class_hour as classHour,
+      c.credit as credit,
+      s.class_time as classTime,
+      s.place as place,
+      s.max_number as maxNumber
+	from
+      term_resource as t,
+      course as co,
+      curriculum as c,
+      selection as s
+	where
+      co.tr_id = t.id and
+      c.cou_id = co.id and
+      s.cu_id = c.id and
+      c.status = 2 and
+      (t.status = 1 or t.status = 3) and
+      t.term_name = #{termName}
+  </select>
 </mapper>
