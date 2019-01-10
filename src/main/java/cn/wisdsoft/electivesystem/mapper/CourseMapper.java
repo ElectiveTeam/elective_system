@@ -27,4 +27,10 @@ public interface CourseMapper {
     int updateByPrimaryKeySelective(Course record);
 
     int updateByPrimaryKey(Course record);
+
+    /**
+     * 无条件查询所有的分组
+     * @return
+     */
+    List<Course> SelectCource();
 }

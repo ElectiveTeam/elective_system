@@ -54,4 +54,30 @@ public class SelectedCurriculumController {
     //如果选课人数大于等于课程最大人数则无法选课
     }
 
+
+    /**
+     * Select details elective system result.
+     * 通过课程ID查询课程信息
+     *
+     * @param curriculumId the curriculum id  课程ID
+     * @return the elective system result  包含课程信息的JSON数据
+     */
+    @RequestMapping("/selectDetails")
+    @ResponseBody
+    public ElectiveSystemResult selectDetails(int curriculumId) {
+        return selectedCurriculumService.selectCurriculum(curriculumId);
+    }
+
+    /**
+     * Select all curriculum elective system result.
+     * 查询当前学期所有课程信息
+     *
+     * @param termName the term name  学期名称
+     * @return the elective system result  包含课程信息的JSON数据
+     */
+    @RequestMapping("/selectAllCurriculum")
+    @ResponseBody
+    public ElectiveSystemResult selectAllCurriculum(String termName) {
+        return selectedCurriculumService.selectAllCurriculum(termName);
+    }
 }

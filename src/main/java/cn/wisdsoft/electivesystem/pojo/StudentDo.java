@@ -2,9 +2,19 @@ package cn.wisdsoft.electivesystem.pojo;
 
 import java.io.Serializable;
 
+/**
+ * @ Author     ：高伟萌.
+ * @ Date       ：Created in 2019-01-10 14:29
+ * @ Description：学生课程信息Do层
+ */
 public class StudentDo implements Serializable {
+    private static final long serialVersionUID = 4019750860923706046L;
 
-    private static final long serialVersionUID = 3325219718079238970L;
+    /**
+     * 课程ID
+     */
+    private Integer curriculumId;
+
     /**
      * 课程名称
      */
@@ -21,24 +31,14 @@ public class StudentDo implements Serializable {
     private String place;
 
     /**
-     * 课程编号
+     * 学时
      */
-    private int cuId;
-
-    /**
-     * 课时
-     */
-    private int classHour;
+    private Integer classHour;
 
     /**
      * 学分
      */
-    private double credit;
-
-    /**
-     * 课程简介
-     */
-    private String describe;
+    private Double credit;
 
     /**
      * 年级
@@ -46,9 +46,22 @@ public class StudentDo implements Serializable {
     private String grade;
 
     /**
-     * 教师Id(职工号)
+     * 选课表Id
+     */
+    private Integer selectId;
+
+    /**
+     * 教师编号
      */
     private String teacherId;
+
+    public Integer getCurriculumId() {
+        return curriculumId;
+    }
+
+    public void setCurriculumId(Integer curriculumId) {
+        this.curriculumId = curriculumId;
+    }
 
     public String getCuName() {
         return cuName;
@@ -74,36 +87,20 @@ public class StudentDo implements Serializable {
         this.place = place;
     }
 
-    public int getCuId() {
-        return cuId;
-    }
-
-    public void setCuId(int cuId) {
-        this.cuId = cuId;
-    }
-
-    public int getClassHour() {
+    public Integer getClassHour() {
         return classHour;
     }
 
-    public void setClassHour(int classHour) {
+    public void setClassHour(Integer classHour) {
         this.classHour = classHour;
     }
 
-    public double getCredit() {
+    public Double getCredit() {
         return credit;
     }
 
-    public void setCredit(double credit) {
+    public void setCredit(Double credit) {
         this.credit = credit;
-    }
-
-    public String getDescribe() {
-        return describe;
-    }
-
-    public void setDescribe(String describe) {
-        this.describe = describe;
     }
 
     public String getGrade() {
@@ -112,6 +109,14 @@ public class StudentDo implements Serializable {
 
     public void setGrade(String grade) {
         this.grade = grade;
+    }
+
+    public Integer getSelectId() {
+        return selectId;
+    }
+
+    public void setSelectId(Integer selectId) {
+        this.selectId = selectId;
     }
 
     public String getTeacherId() {
