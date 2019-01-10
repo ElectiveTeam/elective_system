@@ -20,4 +20,15 @@ public interface PersonCenterService {
      * @return the elective system result
      */
     ElectiveSystemResult selectUserCurriculum(String stuId);
+
+    /**
+     * @Author 李泽宇
+     * @Description 学生退课
+     * @Date 2019/1/10 14:23
+     * @Param
+     * @return
+     **/
+    ElectiveSystemResult delRelationByStuIdAndSelectId(String stuId,int selectId);
+
+
 }

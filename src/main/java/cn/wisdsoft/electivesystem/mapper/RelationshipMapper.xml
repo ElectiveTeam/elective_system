@@ -212,4 +212,12 @@
 	where
 	s.id in (select select_id from relationship where stu_id = #{stuId}) and s.cu_id = c.id
   </select>
+
+  <!--
+  学生退课
+  -->
+  <delete id="delRelationByStuIdAndSelectId">
+    delete from relationship
+    where stu_id = #{stuId} AND select_id = #{selectId};
+  </delete>
 </mapper>

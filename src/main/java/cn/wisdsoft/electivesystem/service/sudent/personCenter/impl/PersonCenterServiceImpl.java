@@ -33,4 +33,13 @@ public class PersonCenterServiceImpl implements PersonCenterService {
         List<StudentDo> studentDos = relationshipMapper.selectUserCurriculum(stuId);
         return ElectiveSystemResult.ok(studentDos);
     }
+
+    @Override
+    public ElectiveSystemResult delRelationByStuIdAndSelectId(String stuId, int selectId) {
+        int count = relationshipMapper.delRelationByStuIdAndSelectId(stuId,selectId);
+        if(count>0){
+            return ElectiveSystemResult.ok("删除成功！");
+        }
+        return ElectiveSystemResult.ok("没有数据！");
+    }
 }
