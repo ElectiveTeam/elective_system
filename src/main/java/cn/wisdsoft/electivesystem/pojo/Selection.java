@@ -42,10 +42,6 @@ public class Selection implements Serializable {
      */
     private Integer minNumber;
 
-    /**
-     * 状态（0已通过、1未通过）
-     */
-    private Integer status;
 
     private String remark;
 
@@ -108,14 +104,6 @@ public class Selection implements Serializable {
 
     public void setMinNumber(Integer minNumber) {
         this.minNumber = minNumber;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
     }
 
     public String getRemark() {
