@@ -204,6 +204,7 @@
       college AS college,
       t.`status` AS termStatus,
       cu.id AS curriculumId,
+      c.id AS courseId,
       cu.cu_name AS cuName,
       class_time AS classTime,
       place AS place,
@@ -228,6 +229,7 @@
     <result property="status" column="termStatus" />
     <collection property="studentDos" ofType="cn.wisdsoft.electivesystem.pojo.StudentDo">
       <result property="curriculumId" column="curriculumId" />
+      <result property="courseId" column="courseId" />
       <result property="cuName" column="cuName" />
       <result property="place" column="place" />
       <result property="classTime" column="classTime" />

@@ -16,6 +16,11 @@ public class StudentDo implements Serializable {
     private Integer curriculumId;
 
     /**
+     * 课程组ID
+     */
+    private Integer courseId;
+
+    /**
      * 课程名称
      */
     private String cuName;
@@ -61,6 +66,14 @@ public class StudentDo implements Serializable {
 
     public void setCurriculumId(Integer curriculumId) {
         this.curriculumId = curriculumId;
+    }
+
+    public Integer getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(Integer courseId) {
+        this.courseId = courseId;
     }
 
     public String getCuName() {
