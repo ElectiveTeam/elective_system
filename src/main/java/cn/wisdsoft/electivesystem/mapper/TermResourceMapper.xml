@@ -240,8 +240,4 @@
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectAllCource" resultMap="BaseResultMap">
-    select <include refid="Base_Column_List"/>
-    from term_resource
-  </select>
 </mapper>

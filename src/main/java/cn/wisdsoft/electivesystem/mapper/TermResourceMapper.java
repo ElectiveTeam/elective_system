@@ -2,9 +2,8 @@ package cn.wisdsoft.electivesystem.mapper;
 
 import cn.wisdsoft.electivesystem.pojo.TermResource;
 import cn.wisdsoft.electivesystem.pojo.TermResourceExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface TermResourceMapper {
     long countByExample(TermResourceExample example);
@@ -28,6 +27,4 @@ public interface TermResourceMapper {
     int updateByPrimaryKeySelective(TermResource record);
 
     int updateByPrimaryKey(TermResource record);
-
-    List<TermResource> selectAllCource();
 }

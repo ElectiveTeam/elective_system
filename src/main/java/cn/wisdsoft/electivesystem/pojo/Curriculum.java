@@ -1,60 +1,28 @@
 package cn.wisdsoft.electivesystem.pojo;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
-/**
- * <p>ClassName: Curriculum</p>
- * <p>Description:课程对象</p>
- *
- * @author 刘玉龙
- * @version 1.0
- * @date 2019/1/7 21:45
- */
-public class Curriculum implements Serializable {
-    private static final long serialVersionUID = 5590203364972740975L;
+public class Curriculum {
     private Integer id;
 
-    /**
-     * 课程名称
-     */
     private String cuName;
 
-    /**
-     * 教师编号
-     */
     private String teacherId;
 
-    /**
-     * 学时
-     */
+    private String teacherName;
+
     private Integer classHour;
 
-    /**
-     * 学分
-     */
     private BigDecimal credit;
 
-    /**
-     * 年级
-     */
     private String grade;
 
-    /**
-     * 状态（0编辑、1未审核、2已通过、3未通过）
-     */
     private Integer status;
 
-    /**
-     * 课程组外键
-     */
     private Integer couId;
 
     private String remark;
 
-    /**
-     * 描述
-     */
     private String describe;
 
     public Integer getId() {
@@ -79,6 +47,14 @@ public class Curriculum implements Serializable {
 
     public void setTeacherId(String teacherId) {
         this.teacherId = teacherId == null ? null : teacherId.trim();
+    }
+
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName == null ? null : teacherName.trim();
     }
 
     public Integer getClassHour() {
