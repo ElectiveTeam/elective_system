@@ -1,16 +1,42 @@
 package cn.wisdsoft.electivesystem.pojo;
 
-public class Achievement {
+import java.io.Serializable;
+
+/**
+ * <p>ClassName: Achievement</p>
+ * <p>Description:成绩对象</p>
+ *
+ * @author 刘玉龙
+ * @version 1.0
+ * @date 2019/1/7 21:45
+ */
+public class Achievement implements Serializable {
+    private static final long serialVersionUID = 6645453281008711637L;
     private Integer id;
 
+    /**
+     * 学生编号
+     */
     private String stuId;
 
+    /**
+     * 学生姓名
+     */
     private String stuName;
 
+    /**
+     * 选课编号
+     */
     private Integer selectId;
 
+    /**
+     * 成绩
+     */
     private Integer achieve;
 
+    /**
+     * 状态（0未发布，不可查看，1已发布，可查看）
+     */
     private Integer status;
 
     private String remark;

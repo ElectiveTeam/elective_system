@@ -56,9 +56,9 @@ public class StudentDo implements Serializable {
     private Integer selectId;
 
     /**
-     * 教师编号
+     * 教师名称
      */
-    private String teacherId;
+    private String teacherName;
 
     public Integer getCurriculumId() {
         return curriculumId;
@@ -132,11 +132,11 @@ public class StudentDo implements Serializable {
         this.selectId = selectId;
     }
 
-    public String getTeacherId() {
-        return teacherId;
+    public String getTeacherName() {
+        return teacherName;
     }
 
-    public void setTeacherId(String teacherId) {
-        this.teacherId = teacherId;
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
     }
 }

@@ -1,6 +1,7 @@
 package cn.wisdsoft.electivesystem.mapper;
 
 import cn.wisdsoft.electivesystem.pojo.Curriculum;
+import cn.wisdsoft.electivesystem.pojo.CurriculumDo;
 import cn.wisdsoft.electivesystem.pojo.CurriculumExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
@@ -33,4 +34,11 @@ public interface CurriculumMapper {
     int updateByPrimaryKeyWithBLOBs(Curriculum record);
 
     int updateByPrimaryKey(Curriculum record);
+
+    /**
+     * 查询当前学期所有课程信息
+     * @param termName  学期名称
+     * @return  包含课程信息的集合
+     */
+    List<CurriculumDo> selectAllCurriculum(String termName);
 }

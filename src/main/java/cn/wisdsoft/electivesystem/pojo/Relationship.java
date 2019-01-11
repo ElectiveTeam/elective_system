@@ -1,15 +1,50 @@
 package cn.wisdsoft.electivesystem.pojo;
 
-public class Relationship {
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import java.io.Serializable;
+
+/**
+ * <p>ClassName: Relationship</p>
+ * <p>Description:学生课程关系对象</p>
+ *
+ * @author 刘玉龙
+ * @version 1.0
+ * @date 2019/1/7 21:45
+ */
+public class Relationship implements Serializable {
+    private static final long serialVersionUID = -925675723845110413L;
     private Integer id;
 
+    /**
+     * 选课编号
+     */
     private Integer selectId;
 
+    /**
+     * 学生编号
+     */
     private String stuId;
 
+    /**
+     * 学生名称
+     */
     private String stuName;
 
     private String remark;
+
+    /**
+     * 查询学生已选课程操作的mapper对象映射（选课表）
+     */
+    private Selection selection;
+
+    public Selection getSelection() {
+        return selection;
+    }
+
+    public void setSelection(Selection selection) {
+        this.selection = selection;
+    }
 
     public Integer getId() {
         return id;

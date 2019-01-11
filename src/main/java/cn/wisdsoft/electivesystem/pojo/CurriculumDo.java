@@ -36,9 +36,9 @@ public class CurriculumDo implements Serializable {
     private String curriculumName;
 
     /**
-     * 教师ID
+     * 教师名称
      */
-    private String teacherId;
+    private String teacherName;
 
     /**
      * 学时
@@ -105,12 +105,12 @@ public class CurriculumDo implements Serializable {
         this.curriculumName = curriculumName;
     }
 
-    public String getTeacherId() {
-        return teacherId;
+    public String getTeacherName() {
+        return teacherName;
     }
 
-    public void setTeacherId(String teacherId) {
-        this.teacherId = teacherId;
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
     }
 
     public Integer getClassHour() {

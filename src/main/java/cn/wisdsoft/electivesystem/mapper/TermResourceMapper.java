@@ -27,4 +27,6 @@ public interface TermResourceMapper {
     int updateByPrimaryKeySelective(TermResource record);
 
     int updateByPrimaryKey(TermResource record);
+
+    List<TermResource> selectAllCource();
 }
