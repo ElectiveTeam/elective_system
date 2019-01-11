@@ -1,0 +1,30 @@
+.list-group{
+    margin: 0 auto;
+    margin-top:6%; 
+    width: 70%;
+    height: 500px;
+    overflow-y:auto; 
+    opacity: 0.75;
+}
+
+#xueqi{
+    height:200px;
+}
+
+#cuinfo{
+    text-indent:2rem;
+}
+
+.cutime{
+    margin-left:30px;
+}
+
+.tk{
+    float:right;
+    color: blue;
+    cursor:pointer;
+}
+
+.cugroup{
+    margin-bottom:20px;
+}

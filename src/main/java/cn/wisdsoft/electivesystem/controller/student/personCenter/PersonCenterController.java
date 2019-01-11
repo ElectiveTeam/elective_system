@@ -47,4 +47,17 @@ public class PersonCenterController {
     public ElectiveSystemResult selectUserCurriculum(String stuId) {
         return personCenterService.selectUserCurriculum(stuId);
     }
+
+    /**
+     * @Author 李泽宇
+     * @Description 学生退课
+     * @Date 2019/1/10 14:27
+     * @Param
+     * @return
+     **/
+    @RequestMapping(value = "/delRelationByStuIdAndSelectId",method = RequestMethod.GET)
+    @ResponseBody
+    public ElectiveSystemResult delRelationByStuIdAndSelectId(String stuId,int selectId) {
+        return personCenterService.delRelationByStuIdAndSelectId(stuId,selectId);
+    }
 }

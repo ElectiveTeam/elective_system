@@ -204,7 +204,6 @@
       college AS college,
       t.`status` AS termStatus,
       cu.id AS curriculumId,
-      c.id AS courseId,
       cu.cu_name AS cuName,
       class_time AS classTime,
       place AS place,
@@ -222,22 +221,30 @@
       r.stu_id = #{stuId}
     ORDER BY t.id ASC
   </select>
-  <resultMap id="myMap" type="cn.wisdsoft.electivesystem.pojo.TermResource">
-    <id property="id" column="termId" />
-    <result property="termName" column="termName" />
-    <result property="college" column="college" />
-    <result property="status" column="termStatus" />
-    <collection property="studentDos" ofType="cn.wisdsoft.electivesystem.pojo.StudentDo">
-      <result property="curriculumId" column="curriculumId" />
-      <result property="courseId" column="courseId" />
-      <result property="cuName" column="cuName" />
-      <result property="place" column="place" />
-      <result property="classTime" column="classTime" />
-      <result property="classHour" column="classHour" />
-      <result property="credit" column="credit" />
-      <result property="grade" column="grade" />
-      <result property="selectId" column="selectId" />
-      <result property="teacherId" column="teacherId" />
-    </collection>
-  </resultMap>
+    <resultMap id="myMap" type="cn.wisdsoft.electivesystem.pojo.TermResource">
+        <id property="id" column="termId" />
+        <result property="termName" column="termName" />
+        <result property="college" column="college" />
+        <result property="status" column="termStatus" />
+        <collection property="studentDos" ofType="cn.wisdsoft.electivesystem.pojo.StudentDo">
+            <result property="curriculumId" column="curriculumId" />
+            <result property="cuName" column="cuName" />
+            <result property="place" column="place" />
+            <result property="classTime" column="classTime" />
+            <result property="classHour" column="classHour" />
+            <result property="credit" column="credit" />
+            <result property="grade" column="grade" />
+            <result property="selectId" column="selectId" />
+            <result property="teacherId" column="teacherId" />
+        </collection>
+    </resultMap>
+
+
+    <!--
+  学生退课
+  -->
+    <delete id="delRelationByStuIdAndSelectId">
+    delete from relationship
+    where stu_id = #{stuId} AND select_id = #{selectId};
+  </delete>
 </mapper>
