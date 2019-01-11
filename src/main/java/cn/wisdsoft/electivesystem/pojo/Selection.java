@@ -28,7 +28,7 @@ public class Selection implements Serializable {
     private String classTime;
 
     /**
-     * 地点
+     * 上课地点
      */
     private String place;
 
@@ -41,7 +41,6 @@ public class Selection implements Serializable {
      * 最小人数
      */
     private Integer minNumber;
-
 
     private String remark;
 
