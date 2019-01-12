@@ -7,10 +7,8 @@ import cn.wisdsoft.electivesystem.pojo.utils.PageResult;
 import cn.wisdsoft.electivesystem.service.administrator.applicatiom.ApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -79,5 +77,30 @@ public class ApplicationController {
                                                  @RequestParam(required = false) String reason) {
         applicationService.updateCurriculum(id, status, reason);
         return ElectiveSystemResult.ok();
+    }
+
+    /**
+     * 作用:跳转显示页面
+     *
+     * @return java.lang.String
+     * @date 22:25 2019/1/10
+     */
+    @RequestMapping(value = "/toPage", method = RequestMethod.GET)
+    public String toPage() {
+        return "curriculum/curriculum_list";
+    }
+
+    /**
+     * 作用:跳转详情页面
+     *
+     * @param id 课程编号
+     * @return java.lang.String
+     * @date 22:53 2019/1/10
+     */
+    @RequestMapping(value = "/find/{id}", method = RequestMethod.GET)
+    public String toReview(@PathVariable Integer id, Model model) {
+        Curriculum curriculum = applicationService.findCurriculumById(id);
+        model.addAttribute(curriculum);
+        return "curriculum/curriculum_info";
     }
 }

@@ -1,5 +1,6 @@
 package cn.wisdsoft.electivesystem.service.administrator.applicatiom.impl;
 
+import cn.wisdsoft.electivesystem.mapper.CourseMapper;
 import cn.wisdsoft.electivesystem.mapper.CurriculumMapper;
 import cn.wisdsoft.electivesystem.pojo.Curriculum;
 import cn.wisdsoft.electivesystem.pojo.CurriculumExample;
@@ -25,9 +26,12 @@ public class ApplicationServiceImpl implements ApplicationService {
 
     private final CurriculumMapper curriculumMapper;
 
+    private final CourseMapper courseMapper;
+
     @Autowired
-    public ApplicationServiceImpl(CurriculumMapper curriculumMapper) {
+    public ApplicationServiceImpl(CurriculumMapper curriculumMapper, CourseMapper courseMapper) {
         this.curriculumMapper = curriculumMapper;
+        this.courseMapper = courseMapper;
     }
 
     /**
@@ -83,5 +87,19 @@ public class ApplicationServiceImpl implements ApplicationService {
             curriculum.setRemark(null);
         }
         return curriculumMapper.updateByPrimaryKeySelective(curriculum);
+    }
+
+    /**
+     * 作用:通过课程编号查询信息
+     *
+     * @param id 课程编号
+     * @return cn.wisdsoft.electivesystem.pojo.Curriculum
+     * @date 22:31 2019/1/10
+     */
+    @Override
+    public Curriculum findCurriculumById(int id) {
+        Curriculum curriculum = curriculumMapper.selectByPrimaryKey(id);
+        curriculum.setCourse(courseMapper.selectByPrimaryKey(curriculum.getCouId()));
+        return curriculum;
     }
 }

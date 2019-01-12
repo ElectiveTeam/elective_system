@@ -43,4 +43,13 @@ public interface ApplicationService {
      * @date 10:14 2019/1/9
      */
     int updateCurriculum(Integer id, Integer status, @RequestParam(required = false) String reason);
+
+    /**
+     * 作用:通过课程编号查询信息
+     *
+     * @param id 课程编号
+     * @return cn.wisdsoft.electivesystem.pojo.Curriculum
+     * @date 22:31 2019/1/10
+     */
+    Curriculum findCurriculumById(int id);
 }

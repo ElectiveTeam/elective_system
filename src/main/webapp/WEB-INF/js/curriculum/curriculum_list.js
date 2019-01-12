@@ -1,0 +1,102 @@
+layui.use('table', function () {
+    var table = layui.table;
+    table.render({
+        elem: '#major' //指定原始表格元素选择器（推荐id选择器）
+        , url: 'http://192.168.6.174:8080/curriculum/findAllByPage'
+        , id: 'majorReload'
+        , cols: [[{
+            field: 'id', title: '课程编号', sort: true
+        }, {
+            field: 'cuName', title: '课程名称'
+        }, {
+            field: 'price', title: '教师名称'
+        }, {
+            field: 'classHour', title: '学时'
+        }, {
+            field: 'credit', title: '学分'
+        }, {
+            field: 'grade', title: '年级'
+        }, {
+            field: 'status', title: '审核状态',
+            templet: '#show'
+        }, {
+            fixed: 'right', align: 'center', title: '操作', toolbar: '#barDemo'
+        }]],
+        page: true
+    });
+    //监听行工具事件
+    table.on('tool(test)', function (obj) {
+        var data = obj.data;
+        if (obj.event === 'success') {
+            layer.confirm('确认同意吗', function (index) {
+                obj.del();
+                layer.close(index);
+                $.ajax({
+                    url: 'http://localhost:8080/application/review',
+                    type: "post",
+                    data: {
+                        'id': obj.data.id,
+                        'status' : 2
+                    }, success: function (data) {
+                        layer.msg("更改成功");
+                        layer.open({
+                            type: 2,
+                            content: 'http://localhost:8080/application/insertSelection/'+obj.data.id,
+                            area: ['550px', '500px'],
+                            offset: ['25px', '250px']
+                        });
+                    }, error: function (data) {
+                        layer.msg("服务器异常");
+                    }
+                })
+            });
+        } else if (obj.event === 'refuse') {
+            $.ajax({
+                url: 'http://localhost:8080/application/review',
+                type: "post",
+                data: {
+                    'id': obj.data.id,
+                    'status' : 3
+                }, success: function (data) {
+                    layer.msg("更改成功");
+                }, error: function (data) {
+                    layer.msg("服务器异常");
+                }
+            })
+        } else if(obj.event === 'info') {
+            layer.open({
+                type: 2,
+                content: 'http://localhost:8080/application/find/'+obj.data.id,
+                area: ['550px', '500px'],
+                offset: ['25px', '250px']
+            })
+        }
+    });
+
+    $("#search").click(function () {
+        reload();
+    });
+    $('#addProduct').click(function () {
+        layer.open({
+            type: 2,
+            content: 'http://localhost:8080/commodity/insert',
+            area: ['550px', '500px'],
+            offset: ['25px', '250px']
+        })
+    });
+});
+
+function reload() {
+    var table = layui.table;
+    let category = $('#categoryName').val();
+    console.log(category === "" || category == null);
+    if(category === "" || category == null) {
+        $('#categoryName').val('1')
+    }
+    //执行重载
+    table.reload('majorReload', {
+        url: 'http://localhost:8080/commodity/findCategory/' + $('#categoryName').val()
+        , page: true
+    });
+    $('#categoryName').val("");
+}
