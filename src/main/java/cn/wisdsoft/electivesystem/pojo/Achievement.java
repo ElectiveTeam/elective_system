@@ -20,6 +20,11 @@ public class Achievement implements Serializable {
     private String stuId;
 
     /**
+     * 学生姓名
+     */
+    private String stuName;
+
+    /**
      * 选课编号
      */
     private Integer selectId;
@@ -50,6 +55,14 @@ public class Achievement implements Serializable {
 
     public void setStuId(String stuId) {
         this.stuId = stuId == null ? null : stuId.trim();
+    }
+
+    public String getStuName() {
+        return stuName;
+    }
+
+    public void setStuName(String stuName) {
+        this.stuName = stuName == null ? null : stuName.trim();
     }
 
     public Integer getSelectId() {

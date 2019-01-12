@@ -17,11 +17,24 @@
         <img src="../images/banner.jpg">
     </div>
 
-
    <header id="hd"></header>
+
    <div class="list-group">
+
+        <ul class="nav nav-pills nav-fill my" >
+                <li class="nav-item">
+                  <a class="nav-link active" data-toggle="pill">校选课</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="pill">院选课</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="pill">我的选课</a>
+                </li>
+              </ul>
+                
         <div class="cugroup">
-            <a class="list-group-item list-group-item-action list-group-item-primary">2018-2019学年 第二学期</a>
+            <!-- <a class="list-group-item list-group-item-action list-group-item-primary">2018-2019学年 第二学期</a> -->
             <a class="list-group-item list-group-item-action flex-column align-items-start" href="../html/cudetails.html">
                 <input type="text" id="teacherId" hidden value="lalala" />
                 <div class="d-flex w-100 justify-content-between">
@@ -63,8 +76,7 @@
 </body>
 </html>
 <script src="../js/jquery_2.2.4.min.js"></script>
-<script type="text/javascript"> 
-		
+<script type="text/javascript"> 	
 $(document).ready(function(){
     $("#hd").load('../html/header.html');
     $("#ft").load('../html/footer.html');

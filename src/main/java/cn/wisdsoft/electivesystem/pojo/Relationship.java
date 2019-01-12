@@ -26,6 +26,11 @@ public class Relationship implements Serializable {
      */
     private String stuId;
 
+    /**
+     * 学生名称
+     */
+    private String stuName;
+
     private String remark;
 
     /**
@@ -63,6 +68,14 @@ public class Relationship implements Serializable {
 
     public void setStuId(String stuId) {
         this.stuId = stuId == null ? null : stuId.trim();
+    }
+
+    public String getStuName() {
+        return stuName;
+    }
+
+    public void setStuName(String stuName) {
+        this.stuName = stuName == null ? null : stuName.trim();
     }
 
     public String getRemark() {

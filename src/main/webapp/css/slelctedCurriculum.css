@@ -31,6 +31,12 @@
     font-size:15px; 
 }
 
+.my{
+    background-color: rgb(255,255,255);
+    border-radius: 4px;
+}
+
 .cugroup{
     margin-bottom:20px;
 }
+

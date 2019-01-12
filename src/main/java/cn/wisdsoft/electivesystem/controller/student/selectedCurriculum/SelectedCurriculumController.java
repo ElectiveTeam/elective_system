@@ -48,8 +48,9 @@ public class SelectedCurriculumController {
     public ElectiveSystemResult insertRelation(Relationship relationship) {
         ElectiveSystemResult electiveSystemResult = selectedCurriculumService.insertRelation(relationship);
         return electiveSystemResult;
+
+    //如果已经选择了相同课程组的其他一门课程则无法选课(前端做)
     //如果已经选择该课程则无法选课
-    //如果已经选择了相同课程组的其他一门课程则无法选课
     //如果系选课大于3门或院选课大于1门则无法选课
     //如果选课人数大于等于课程最大人数则无法选课
     }
