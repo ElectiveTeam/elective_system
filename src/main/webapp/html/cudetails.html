@@ -3,78 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-    <link rel="stylesheet" type="text/css" href="../css/cudetails.css" />
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+    
+    <link rel="stylesheet" type="text/css" href="../css/cudetails.css" /> 
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" /> 
     <script src="../js/jquery_2.2.4.min.js"></script>
     <script src="../js/popper.min.js"></script>
     <script src="../js/twitter-bootstrap.min.js"></script>
     <title>课程详情</title>
 </head>
 <body>
-<div id="bg">
-    <img src="../images/banner.jpg">
-</div>
-<header id="hd"></header>
+    <div id="bg">
+        <img src="../images/banner.jpg">
+    </div>
+   <header id="hd"></header>
 
-<div class="card">
+   <div class="card">
     <div class="card-header">
         软件学院
     </div>
     <div class="card-body">
-        <h5 class="card-title">课程名称</h5>
-        <p class="card-text">数据结构</p>
-        <h5 class="card-title">任课教师</h5>
-        <p class="card-text">孙伟光</p>
-        <h5 class="card-title">上课时间</h5>
-        <p class="card-text">2:30-3:00</p>
-        <h5 class="card-title">上课地点</h5>
-        <p class="card-text">4-107</p>
-        <h5 class="card-title">课程简介</h5>
-        <p class="card-text">暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介</p>
-        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" id="choo">选课</button>
+      <h5 class="card-title">课程名称</h5>
+      <p class="card-text">数据结构</p>
+      <h5 class="card-title">任课教师</h5>
+      <p class="card-text">孙伟光</p>
+      <h5 class="card-title">上课时间</h5>
+      <p class="card-text">2:30-3:00</p>
+      <h5 class="card-title">上课地点</h5>
+      <p class="card-text">4-107</p>
+      <h5 class="card-title">课程简介</h5>
+      <p class="card-text">暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介</p>
+      <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" id="choo">选课</button> 
 
     </div>
-</div>
+   </div>
 
-<!-- 选课模态框 -->
+   <!-- 选课模态框 -->
 <div class="modal fade" id="myModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- 模态框头部 -->
-            <div class="modal-header">
-                <h4 class="modal-title">温馨提示</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <!-- 模态框主体 -->
-            <div class="modal-body">
-                你现在不能选课。
-            </div>
-            <!-- 模态框底部 -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-            </div>
-        </div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- 模态框头部 -->
+      <div class="modal-header">
+        <h4 class="modal-title">温馨提示</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- 模态框主体 -->
+      <div class="modal-body">
+        你现在不能选课。
+      </div>
+      <!-- 模态框底部 -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+      </div>
     </div>
+  </div>
 </div>
 
 
-<footer id="ft"></footer>
-</body>
+   <footer id="ft"></footer>
+  </body>
 </html>
 <script src="../js/jquery_2.2.4.min.js"></script>
-<script type="text/javascript">
-
-    $(document).ready(function(){
-        $("#hd").load('../html/header.html');
-        $("#ft").load('../html/footer.html');
-
-
-        $("#myModal").on("hidden.bs.modal click", function () {
-            //关闭模态框后清除模态框数据
-            window.location.reload();
-        });
+<script type="text/javascript"> 
+		
+$(document).ready(function(){
+    $("#hd").load('../html/header.html');
+    $("#ft").load('../html/footer.html');
 
 
-    });
+    $("#myModal").on("hidden.bs.modal click", function () {
+      //关闭模态框后清除模态框数据
+      window.location.reload();
+});
+
+
+});
 </script>
