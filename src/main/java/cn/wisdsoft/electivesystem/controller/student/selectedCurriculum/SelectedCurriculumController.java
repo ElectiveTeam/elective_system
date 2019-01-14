@@ -11,13 +11,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
+ * The type Selected curriculum controller.
+ *
  * @ClassName SelectedCurriculumController
  * @Description
  * @Author LIZEYU
- * @Date 2019/1/8 16:55
+ * @Date 2019 /1/8 16:55
  * @Version 1.0
- **/
-
+ */
 @Controller
 @RequestMapping(value = ElectiveSystemConfig.SELECTED_CURRICULUM_MAPPING)
 public class SelectedCurriculumController {
@@ -25,24 +26,30 @@ public class SelectedCurriculumController {
     private final SelectedCurriculumService selectedCurriculumService;
 
     /**
+     * Instantiates a new Selected curriculum controller.
+     *
+     * @param selectedCurriculumService the selected curriculum service
+     * @return
      * @Author 李泽宇
      * @Description 注入业务层
-     * @Date 2019/1/10 14:55
+     * @Date 2019 /1/10 14:55
      * @Param
-     * @return
-     **/
+     */
     @Autowired
     public SelectedCurriculumController(SelectedCurriculumService selectedCurriculumService) {
         this.selectedCurriculumService = selectedCurriculumService;
     }
 
     /**
+     * Insert relation elective system result.
+     *
+     * @param relationship the relationship
+     * @return elective system result
      * @Author 李泽宇
      * @Description 学生选课
-     * @Date 2019/1/10 15:02
+     * @Date 2019 /1/10 15:02
      * @Param
-     * @return
-     **/
+     */
     @RequestMapping(value = "/insertRelation",method = RequestMethod.GET)
     @ResponseBody
     public ElectiveSystemResult insertRelation(Relationship relationship) {
@@ -74,11 +81,12 @@ public class SelectedCurriculumController {
      * 查询当前学期所有课程信息
      *
      * @param termName the term name  学期名称
+     * @param category the category  课程类别
      * @return the elective system result  包含课程信息的JSON数据
      */
     @RequestMapping("/selectAllCurriculum")
     @ResponseBody
-    public ElectiveSystemResult selectAllCurriculum(String termName) {
-        return selectedCurriculumService.selectAllCurriculum(termName);
+    public ElectiveSystemResult selectAllCurriculum(String termName,String category) {
+        return selectedCurriculumService.selectAllCurriculum(termName,category);
     }
 }

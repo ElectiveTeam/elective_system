@@ -36,8 +36,8 @@ public class SelectedCurriculumServiceImpl implements SelectedCurriculumService 
     }
 
     @Override
-    public ElectiveSystemResult selectAllCurriculum(String termName) {
-        return ElectiveSystemResult.ok(curriculumMapper.selectAllCurriculum(termName));
+    public ElectiveSystemResult selectAllCurriculum(String termName,String category) {
+        return ElectiveSystemResult.ok(curriculumMapper.selectAllCurriculum(termName,category));
     }
 
     @Override

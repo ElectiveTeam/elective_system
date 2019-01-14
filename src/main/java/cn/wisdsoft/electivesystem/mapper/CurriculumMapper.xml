@@ -379,6 +379,7 @@
       s.cu_id = c.id and
       c.status = 2 and
       (t.status = 1 or t.status = 3) and
-      t.term_name = #{termName}
+      t.term_name = #{termName} and
+      t.college = #{category}
   </select>
 </mapper>

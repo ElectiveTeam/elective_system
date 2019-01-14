@@ -38,7 +38,8 @@ public interface CurriculumMapper {
     /**
      * 查询当前学期所有课程信息
      * @param termName  学期名称
+     * @param category  课程类别
      * @return  包含课程信息的集合
      */
-    List<CurriculumDo> selectAllCurriculum(String termName);
+    List<CurriculumDo> selectAllCurriculum(@Param("termName") String termName,@Param("category") String category);
 }
