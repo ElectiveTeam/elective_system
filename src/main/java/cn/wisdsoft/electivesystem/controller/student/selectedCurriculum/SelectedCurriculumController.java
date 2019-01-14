@@ -26,10 +26,6 @@ public class SelectedCurriculumController {
     private final SelectedCurriculumService selectedCurriculumService;
 
     /**
-     * Instantiates a new Selected curriculum controller.
-     *
-     * @param selectedCurriculumService the selected curriculum service
-     * @return
      * @Author 李泽宇
      * @Description 注入业务层
      * @Date 2019 /1/10 14:55
@@ -40,26 +36,22 @@ public class SelectedCurriculumController {
         this.selectedCurriculumService = selectedCurriculumService;
     }
 
+
     /**
      * Insert relation elective system result.
+     * 插入学生选课信息
      *
-     * @param relationship the relationship
-     * @return elective system result
-     * @Author 李泽宇
-     * @Description 学生选课
-     * @Date 2019 /1/10 15:02
-     * @Param
+     * @param stuId        the stu id  学生ID
+     * @param stuName      the stu name  学生姓名
+     * @param curriculumId the curriculum id  课程ID
+     * @param yard         the yard  学院名称（除校选外）
+     * @return the elective system result
      */
-    @RequestMapping(value = "/insertRelation",method = RequestMethod.GET)
+    @RequestMapping(value = "/insertRelation",method = RequestMethod.POST)
     @ResponseBody
-    public ElectiveSystemResult insertRelation(Relationship relationship) {
-        ElectiveSystemResult electiveSystemResult = selectedCurriculumService.insertRelation(relationship);
-        return electiveSystemResult;
-
-    //如果已经选择了相同课程组的其他一门课程则无法选课(前端做)
-    //如果已经选择该课程则无法选课
-    //如果系选课大于3门或院选课大于1门则无法选课
-    //如果选课人数大于等于课程最大人数则无法选课
+    public ElectiveSystemResult insertRelation(String stuId,String stuName,int curriculumId,String yard) {
+        //如果已经选择了相同课程组的其他一门课程则无法选课(前端做)
+        return selectedCurriculumService.insertRelation(stuId, stuName, curriculumId, yard);
     }
 
 
@@ -70,7 +62,7 @@ public class SelectedCurriculumController {
      * @param curriculumId the curriculum id  课程ID
      * @return the elective system result  包含课程信息的JSON数据
      */
-    @RequestMapping("/selectDetails")
+    @RequestMapping(value = "/selectDetails",method = RequestMethod.GET)
     @ResponseBody
     public ElectiveSystemResult selectDetails(int curriculumId) {
         return selectedCurriculumService.selectCurriculum(curriculumId);
@@ -84,9 +76,22 @@ public class SelectedCurriculumController {
      * @param category the category  课程类别
      * @return the elective system result  包含课程信息的JSON数据
      */
-    @RequestMapping("/selectAllCurriculum")
+    @RequestMapping(value = "/selectAllCurriculum",method = RequestMethod.GET)
     @ResponseBody
     public ElectiveSystemResult selectAllCurriculum(String termName,String category) {
         return selectedCurriculumService.selectAllCurriculum(termName,category);
+    }
+
+    /**
+     * Choose status elective system result.
+     * 判断学生是否可以选课
+     *
+     * @param category the category  课程类别（除校选之外）
+     * @return the elective system result  返回包含前台提示信息的JSON数据
+     */
+    @RequestMapping(value = "/chooseStatus",method = RequestMethod.GET)
+    @ResponseBody
+    public ElectiveSystemResult chooseStatus(String category) {
+        return selectedCurriculumService.selectStatus(category);
     }
 }
