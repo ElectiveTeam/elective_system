@@ -6,6 +6,9 @@
     <link rel="stylesheet" type="text/css" href="/elective/student/css/main.css" />
     <link rel="stylesheet" type="text/css" href="/elective/student/css/common.css" />
     <link rel="stylesheet" type="text/css" href="/elective/student/css/bootstrap.min.css" />
+    <script src="/elective/student/js/jquery_2.2.4.min.js"></script>
+    <script src="/elective/student/js/popper.min.js"></script>
+    <script src="/elective/student/js/twitter-bootstrap.min.js"></script>
     <title>河北工程技术学院选课系统</title>
 </head>
 <body>
@@ -19,40 +22,49 @@
                     <!--<button type="button" class="btn btn-primary btn-lg btn-block" id="seletedc">我要选课</button>-->
                     <!--<button type="button" class="btn btn-primary btn-lg btn-block" id="curriculum">已选课程</button>-->
                     <!--<button type="button" class="btn btn-primary btn-lg btn-block" id="achievement">查询成绩</button>-->
-                <figure id="one">
+                <figure id="one" class="btn btn-primary btn-lg">
                     <img src="/elective/student/images/selectCurriculum.png" alt="">
                     <p>我要选课</p>
                 </figure>
-                <figure id="two">
+                <figure id="two" class="btn btn-primary btn-lg">
                     <img src="/elective/student/images/myCurriculum.png" alt="">
                     <p>已选课程</p>
                 </figure>
-                <figure id="three">
+                <figure id="three" class="btn btn-primary btn-lg">
                     <img src="/elective/student/images/selectGrade.png" alt="">
                     <p>查询成绩</p>
                 </figure>
             </div>
         </div>
+
+
+
+    <!-- 模态框 -->
+    <div class="modal fade" id="myModal" data-toggle="modal" data-target="#myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- 模态框头部 -->
+                <div class="modal-header">
+                    <h4 class="modal-title">温馨提示</h4>
+                    <button type="button" class="close" data-dismiss="#myModal">&times;</button>
+                </div>
+                <!-- 模态框主体 -->
+                <div class="modal-body">
+                    选课功能未开放，请关注教务处通知！
+                </div>
+                <!-- 模态框底部 -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="#myModal" id="closeMo">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <footer id="ft"></footer>
 </body>
 </html>
 <script src="/elective/student/js/jquery_2.2.4.min.js"></script>
-<script type="text/javascript"> 
-		
-$(document).ready(function(){
-    
-    $("#ft").load('../html/footer.html');
-    $("#one").click(function(){
-        location.href = "../html/selectedCurriculum.html";
-    });
-
-    $("#two").click(function(){
-        location.href = "../html/personCenter.html";
-    });
-
-    $("#three").click(function(){
-        location.href = "../html/selectedCurriculum.html";
-    });
-
-});
-</script>
+<script src="/elective/student/js/popper.min.js"></script>
+<script src="/elective/student/js/twitter-bootstrap.min.js"></script>
+<script src="/elective/student/js/stuMain.js"></script>
