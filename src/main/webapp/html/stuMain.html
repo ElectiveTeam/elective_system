@@ -19,15 +19,15 @@
                     <!--<button type="button" class="btn btn-primary btn-lg btn-block" id="seletedc">我要选课</button>-->
                     <!--<button type="button" class="btn btn-primary btn-lg btn-block" id="curriculum">已选课程</button>-->
                     <!--<button type="button" class="btn btn-primary btn-lg btn-block" id="achievement">查询成绩</button>-->
-                <figure>
+                <figure id="one">
                     <img src="/elective/student/images/selectCurriculum.png" alt="">
                     <p>我要选课</p>
                 </figure>
-                <figure>
+                <figure id="two">
                     <img src="/elective/student/images/myCurriculum.png" alt="">
                     <p>已选课程</p>
                 </figure>
-                <figure>
+                <figure id="three">
                     <img src="/elective/student/images/selectGrade.png" alt="">
                     <p>查询成绩</p>
                 </figure>
@@ -42,15 +42,15 @@
 $(document).ready(function(){
     
     $("#ft").load('../html/footer.html');
-    $("#seletedc").click(function(){
+    $("#one").click(function(){
         location.href = "../html/selectedCurriculum.html";
     });
 
-    $("#curriculum").click(function(){
+    $("#two").click(function(){
         location.href = "../html/personCenter.html";
     });
 
-    $("#achievement").click(function(){
+    $("#three").click(function(){
         location.href = "../html/selectedCurriculum.html";
     });
 
