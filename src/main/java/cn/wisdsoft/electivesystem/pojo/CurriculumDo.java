@@ -1,6 +1,7 @@
 package cn.wisdsoft.electivesystem.pojo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * @ Author     ：高伟萌.
@@ -26,6 +27,11 @@ public class CurriculumDo implements Serializable {
     private Integer courseId;
 
     /**
+     * 课程组名称
+     */
+    private String courseName;
+
+    /**
      * 课程ID
      */
     private Integer curriculumId;
@@ -48,7 +54,7 @@ public class CurriculumDo implements Serializable {
     /**
      * 学分
      */
-    private Double credit;
+    private BigDecimal credit;
 
     /**
      * 上课时间
@@ -64,6 +70,30 @@ public class CurriculumDo implements Serializable {
      * 最大人数
      */
     private Integer maxNumber;
+
+    /**
+     * 最小人数
+     */
+    private Integer minNumber;
+
+    /**
+     * 年级
+     */
+    private String grade;
+
+    /**
+     * 描述
+     */
+    private String describe;
+
+    /**
+     * 状态
+     */
+    private String status;
+
+    private Integer selectionId;
+
+    private String remark;
 
     public String getTermName() {
         return termName;
@@ -121,11 +151,11 @@ public class CurriculumDo implements Serializable {
         this.classHour = classHour;
     }
 
-    public Double getCredit() {
+    public BigDecimal getCredit() {
         return credit;
     }
 
-    public void setCredit(Double credit) {
+    public void setCredit(BigDecimal credit) {
         this.credit = credit;
     }
 
@@ -151,5 +181,67 @@ public class CurriculumDo implements Serializable {
 
     public void setMaxNumber(Integer maxNumber) {
         this.maxNumber = maxNumber;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public CurriculumDo setCourseName(String courseName) {
+        this.courseName = courseName;
+        return this;
+    }
+
+    public Integer getMinNumber() {
+        return minNumber;
+    }
+
+    public CurriculumDo setMinNumber(Integer minNumber) {
+        this.minNumber = minNumber;
+        return this;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public CurriculumDo setGrade(String grade) {
+        this.grade = grade;
+        return this;
+    }
+
+    public String getDescribe() {
+        return describe;
+    }
+
+    public CurriculumDo setDescribe(String describe) {
+        this.describe = describe;
+        return this;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public CurriculumDo setStatus(String status) {
+        this.status = status;
+        return this;
+    }
+
+    public Integer getSelectionId() {
+        return selectionId;
+    }
+
+    public CurriculumDo setSelectionId(Integer selectionId) {
+        this.selectionId = selectionId;
+        return this;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

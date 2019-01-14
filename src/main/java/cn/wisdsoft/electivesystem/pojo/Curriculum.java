@@ -62,6 +62,8 @@ public class Curriculum implements Serializable {
      */
     private String describe;
 
+    private Course course;
+
     public Integer getId() {
         return id;
     }
@@ -148,5 +150,14 @@ public class Curriculum implements Serializable {
 
     public void setDescribe(String describe) {
         this.describe = describe == null ? null : describe.trim();
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public Curriculum setCourse(Course course) {
+        this.course = course;
+        return this;
     }
 }
