@@ -1,6 +1,5 @@
 package cn.wisdsoft.electivesystem.controller.student.selectedCurriculum;
 
-import cn.wisdsoft.electivesystem.pojo.Relationship;
 import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemConfig;
 import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult;
 import cn.wisdsoft.electivesystem.service.sudent.selectedCurriculum.SelectedCurriculumService;
@@ -40,6 +39,7 @@ public class SelectedCurriculumController {
     /**
      * Insert relation elective system result.
      * 插入学生选课信息
+     * 测试成功
      *
      * @param stuId        the stu id  学生ID
      * @param stuName      the stu name  学生姓名
@@ -58,6 +58,7 @@ public class SelectedCurriculumController {
     /**
      * Select details elective system result.
      * 通过课程ID查询课程信息
+     * 测试成功
      *
      * @param curriculumId the curriculum id  课程ID
      * @return the elective system result  包含课程信息的JSON数据
@@ -71,6 +72,7 @@ public class SelectedCurriculumController {
     /**
      * Select all curriculum elective system result.
      * 查询当前学期所有课程信息
+     * 测试成功
      *
      * @param termName the term name  学期名称
      * @param category the category  课程类别
@@ -85,6 +87,7 @@ public class SelectedCurriculumController {
     /**
      * Choose status elective system result.
      * 判断学生是否可以选课
+     * 测试成功
      *
      * @param category the category  课程类别（除校选之外）
      * @return the elective system result  返回包含前台提示信息的JSON数据

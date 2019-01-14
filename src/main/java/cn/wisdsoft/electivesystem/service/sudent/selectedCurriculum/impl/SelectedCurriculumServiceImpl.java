@@ -56,7 +56,7 @@ public class SelectedCurriculumServiceImpl implements SelectedCurriculumService 
     public ElectiveSystemResult selectStatus(String category) {
         TermResource termResource = relationshipMapper.selectStatus(category);
         if (termResource == null) {
-            return ElectiveSystemResult.build(401, "选课功能暂未开放");
+            return ElectiveSystemResult.build(401, category+"选课功能暂未开放");
         }
         Date open = termResource.getOpenTime();
         Date close = termResource.getCloseTime();
