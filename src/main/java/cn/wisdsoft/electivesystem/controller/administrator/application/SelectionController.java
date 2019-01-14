@@ -1,6 +1,7 @@
 package cn.wisdsoft.electivesystem.controller.administrator.application;
 
 import cn.wisdsoft.electivesystem.pojo.Curriculum;
+import cn.wisdsoft.electivesystem.pojo.CurriculumDo;
 import cn.wisdsoft.electivesystem.pojo.Selection;
 import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemConfig;
 import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult;
@@ -9,12 +10,7 @@ import cn.wisdsoft.electivesystem.service.administrator.applicatiom.SelectionSer
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>ClassName: SelectionController</p>
@@ -32,13 +28,10 @@ public class SelectionController {
 
     private final ApplicationService applicationService;
 
-    private final HttpServletRequest request;
-
     @Autowired
-    public SelectionController(SelectionService selectionService, ApplicationService applicationService, HttpServletRequest request) {
+    public SelectionController(SelectionService selectionService, ApplicationService applicationService) {
         this.selectionService = selectionService;
         this.applicationService = applicationService;
-        this.request = request;
     }
 
     /**
@@ -50,8 +43,9 @@ public class SelectionController {
      */
     @RequestMapping(value = "/insertSelection", method = RequestMethod.POST)
     @ResponseBody
-    public ElectiveSystemResult insertSelection(Selection selection) {
-        return ElectiveSystemResult.ok(selectionService.insertSelection(selection));
+    public ElectiveSystemResult insertSelection(@RequestBody Selection selection) {
+        selectionService.insertSelection(selection);
+        return ElectiveSystemResult.ok();
     }
 
     /**
@@ -65,6 +59,26 @@ public class SelectionController {
     public String toInsertSelection(@PathVariable Integer id, Model model) {
         Curriculum curriculum = applicationService.findCurriculumById(id);
         model.addAttribute(curriculum);
+        return "curriculum/selection_add";
+    }
+
+    /**
+     * 作用:根据课程编号查询课程信息
+     *
+     * @param id 课程编号
+     * @return java.lang.String
+     * @date 14:39 2019/1/14
+     */
+    @RequestMapping(value = "/selectionInfo/{id}", method = RequestMethod.GET)
+    public String toInfo(@PathVariable Integer id, Model model) {
+        CurriculumDo curriculumDo = selectionService.findCurriculumDoById(id);
+        model.addAttribute("curriculum", curriculumDo);
         return "curriculum/selection_info";
+    }
+
+    @RequestMapping(value = "/updateSelection", method = RequestMethod.POST)
+    public ElectiveSystemResult updateSelection(@RequestBody Selection selection) {
+        selectionService.updateSelection(selection);
+        return ElectiveSystemResult.ok();
     }
 }

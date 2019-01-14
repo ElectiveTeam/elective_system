@@ -4,6 +4,7 @@ import cn.wisdsoft.electivesystem.mapper.CourseMapper;
 import cn.wisdsoft.electivesystem.mapper.CurriculumMapper;
 import cn.wisdsoft.electivesystem.pojo.Curriculum;
 import cn.wisdsoft.electivesystem.pojo.CurriculumExample;
+import cn.wisdsoft.electivesystem.pojo.Teacher;
 import cn.wisdsoft.electivesystem.pojo.utils.PageResult;
 import cn.wisdsoft.electivesystem.service.administrator.applicatiom.ApplicationService;
 import com.github.pagehelper.PageHelper;
@@ -11,6 +12,9 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,27 +32,36 @@ public class ApplicationServiceImpl implements ApplicationService {
 
     private final CourseMapper courseMapper;
 
+    private final HttpServletRequest request;
+
     @Autowired
-    public ApplicationServiceImpl(CurriculumMapper curriculumMapper, CourseMapper courseMapper) {
+    public ApplicationServiceImpl(CurriculumMapper curriculumMapper, CourseMapper courseMapper, HttpServletRequest request) {
         this.curriculumMapper = curriculumMapper;
         this.courseMapper = courseMapper;
+        this.request = request;
     }
 
     /**
      * 作用:查看所有审核并分页
-     * TODO:根据条件分页
      *
+     * TODO 通过管理中获取权限查询学院
      * @param page  页数
      * @param limit 行数
+     * @param key 个人令牌
      * @return cn.wisdsoft.electivesystem.pojo.utils.PageResult<cn.wisdsoft.electivesystem.pojo.Curriculum>
      * @date 9:47 2019/1/9
      */
     @Override
-    public PageResult<Curriculum> findAllByPage(int page, int limit) {
+    public PageResult<Curriculum> findAllByPage(int page, int limit, String key) {
+        HttpSession session = request.getSession();
+        Teacher teacher = (Teacher) session.getAttribute(key);
+        List<Integer> couIds = new ArrayList<>();
+
         PageHelper.startPage(page, limit);
         CurriculumExample curriculumExample = new CurriculumExample();
         CurriculumExample.Criteria curriculumExampleCriteria
                 = curriculumExample.createCriteria();
+        curriculumExampleCriteria.andCouIdIn(couIds);
         List<Curriculum> curricula = curriculumMapper.selectByExample(curriculumExample);
         PageInfo<Curriculum> pageInfo = new PageInfo<>(curricula);
         return PageResult.ok(curricula, pageInfo.getTotal());

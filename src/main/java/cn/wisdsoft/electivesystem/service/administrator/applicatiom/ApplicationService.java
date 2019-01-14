@@ -19,10 +19,11 @@ public interface ApplicationService {
      *
      * @param page 页数
      * @param limit 行数
+     * @param key 个人令牌
      * @return cn.wisdsoft.electivesystem.pojo.utils.PageResult<cn.wisdsoft.electivesystem.pojo.Curriculum>
      * @date 9:47 2019/1/9
      */
-    PageResult<Curriculum> findAllByPage(int page, int limit);
+    PageResult<Curriculum> findAllByPage(int page, int limit, String key);
 
     /**
      * 作用:提交审核

@@ -10,8 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * <p>ClassName: ApplicationController</p>
  * <p>Description:管理员申请模块</p>
@@ -24,14 +22,11 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping(value = ElectiveSystemConfig.APPLICATION_MAPPING)
 public class ApplicationController {
 
-    private final HttpServletRequest request;
-
     private final ApplicationService applicationService;
 
     @Autowired
-    public ApplicationController(ApplicationService applicationService, HttpServletRequest request) {
+    public ApplicationController(ApplicationService applicationService) {
         this.applicationService = applicationService;
-        this.request = request;
     }
 
     /**
@@ -39,13 +34,14 @@ public class ApplicationController {
      *
      * @param page 页数
      * @param limit 行数
+     * @param key 个人身份验证token
      * @return cn.wisdsoft.electivesystem.pojo.utils.PageResult<Curriculum>
      * @date 9:11 2019/1/9
      */
     @RequestMapping(value = "/find", method = RequestMethod.GET)
     @ResponseBody
-    public PageResult<Curriculum> findAllByPage(Integer page, Integer limit) {
-        return applicationService.findAllByPage(page, limit);
+    public PageResult<Curriculum> findAllByPage(Integer page, Integer limit, String key) {
+        return applicationService.findAllByPage(page, limit, key);
     }
 
     /**

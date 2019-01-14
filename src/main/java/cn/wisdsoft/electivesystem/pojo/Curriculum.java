@@ -64,8 +64,6 @@ public class Curriculum implements Serializable {
 
     private Course course;
 
-    private String teacherName;
-
     public Integer getId() {
         return id;
     }
@@ -160,15 +158,6 @@ public class Curriculum implements Serializable {
 
     public Curriculum setCourse(Course course) {
         this.course = course;
-        return this;
-    }
-
-    public String getTeacherName() {
-        return teacherName;
-    }
-
-    public Curriculum setTeacherName(String teacherName) {
-        this.teacherName = teacherName;
         return this;
     }
 }

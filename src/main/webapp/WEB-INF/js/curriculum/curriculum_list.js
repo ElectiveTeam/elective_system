@@ -29,26 +29,12 @@ layui.use('table', function () {
         var data = obj.data;
         if (obj.event === 'success') {
             layer.confirm('确认同意吗', function (index) {
-                obj.del();
-                layer.close(index);
-                $.ajax({
-                    url: 'http://localhost:8080/application/review',
-                    type: "post",
-                    data: {
-                        'id': obj.data.id,
-                        'status' : 2
-                    }, success: function (data) {
-                        layer.msg("更改成功");
                         layer.open({
                             type: 2,
                             content: 'http://localhost:8080/application/insertSelection/'+obj.data.id,
                             area: ['550px', '500px'],
                             offset: ['25px', '250px']
                         });
-                    }, error: function (data) {
-                        layer.msg("服务器异常");
-                    }
-                })
             });
         } else if (obj.event === 'refuse') {
             $.ajax({
@@ -70,22 +56,32 @@ layui.use('table', function () {
                 area: ['550px', '500px'],
                 offset: ['25px', '250px']
             })
+        } else if(obj.event === 'success_info') {
+            layer.open({
+                type: 2,
+                content: 'http://localhost:8080/application/selectionInfo/'+obj.data.id,
+                area: ['550px', '500px'],
+                offset: ['25px', '250px']
+            })
         }
     });
 
     $("#search").click(function () {
         reload();
     });
-    $('#addProduct').click(function () {
-        layer.open({
-            type: 2,
-            content: 'http://localhost:8080/commodity/insert',
-            area: ['550px', '500px'],
-            offset: ['25px', '250px']
-        })
-    });
-});
 
+
+});
+$("#CatCourse").click(function () {
+    layer.open({
+        type: 2,
+        title: '查看分组',
+        area: ['800px', '580px'],
+        fixed: false, //不固定
+        maxmin: true,
+        content: '/course/'
+    });
+})
 function reload() {
     var table = layui.table;
     let category = $('#categoryName').val();

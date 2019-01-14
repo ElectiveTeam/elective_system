@@ -1,7 +1,7 @@
 <%--
   User: Mr.Liu
-  Date: 2019/1/10
-  Time: 23:54
+  Date: 2019/1/11
+  Time: 8:10
 --%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -13,7 +13,7 @@
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>选课信息</title>
+    <title>选课添加</title>
     <link rel="stylesheet" type="text/css" href="/elective/layui/css/layui.css">
     <script type="text/javascript" src="/elective/js/jquery_2.2.4.min.js"></script>
 </head>
@@ -26,7 +26,7 @@
         </label>
         <div class="layui-input-inline">
             <input type="text" id="cuName" disabled name="cuName"
-                   autocomplete="off" class="layui-input" value="${ curriculum.curriculumName }"/>
+                   autocomplete="off" class="layui-input" value="${ curriculum.cuName }"/>
         </div>
         <label for="teacherName" class="layui-form-label">
             <span class="x-red">*</span>授课人
@@ -41,7 +41,7 @@
             <span class="x-red">*</span>分组名称
         </label>
         <div class="layui-input-inline">
-            <input type="text" id="courseName" disabled name="courseName" value="${ curriculum.courseName }"
+            <input type="text" id="courseName" disabled name="courseName" value="${ curriculum.course.courseName }"
                    autocomplete="off" class="layui-input"/>
         </div>
         <label for="grade" class="layui-form-label">
@@ -79,21 +79,20 @@
     </div>
     <hr class="layui-bg-blue">
     <form class="layui-form" action="">
-        <input type="text" value="${ curriculum.selectionId }" name="id" hidden>
+        <input type="text" name="cuId" value="${ curriculum.id }" hidden>
         <div class="layui-form-item">
             <label for="classTime" class="layui-form-label">
                 <span class="x-red">*</span>上课时间
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="classTime" lay-verify="required" name="classTime"
-                       value="${ curriculum.classTime }"
+                <input type="text" id="classTime" lay-verify="required" name="classTime" value="123456"
                        autocomplete="off" class="layui-input"/>
             </div>
             <label for="place" class="layui-form-label">
                 <span class="x-red">*</span>上课地点
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="place" lay-verify="required" name="place" value="${ curriculum.place }"
+                <input type="text" id="place" lay-verify="required" name="place" value=""
                        autocomplete="off" class="layui-input"/>
             </div>
         </div>
@@ -102,16 +101,14 @@
                 最小人数
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="minNumber" placeholder="默认为30" name="minNumber"
-                       value="${ curriculum.minNumber }"
+                <input type="text" id="minNumber" placeholder="默认为30" lay-verify="number" name="minNumber" value=""
                        autocomplete="off" class="layui-input"/>
             </div>
             <label for="maxNumber" class="layui-form-label">
                 <span class="x-red">*</span>最大人数
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="maxNumber" lay-verify="required" name="maxNumber"
-                       value="${ curriculum.maxNumber }"
+                <input type="text" id="maxNumber" lay-verify="required|number" name="maxNumber" value=""
                        autocomplete="off" class="layui-input"/>
             </div>
         </div>
@@ -119,12 +116,12 @@
             <label class="layui-form-label">
             </label>
             <button class="layui-btn" id="btn" lay-filter="sub" lay-submit="">
-                更新
+                增加
             </button>
         </div>
     </form>
 </div>
 </body>
 <script type="text/javascript" src="/elective/layui/layui.js"></script>
-<script type="text/javascript" src="/elective/js/curriculum/selection_info.js"></script>
+<script type="text/javascript" src="/elective/js/curriculum/selection_add.js"></script>
 </html>

@@ -45,7 +45,7 @@
             </label>
             <div class="layui-input-inline">
                 <input type="text" id="course.courseName" disabled name="course.courseName" value="${ curriculum.course.courseName }"
-                       autocomplete="off" class="layui-input" style="display: none"/>
+                       autocomplete="off" class="layui-input"/>
             </div>
         </div>
         <div class="layui-form-item">
@@ -54,7 +54,7 @@
             </label>
             <div class="layui-input-inline">
                 <input type="text" id="grade" name="grade" disabled value="${ curriculum.grade }"
-                       autocomplete="off" class="layui-input" style="display: none"/>
+                       autocomplete="off" class="layui-input"/>
             </div>
         </div>
         <div class="layui-form-item">
@@ -80,13 +80,14 @@
                 <span class="x-red">*</span>简介
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="describe" name="describe" value="${ curriculum.describe }"
-                       autocomplete="off" class="layui-input" style="display: none"/>
+                <input type="text" id="describe" disabled name="describe" value="${ curriculum.describe }"
+                       autocomplete="off" class="layui-input"/>
             </div>
         </div>
     </form>
 </div>
 </body>
 <script type="text/javascript" src="/elective/layui/layui.js"></script>
+<script type="text/javascript" src="/elective/js/curriculum/selection_add.js"></script>
 </html>
 

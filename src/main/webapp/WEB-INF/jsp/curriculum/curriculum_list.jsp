@@ -27,8 +27,9 @@
         </div>
         <button class="layui-btn" id="search" data-type="reload">搜索</button>
     </div>
-    <div style="margin-top: 10px">
-        <button class="layui-btn layui-btn-sm" id="addProduct">增加</button>
+    <div>
+        <button class="layui-btn" id="term">学期</button>
+        <button class="layui-btn" id="CatCourse">查看分组</button>
     </div>
     <table id="major" lay-filter="test"></table>
     <script type="text/html" id="barDemo">
@@ -37,7 +38,7 @@
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="refuse">拒绝</a>
         <a class="layui-btn layui-btn-xs" lay-event="info">详情</a>
         {{# } else if (d.status == 2) { }}
-        <a class="layui-btn layui-btn-xs" lay-event="info">详情</a>
+        <a class="layui-btn layui-btn-xs" lay-event="success_info">详情</a>
         {{# } }}
     </script>
 </div>
