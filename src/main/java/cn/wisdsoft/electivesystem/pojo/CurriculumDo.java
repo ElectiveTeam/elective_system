@@ -65,6 +65,8 @@ public class CurriculumDo implements Serializable {
      */
     private Integer maxNumber;
 
+    private String remark;
+
     public String getTermName() {
         return termName;
     }
@@ -151,5 +153,13 @@ public class CurriculumDo implements Serializable {
 
     public void setMaxNumber(Integer maxNumber) {
         this.maxNumber = maxNumber;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

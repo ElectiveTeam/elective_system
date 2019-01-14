@@ -60,4 +60,16 @@ public class Rule {
     public void setFinalexam(Integer finalexam) {
         this.finalexam = finalexam;
     }
+
+    @Override
+    public String toString() {
+        return "Rule{" +
+                "id=" + id +
+                ", selectId=" + selectId +
+                ", usual=" + usual +
+                ", midterm=" + midterm +
+                ", skill=" + skill +
+                ", finalexam=" + finalexam +
+                '}';
+    }
 }

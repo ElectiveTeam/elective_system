@@ -1,6 +1,7 @@
 package cn.wisdsoft.electivesystem.controller.administrator.achievement;
 
 import cn.wisdsoft.electivesystem.pojo.Achievement;
+import cn.wisdsoft.electivesystem.pojo.Rule;
 import cn.wisdsoft.electivesystem.pojo.Teacher;
 import cn.wisdsoft.electivesystem.pojo.utils.*;
 import cn.wisdsoft.electivesystem.service.administrator.achievement.AchievementService;
@@ -43,13 +44,16 @@ public class AchievementController {
     public AchievementController(AchievementService achievementService) {
         this.achievementService = achievementService;
     }
+
+
+
     @RequestMapping(value = "/test")
     public String test(){
         return "home_page/index";
     }
     @RequestMapping(value = "/")
     public String test2(){
-        return "Achievemnt/achievement";
+        return "Achievement/achievement";
     }
 
     @RequestMapping(value = "/test1",method = RequestMethod.GET)
@@ -88,12 +92,25 @@ public class AchievementController {
 
     @RequestMapping(value = "/exportExcel")
     @ResponseBody
-    public void exportExcel(String model, HttpServletResponse response){
+    public void exportExcel(String model, Rule rule, HttpServletResponse response){
+
         List list = JSONObject.parseArray(model, Achievement.class);
         Map<String,String> map = new LinkedHashMap<>();
         map.put("stuId","学号");
         map.put("stuName","姓名");
-        map.put("achieve","成绩");
+        if (rule.getUsual()>0){
+            map.put("usual","平时成绩");
+        }
+        if (rule.getMidterm()>0){
+            map.put("midterm","期中成绩");
+        }
+        if (rule.getSkill()>0){
+            map.put("skill","技能考核");
+        }
+        if (rule.getFinalexam()>0){
+            map.put("finalexam","期末成绩");
+        }
+        map.put("achieve","总成绩");
         HSSFWorkbook excel = ExportUtil.createExcel("student", map);
         HSSFSheet oneHSSFSheet = null;
         try {

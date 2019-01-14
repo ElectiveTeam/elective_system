@@ -355,6 +355,9 @@
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selCurByTeaId" parameterType="String" resultMap="BaseResultMap">
+    SELECT s.id id,c.cu_name FROM curriculum c ,selection s WHERE c.id=s.cu_id AND c.teacher_id=#{teacherId}
+  </select>
   <select id="selectAllCurriculum" resultType="cn.wisdsoft.electivesystem.pojo.CurriculumDo">
     select
       t.term_name as termName,
@@ -381,5 +384,11 @@
       (t.status = 1 or t.status = 3) and
       t.term_name = #{termName} and
       t.college = #{category}
+  </select>
+  <!--
+    查询最大人数
+  -->
+  <select id="selectMaxNumber" resultType="integer">
+    select s.max_number from curriculum as c,selection as s where s.cu_id = c.id and c.id = #{curriculumId};
   </select>
 </mapper>

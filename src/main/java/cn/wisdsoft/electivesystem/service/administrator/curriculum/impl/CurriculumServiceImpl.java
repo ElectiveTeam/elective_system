@@ -3,6 +3,7 @@ package cn.wisdsoft.electivesystem.service.administrator.curriculum.impl;
 import cn.wisdsoft.electivesystem.mapper.CurriculumMapper;
 import cn.wisdsoft.electivesystem.pojo.Curriculum;
 import cn.wisdsoft.electivesystem.pojo.CurriculumExample;
+import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult;
 import cn.wisdsoft.electivesystem.pojo.utils.PageResult;
 import cn.wisdsoft.electivesystem.service.administrator.curriculum.CurriculumService;
 import com.github.pagehelper.PageHelper;
@@ -46,5 +47,21 @@ public class CurriculumServiceImpl implements CurriculumService {
         List<Curriculum> curricula = curriculumMapper.selectByExample(example);
         PageInfo pageInfo = new PageInfo(curricula);
         return PageResult.ok(curricula,pageInfo.getTotal());
+    }
+
+    /**
+    * @Description: 修改课程分组
+    * @param: [curriculum]
+    * @return: cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult
+    * @Author:  SongJunWei
+    * @CreateDate:  2019/1/10 20:08
+    */
+    @Override
+    public ElectiveSystemResult updateCourse(Curriculum curriculum) {
+        int count = curriculumMapper.updateByPrimaryKeySelective(curriculum);
+        if(count<0){
+            return ElectiveSystemResult.build(420,"修改失败");
+        }
+        return ElectiveSystemResult.ok();
     }
 }

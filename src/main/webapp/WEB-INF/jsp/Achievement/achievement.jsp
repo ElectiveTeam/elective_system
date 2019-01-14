@@ -12,6 +12,35 @@
     <script src="/elective/js/jquery_2.2.4.min.js" charset="UTF-8"></script>
 </head>
 <body>
+<span>下载模板前请填写各项成绩占比，例如：平时成绩：20 期中成绩：20 技能考核：0 期末成绩：60;不填则默认为0，总和须为100</span>
+<div class="layui-btn-container" style="margin-top: 20px;">
+    <button class="layui-btn layui-btn-sm" id="importExcel">批量导入</button>
+    <button class="layui-btn layui-btn-sm" id="theBatchExport">下载模板</button>
+</div>
+<div class="layui-form-item">
+    <div class="layui-inline">
+        <label class="layui-form-label">平时成绩：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="usual" style="width: 50px" name="usual" lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-inline">
+        <label class="layui-form-label">期中成绩:</label>
+        <div class="layui-input-inline">
+            <input type="text" id="midterm" style="width: 50px" name="midterm" lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div><div class="layui-inline">
+    <label class="layui-form-label">技能考核:</label>
+    <div class="layui-input-inline">
+        <input type="text" id="skill" style="width: 50px" name="skill" lay-verify="required" autocomplete="off" class="layui-input">
+    </div>
+</div><div class="layui-inline">
+    <label class="layui-form-label">期末成绩:</label>
+    <div class="layui-input-inline">
+        <input type="text" id="finalexam" style="width: 50px" name="finalexam" lay-verify="required" autocomplete="off" class="layui-input">
+    </div>
+</div>
+</div>
 <table id="test" lay-filter="test"></table>
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
@@ -31,8 +60,8 @@
             , id: 'achieveReload'
             , even: true    //隔行换色
             , cols: [[
-                {type: 'checkbox', fixed: 'left'},{
-                    field: 'stuId', title: '学号', sort: true,width:70
+                {
+                    field: 'stuId', title: '学号', sort: true
                 }, {
                     field: 'stuName', title: '姓名'
                 }, {
@@ -67,28 +96,33 @@
     $('#theBatchExport').on('click',function (){
         layui.use('table', function () {
             var table = layui.table;
-            var checkStatus = table.checkStatus('claimReload');
-            var data = checkStatus.data;
-
-            /*$.ajax({
-                url:'${pageContext.request.contextPath}/achievement/test2',
-                type:'post',
-                dataType:"json",
-                data: {
-                    dt:JSON.stringify(data)
-                },
-                success:function (res) {
-                    console.log(res);
-                }
-            })*/
-            /*if (data.length === 0) {
-                layer.alert('请大哥勾选数据之后在进行导出哦！！ (*^v^*)', {
-                    icon: 6,
-                    skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
-                });
-            }else{
+            var data = table.cache.achieveReload;
+            var usual = parseInt($("#usual").val());
+            var midterm = parseInt($("#midterm").val());
+            var skill = parseInt($("#skill").val());
+            var finalexam = parseInt($("#finalexam").val());
+            if ($("#usual").val()==null||$("#usual").val()==""){
+                usual=0;
+            }
+            if ($("#midterm").val()==null||$("#midterm").val()==""){
+                midterm=0;
+            }
+            if ($("#skill").val()==null||$("#skill").val()==""){
+                skill=0;
+            }
+            if ($("#finalexam").val()==null||$("#finalexam").val()==""){
+                finalexam=0;
+            }
+            var selectId=1;
+            console.log(usual+midterm+skill+finalexam)
+            if (usual+midterm+skill+finalexam == 100) {
                 var formData = new FormData();
                 formData.append("model", JSON.stringify(data));
+                formData.append("usual", usual);
+                formData.append("midterm", midterm);
+                formData.append("skill", skill);
+                formData.append("finalexam", finalexam);
+                formData.append("selectId", selectId);
                 var url = "${pageContext.request.contextPath}/achievement/exportExcel";
                 var xhr = new XMLHttpRequest();
                 xhr.open("post", url, true);
@@ -109,7 +143,12 @@
                     }
                 };
                 xhr.send(formData);
-            }*/
+            }else{
+                layer.alert('请重新填写规则，规则总和必须为100', {
+                    icon: 6,
+                    skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                });
+            }
         })
     });
 </script>

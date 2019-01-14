@@ -82,7 +82,7 @@ public class ExportUtil {
             HSSFRow hssfRow = hssfSheet.createRow(flag);
             //获取实例
             T t = iterator.next();
-            for (int i = 0; i < myHeader.size(); i++) {
+            for (int i = 0; i < myHeader.size()-1; i++) {
                 //创建单元格
                 HSSFCell hssfCell = hssfRow.createCell(i);
                 //获取字段名称
@@ -104,7 +104,11 @@ public class ExportUtil {
                 Object obj_2 = objects[1];
                 switch (obj_1) {
                     case "java.lang.Integer":
-                        hssfCell.setCellValue((Integer) obj_2);
+                        if(obj_2==null){
+                            hssfCell.setCellValue((String) obj_2);
+                        }else{
+                            hssfCell.setCellValue((Integer) obj_2);
+                        }
                         break;
                     case "java.util.Date":
                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -127,6 +131,8 @@ public class ExportUtil {
                         break;
                 }
             }
+//            HSSFCell hssfCell = hssfRow.createCell(myHeader.size()-1);
+//            hssfCell.setCellFormula("SUM(C2:D2)");
         }
     }
 //

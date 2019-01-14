@@ -8,10 +8,11 @@ import cn.wisdsoft.electivesystem.service.administrator.course.CourseService;
 import cn.wisdsoft.electivesystem.service.administrator.curriculum.CurriculumService;
 import cn.wisdsoft.electivesystem.service.administrator.term.TermResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>ClassName: CourseController</p>
@@ -94,11 +95,14 @@ public class CourseController {
      * 跳转更改分组页面
      * @return
      */
-    @RequestMapping("/updateCourse")
-    public String updateCourse(Model model){
-        ElectiveSystemResult electiveSystemResult = termResourceService.selectAllTerm();
-        model.addAttribute("term",electiveSystemResult);
-        return "Course/course";
+    @RequestMapping("/courseEdit")
+    public String updateCourse(Model model,String curId,String cuName,String courseName){
+        List<Course> courseList = courseService.SelectAllCourse();
+        model.addAttribute("courseList",courseList);
+        model.addAttribute("cuName",cuName);
+        model.addAttribute("curId",curId);
+        model.addAttribute("courseName",courseName);
+        return "Course/course_edit";
     }
 
     /**
@@ -118,29 +122,15 @@ public class CourseController {
     }
 
     /**
-     * 跳转分组-课程页面
+     * 跳转编辑分组页面
      * @return
      */
-//    @RequestMapping("/JumpCurriculum")
+//    @RequestMapping("/courseEdit")
 //    public String JumpCurriculum(){
-//        return "/Course/SelectCurriculum";
+//        return "/Course/course_edit";
 //    }
 
-    /**
-    * @Description: 更改分组
-    * @param: [course]
-    * @return: cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult
-    * @Author:  SongJunWei
-    * @CreateDate:  2019/1/9 17:45
-    */
-    @RequestMapping(value = "/UpdateCource",method = RequestMethod.POST)
-    @ResponseBody
-    public ElectiveSystemResult updateCource(Course course){
-        ElectiveSystemResult electiveSystemResult = courseService.updateCource(course);
-        return electiveSystemResult;
-    }
-
-    @RequestMapping("/course")
+    @RequestMapping("/")
     public String course(){
         return "/Course/course";
     }
