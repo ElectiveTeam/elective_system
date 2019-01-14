@@ -7,6 +7,8 @@ import cn.wisdsoft.electivesystem.service.administrator.achievement.AchievementS
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>ClassName: AchievementServiceImpl</p>
  * <p>Description:</p>
@@ -54,8 +56,8 @@ public class AchievementServiceImpl implements AchievementService {
     }
 
     @Override
-    public ElectiveSystemResult editStuAchieve(int id, int achieve) {
-        int flag = achievementMapper.editStuAchieve(id, achieve);
+    public ElectiveSystemResult editStuAchieve(String stuId,int selectId, int achieve) {
+        int flag = achievementMapper.editStuAchieve(stuId,selectId, achieve);
         if(flag>0){
             return ElectiveSystemResult.ok();
         }
@@ -69,5 +71,11 @@ public class AchievementServiceImpl implements AchievementService {
             return ElectiveSystemResult.ok();
         }
         return ElectiveSystemResult.build(400,"发布失败");
+    }
+
+    @Override
+    public ElectiveSystemResult insertExportList(List<List<Object>> list, int selectId) {
+        int result = achievementMapper.insertExcelList(list,selectId);
+        return ElectiveSystemResult.ok();
     }
 }

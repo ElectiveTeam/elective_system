@@ -20,6 +20,10 @@ public class Achievement implements Serializable {
     private String stuId;
 
     /**
+     * 学生姓名
+     */
+    private String stuName;
+    /**
      * 选课编号
      */
     private Integer selectId;
@@ -33,6 +37,28 @@ public class Achievement implements Serializable {
      * 状态（0未发布，不可查看，1已发布，可查看）
      */
     private Integer status;
+    /**
+     * 课程
+     */
+    private String cuName;
+    /**
+     * 学期
+     */
+    private String termName;
+
+    /**
+     * 教师
+     */
+    private  String teacher;
+
+    /**
+     * 教师Id
+     */
+    private  String teacherId;
+    /**
+     * 学分
+     */
+    private double credit;
 
     private String remark;
 
@@ -82,5 +108,53 @@ public class Achievement implements Serializable {
 
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
+    }
+
+    public String getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(String teacher) {
+        this.teacher = teacher;
+    }
+
+    public double getCredit() {
+        return credit;
+    }
+
+    public void setCredit(double credit) {
+        this.credit = credit;
+    }
+
+    public String getCuName() {
+        return cuName;
+    }
+
+    public void setCuName(String cuName) {
+        this.cuName = cuName;
+    }
+
+    public String getTermName() {
+        return termName;
+    }
+
+    public void setTermName(String termName) {
+        this.termName = termName;
+    }
+
+    public String getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(String teacherId) {
+        this.teacherId = teacherId;
+    }
+
+    public String getStuName() {
+        return stuName;
+    }
+
+    public void setStuName(String stuName) {
+        this.stuName = stuName;
     }
 }

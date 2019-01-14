@@ -26,6 +26,11 @@ public class Curriculum implements Serializable {
     private String teacherId;
 
     /**
+     * 选课id
+     */
+    private int selectId;
+
+    /**
      * 学时
      */
     private Integer classHour;
@@ -135,5 +140,13 @@ public class Curriculum implements Serializable {
 
     public void setDescribe(String describe) {
         this.describe = describe == null ? null : describe.trim();
+    }
+
+    public int getSelectId() {
+        return selectId;
+    }
+
+    public void setSelectId(int selectId) {
+        this.selectId = selectId;
     }
 }

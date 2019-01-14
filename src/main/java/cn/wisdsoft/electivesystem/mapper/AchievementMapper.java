@@ -29,8 +29,11 @@ public interface AchievementMapper {
 
     int updateByPrimaryKey(Achievement record);
 
-    int editStuAchieve(@Param("id") int id, @Param("achieve")int achieve);
+    int editStuAchieve(@Param("stuId")String stuId,@Param("selectId") int selectId, @Param("achieve")int achieve);
 
     int saveAchieve(int selectId);
 
+    List<Achievement> selectGrade(String stuId);
+
+    int insertExcelList(@Param("list") List list,@Param("selectId") int selectId);
 }

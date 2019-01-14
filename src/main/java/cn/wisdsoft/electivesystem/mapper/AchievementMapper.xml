@@ -7,6 +7,10 @@
     <result column="select_id" jdbcType="INTEGER" property="selectId" />
     <result column="achieve" jdbcType="INTEGER" property="achieve" />
     <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="term_name" jdbcType="VARCHAR" property="termName" />
+    <result column="cu_name" jdbcType="VARCHAR" property="cuName" />
+    <result column="teacher_id" jdbcType="VARCHAR" property="teacherId" />
+    <result column="credit" jdbcType="DECIMAL" property="credit" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -226,9 +230,26 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="editStuAchieve">
-    update achievement set achieve = #{achieve,jdbcType=INTEGER} where id = #{id,jdbcType=INTEGER}
+    update achievement set achieve = #{achieve,jdbcType=INTEGER} where stu_id = #{stuId,jdbcType=VARCHAR} and select_id = #{selectId,jdbcType=INTEGER}
   </update>
   <update id="saveAchieve" parameterType="Integer">
     update achievement set status = 1 where select_id = #{selectId,jdbcType=INTEGER}
   </update>
+  <select id="selectGrade" parameterType="String" resultMap="BaseResultMap">
+    SELECT tr.term_name,cm.teacher_id ,cm.cu_name,cm.credit,a.achieve
+    FROM achievement a,curriculum cm,selection s,course c,term_resource tr
+    WHERE a.select_id=s.id AND s.cu_id=cm.id AND cm.cou_id=c.id AND c.tr_id=tr.id AND a.stu_id=#{stuId} AND a.`status`=1
+  </select>
+  <insert id="insertExcelList">
+    INSERT INTO achievement(
+    stu_id,
+    select_id,
+    achieve,
+    status
+    )
+    VALUES
+    <foreach collection="list" index="index" separator="," item="item">
+      ('${item[0]}', #{selectId,jdbcType=INTEGER}, '${item[2]}',0)
+    </foreach>
+  </insert>
 </mapper>

@@ -2,6 +2,8 @@ package cn.wisdsoft.electivesystem.service.administrator.achievement;
 
 import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult;
 
+import java.util.List;
+
 /**
  * <p>ClassName: AchievementService</p>
  * <p>Description:</p>
@@ -15,6 +17,7 @@ public interface AchievementService {
     //public ElectiveSystemResult getAllCurriculum(String teacherId);
     //public ElectiveSystemResult getStuBySelId(int selectId);
     public ElectiveSystemResult uploadAchieve(String stuId[],int selectId,int achieve[]);
-    public ElectiveSystemResult editStuAchieve(int id,int achieve);
+    public ElectiveSystemResult editStuAchieve(String stuId,int selectId,int achieve);
     public ElectiveSystemResult saveAchieve(int selectId);
+    public ElectiveSystemResult insertExportList(List<List<Object>> list,int selectId);
 }

@@ -1,0 +1,20 @@
+[WARN] 2019-01-09 09:24:42,107 [org.springframework.web.servlet.PageNotFound] method: org.springframework.web.servlet.DispatcherServlet.noHandlerFound(DispatcherServlet.java:1176)
+ No mapping found for HTTP request with URI [/selectGrade] in DispatcherServlet with name 'springmvc'
+[WARN] 2019-01-09 15:20:37,966 [org.springframework.web.servlet.PageNotFound] method: org.springframework.web.servlet.DispatcherServlet.noHandlerFound(DispatcherServlet.java:1176)
+ No mapping found for HTTP request with URI [/favicon.ico] in DispatcherServlet with name 'springmvc'
+[WARN] 2019-01-09 16:40:32,328 [org.springframework.web.servlet.PageNotFound] method: org.springframework.web.servlet.DispatcherServlet.noHandlerFound(DispatcherServlet.java:1176)
+ No mapping found for HTTP request with URI [/info/college] in DispatcherServlet with name 'springmvc'
+[WARN] 2019-01-09 17:10:06,392 [org.springframework.web.servlet.PageNotFound] method: org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver.handleHttpRequestMethodNotSupported(DefaultHandlerExceptionResolver.java:215)
+ Request method 'GET' not supported
+[WARN] 2019-01-09 17:10:18,762 [org.springframework.web.servlet.PageNotFound] method: org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver.handleHttpRequestMethodNotSupported(DefaultHandlerExceptionResolver.java:215)
+ Request method 'GET' not supported
+[WARN] 2019-01-09 17:23:43,785 [org.springframework.web.servlet.PageNotFound] method: org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver.handleHttpRequestMethodNotSupported(DefaultHandlerExceptionResolver.java:215)
+ Request method 'GET' not supported
+[WARN] 2019-01-09 17:23:48,326 [org.springframework.web.servlet.PageNotFound] method: org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver.handleHttpRequestMethodNotSupported(DefaultHandlerExceptionResolver.java:215)
+ Request method 'GET' not supported
+[WARN] 2019-01-09 17:24:26,468 [org.springframework.web.servlet.PageNotFound] method: org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver.handleHttpRequestMethodNotSupported(DefaultHandlerExceptionResolver.java:215)
+ Request method 'GET' not supported
+[WARN] 2019-01-09 17:24:28,603 [org.springframework.web.servlet.PageNotFound] method: org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver.handleHttpRequestMethodNotSupported(DefaultHandlerExceptionResolver.java:215)
+ Request method 'GET' not supported
+[WARN] 2019-01-09 17:24:39,617 [org.springframework.web.servlet.PageNotFound] method: org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver.handleHttpRequestMethodNotSupported(DefaultHandlerExceptionResolver.java:215)
+ Request method 'GET' not supported

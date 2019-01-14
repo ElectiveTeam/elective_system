@@ -33,4 +33,6 @@ public interface CurriculumMapper {
     int updateByPrimaryKeyWithBLOBs(Curriculum record);
 
     int updateByPrimaryKey(Curriculum record);
+
+    List<Curriculum> selCurByTeaId(String teacherId);
 }
