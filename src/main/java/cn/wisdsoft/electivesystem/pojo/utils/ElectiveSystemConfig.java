@@ -22,10 +22,6 @@ public class ElectiveSystemConfig {
     public final static String ACHIEVEMENT_MAPPING = "/achievement";
     public final static String STATISTICS_MAPPING = "/statistics";
 
-    /**
-     * 学生登录
-     */
-    public final static String STUDENT_LOGIN_MAPPING = "/studentLogin";
     public ElectiveSystemConfig() {
 
     }

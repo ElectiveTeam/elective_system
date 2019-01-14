@@ -45,9 +45,19 @@ public class AchievementController {
     }
     @RequestMapping(value = "/test")
     public String test(){
-        return "test";
+        return "home_page/index";
+    }
+    @RequestMapping(value = "/")
+    public String test2(){
+        return "Achievemnt/achievement";
     }
 
+    @RequestMapping(value = "/test1",method = RequestMethod.GET)
+    @ResponseBody
+    public PageResult getAllCurriculum(HttpSession session ,String key){
+        List<Achievement> achievements = (List<Achievement>) session.getAttribute("a");
+        return PageResult.ok(achievements,achievements.size());
+    }
     /*@RequestMapping(value = "/getAllCurriculum",method = RequestMethod.GET)
     @ResponseBody
     public ElectiveSystemResult getAllCurriculum(HttpSession session ,String key){

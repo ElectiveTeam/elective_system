@@ -67,7 +67,7 @@
                         <dd><a data-id="10" data-uri="" class="my-demo">驳回课程</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a data-id="11" data-uri="" class="my-demo">成绩管理</a></li>
+                <li class="layui-nav-item"><a data-id="11" data-uri="${pageContext.request.contextPath}/achievement/" class="my-demo">成绩管理</a></li>
             </ul>
         </div>
     </div>

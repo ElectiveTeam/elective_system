@@ -1,33 +1,25 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: 高伟萌
-  Date: 2018/9/19
-  Time: 10:14
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ page isELIgnored="false" %>
-<!DOCTYPE html>
-<html lang="en">
-
+<%@page isELIgnored="false"%>
+<html>
 <head>
-    <meta charset="UTF-8">
+    <title>成绩模块</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>后台管理系统</title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/elective/layui/css/layui.css">
-    <script src="${pageContext.request.contextPath}/elective/js/jquery_2.2.4.min.js"></script>
+    <link rel="stylesheet" href="/elective/layui/css/layui.css"  media="all">
+    <script src="/elective/js/jquery_2.2.4.min.js" charset="UTF-8"></script>
 </head>
-
-<body class="layui-layout-body">
-<div class="layui-btn-container" style="margin-top: 20px;">
-    <button class="layui-btn layui-btn-sm" id="importExcel">批量导入</button>
-    <button class="layui-btn layui-btn-sm" id="theBatchExport">下载模板</button>
-</div>
+<body>
 <table id="test" lay-filter="test"></table>
-<script src="${pageContext.request.contextPath}/elective/layui/layui.js"></script>
-<script src="${pageContext.request.contextPath}/elective/js/home_page/index.js"></script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+</script>
+</body>
+</html>
+<script src="/elective/layui/layui.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
     layui.use(['table','upload'] ,function () {
         var table = layui.table
@@ -36,16 +28,16 @@
         table.render({
             elem: '#test' //指定原始表格元素选择器（推荐id选择器）
             , url: '${pageContext.request.contextPath}/achievement/importExcel'
-            , id: 'claimReload'
+            , id: 'achieveReload'
             , even: true    //隔行换色
             , cols: [[
                 {type: 'checkbox', fixed: 'left'},{
-                field: 'stuId', title: '学号', sort: true,width:70
-            }, {
-                field: 'stuName', title: '姓名'
-            }, {
-                field: 'achieve', title: '成绩'
-            }]],
+                    field: 'stuId', title: '学号', sort: true,width:70
+                }, {
+                    field: 'stuName', title: '姓名'
+                }, {
+                    field: 'achieve', title: '成绩'
+                }]],
 
         });
         upload.render({
@@ -61,7 +53,7 @@
             done: function (msg) {
                 var table = layui.table;
                 //执行重载
-                table.reload('claimReload', {
+                table.reload('achieveReload', {
                     url: '${pageContext.request.contextPath}/achievement/test1'
                 })
                 if (msg.status == 200){
@@ -121,6 +113,3 @@
         })
     });
 </script>
-</body>
-
-</html>
