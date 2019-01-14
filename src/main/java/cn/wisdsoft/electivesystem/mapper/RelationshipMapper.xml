@@ -5,6 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="select_id" jdbcType="INTEGER" property="selectId" />
     <result column="stu_id" jdbcType="VARCHAR" property="stuId" />
+    <result column="stu_name" jdbcType="VARCHAR" property="stuName" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, select_id, stu_id, remark
+    id, select_id, stu_id, stu_name, remark
   </sql>
   <select id="selectByExample" parameterType="cn.wisdsoft.electivesystem.pojo.RelationshipExample" resultMap="BaseResultMap">
     select
@@ -100,9 +101,9 @@
   </delete>
   <insert id="insert" parameterType="cn.wisdsoft.electivesystem.pojo.Relationship">
     insert into relationship (id, select_id, stu_id, 
-      remark)
+      stu_name, remark)
     values (#{id,jdbcType=INTEGER}, #{selectId,jdbcType=INTEGER}, #{stuId,jdbcType=VARCHAR}, 
-      #{remark,jdbcType=VARCHAR})
+      #{stuName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.wisdsoft.electivesystem.pojo.Relationship">
     insert into relationship
@@ -115,6 +116,9 @@
       </if>
       <if test="stuId != null">
         stu_id,
+      </if>
+      <if test="stuName != null">
+        stu_name,
       </if>
       <if test="remark != null">
         remark,
@@ -129,6 +133,9 @@
       </if>
       <if test="stuId != null">
         #{stuId,jdbcType=VARCHAR},
+      </if>
+      <if test="stuName != null">
+        #{stuName,jdbcType=VARCHAR},
       </if>
       <if test="remark != null">
         #{remark,jdbcType=VARCHAR},
@@ -153,6 +160,9 @@
       <if test="record.stuId != null">
         stu_id = #{record.stuId,jdbcType=VARCHAR},
       </if>
+      <if test="record.stuName != null">
+        stu_name = #{record.stuName,jdbcType=VARCHAR},
+      </if>
       <if test="record.remark != null">
         remark = #{record.remark,jdbcType=VARCHAR},
       </if>
@@ -166,6 +176,7 @@
     set id = #{record.id,jdbcType=INTEGER},
       select_id = #{record.selectId,jdbcType=INTEGER},
       stu_id = #{record.stuId,jdbcType=VARCHAR},
+      stu_name = #{record.stuName,jdbcType=VARCHAR},
       remark = #{record.remark,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -180,6 +191,9 @@
       <if test="stuId != null">
         stu_id = #{stuId,jdbcType=VARCHAR},
       </if>
+      <if test="stuName != null">
+        stu_name = #{stuName,jdbcType=VARCHAR},
+      </if>
       <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
       </if>
@@ -190,7 +204,62 @@
     update relationship
     set select_id = #{selectId,jdbcType=INTEGER},
       stu_id = #{stuId,jdbcType=VARCHAR},
+      stu_name = #{stuName,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+    <!--
+      查询学生已选课程
+    -->
+    <select id="selectUserCurriculum" resultMap="myMap">
+    SELECT
+      t.id AS termId,
+      term_name AS termName,
+      college AS college,
+      t.`status` AS termStatus,
+      cu.id AS curriculumId,
+      cu.cu_name AS cuName,
+      class_time AS classTime,
+      place AS place,
+      class_hour AS classHour,
+      credit AS credit,
+      grade AS grade,
+      r.select_id AS selectId,
+      teacher_name AS teacherName
+    FROM term_resource AS t,course AS c, curriculum AS cu,selection AS s, relationship AS r
+    WHERE
+      t.id = c.tr_id AND
+      c.id = cu.cou_id AND
+      cu.id = s.cu_id AND
+      s.id = r.select_id AND
+      r.stu_id = #{stuId}
+    ORDER BY t.id ASC
+  </select>
+    <resultMap id="myMap" type="cn.wisdsoft.electivesystem.pojo.TermResource">
+        <id property="id" column="termId" />
+        <result property="termName" column="termName" />
+        <result property="college" column="college" />
+        <result property="status" column="termStatus" />
+        <collection property="studentDos" ofType="cn.wisdsoft.electivesystem.pojo.StudentDo">
+            <result property="curriculumId" column="curriculumId" />
+            <result property="cuName" column="cuName" />
+            <result property="place" column="place" />
+            <result property="classTime" column="classTime" />
+            <result property="classHour" column="classHour" />
+            <result property="credit" column="credit" />
+            <result property="grade" column="grade" />
+            <result property="selectId" column="selectId" />
+            <result property="teacherName" column="teacherName" />
+        </collection>
+    </resultMap>
+
+
+    <!--
+  学生退课
+  -->
+    <delete id="delRelationByStuIdAndSelectId">
+    delete from relationship
+    where stu_id = #{stuId} AND select_id = #{selectId};
+  </delete>
 </mapper>

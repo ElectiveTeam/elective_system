@@ -1,6 +1,9 @@
 package cn.wisdsoft.electivesystem.pojo;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * <p>ClassName: Selection</p>
@@ -25,7 +28,7 @@ public class Selection implements Serializable {
     private String classTime;
 
     /**
-     * 地点
+     * 上课地点
      */
     private String place;
 
@@ -39,12 +42,20 @@ public class Selection implements Serializable {
      */
     private Integer minNumber;
 
-    /**
-     * 状态（0已通过、1未通过）
-     */
-    private Integer status;
-
     private String remark;
+
+    /**
+     * 查询学生已选课程操作的mapper对象映射（课程表）
+     */
+    private Curriculum curriculum;
+
+    public Curriculum getCurriculum() {
+        return curriculum;
+    }
+
+    public void setCurriculum(Curriculum curriculum) {
+        this.curriculum = curriculum;
+    }
 
     public Integer getId() {
         return id;
@@ -92,14 +103,6 @@ public class Selection implements Serializable {
 
     public void setMinNumber(Integer minNumber) {
         this.minNumber = minNumber;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
     }
 
     public String getRemark() {

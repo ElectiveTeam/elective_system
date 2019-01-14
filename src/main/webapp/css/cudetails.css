@@ -1,0 +1,14 @@
+.card{
+    margin: 0 auto;
+    margin-top:6%; 
+    width: 70%;
+    height: 500px;
+    overflow-y:auto; 
+    opacity: 0.8;
+}
+/* .abc{
+    background-color: rgba(255, 255, 255, 0.7);
+    margin: 0 auto;
+    margin-top:6%; 
+    width: 70%;
+} */

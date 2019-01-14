@@ -1,11 +1,11 @@
 # Elective-course
 ## 选课系统
-#####- [项目git地址](https://github.com/LYLYuLongLiu/Elective-course)
-#####- git clone https://github.com/ElectiveTeam/elective_system.git
+##### - [项目git地址](https://github.com/LYLYuLongLiu/Elective-course)
+##### - git clone https://github.com/ElectiveTeam/elective_system.git
 
 ***
 
-###系统模块
+### 系统模块
 1. 选课系统
     1. 管理员模块
         1. 审核模块

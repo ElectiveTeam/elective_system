@@ -1,0 +1,45 @@
+body h1{
+    width: 100%;
+    margin-top:5rem;
+    text-align: center;
+    color: white;
+}
+.content{
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+#btns{
+    width: 80%;
+    margin: 7% auto;
+    display: flex;
+    justify-content: space-around;
+}
+
+#btns figure{
+    width: 25%;
+    background-color: rgba(153, 204, 255,0.8);
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    /*margin: 0 auto;*/
+    /*margin-top: 2%;*/
+    /*width: 80%;*/
+}
+#btns figure p{
+    font-size: 20px;
+    width:100%;
+    text-align: center;
+}
+#btns figure img{
+    width: 40%;
+    margin:  1rem 0;
+    display: block;
+}
+
+
+

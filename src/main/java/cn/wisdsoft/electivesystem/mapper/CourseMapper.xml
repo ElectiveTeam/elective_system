@@ -193,4 +193,7 @@
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="SelectCource" resultMap="BaseResultMap">
+    SELECT id,course_name FROM course
+  </select>
 </mapper>

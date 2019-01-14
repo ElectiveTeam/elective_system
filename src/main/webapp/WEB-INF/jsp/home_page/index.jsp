@@ -36,9 +36,10 @@
                 <dl class="layui-nav-child">
                     <dd><a data-id="6" data-uri="administrator/updatePwd" class="my-demo">个人信息</a></dd>
                     <dd><a data-id="7" data-uri="administrator/updatePwd" class="my-demo">修改密码</a></dd>
+                    <dd><a data-id="7" data-uri="administrator/updatePwd" class="my-demo" onclick="logout()">退出</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a onclick="logout()">退出</a></li>
+            <li class="layui-nav-item"><a>2018-2019学年第二学期</a></li>
         </ul>
     </div>
     <div class="layui-side layui-bg-black">

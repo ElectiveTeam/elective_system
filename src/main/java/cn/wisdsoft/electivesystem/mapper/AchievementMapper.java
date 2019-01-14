@@ -2,9 +2,8 @@ package cn.wisdsoft.electivesystem.mapper;
 
 import cn.wisdsoft.electivesystem.pojo.Achievement;
 import cn.wisdsoft.electivesystem.pojo.AchievementExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface AchievementMapper {
     long countByExample(AchievementExample example);

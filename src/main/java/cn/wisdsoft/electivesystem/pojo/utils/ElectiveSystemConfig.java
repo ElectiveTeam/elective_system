@@ -10,7 +10,9 @@ package cn.wisdsoft.electivesystem.pojo.utils;
  */
 public class ElectiveSystemConfig {
 
-    public final static String STUDNET_MAPPING = "/student";
+    public final static String PERSON_CENTER_MAPPING = "/student/personCenter";
+    public final static String SELECTED_CURRICULUM_MAPPING = "/student/selectedCurriculum";
+    public final static String STUDENT_LOGIN_MAPPING = "/student/studentLogin";
     public final static String TEACHER_MAPPING = "/teacher";
     public final static String APPLICATION_MAPPING = "/application";
     public final static String COURSE_MAPPING = "/course";

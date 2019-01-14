@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <p>ClassName: TermResource</p>
@@ -45,6 +46,12 @@ public class TermResource implements Serializable {
     private Integer status;
 
     private String remark;
+
+    /**
+     * 学生课程列表信息
+     * @author 高伟萌
+     */
+    private List<StudentDo> studentDos;
 
     public Integer getId() {
         return id;
@@ -100,5 +107,13 @@ public class TermResource implements Serializable {
 
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
+    }
+
+    public List<StudentDo> getStudentDos() {
+        return studentDos;
+    }
+
+    public void setStudentDos(List<StudentDo> studentDos) {
+        this.studentDos = studentDos;
     }
 }

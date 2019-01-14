@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="/elective/student/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="/elective/student/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="/elective/student/css/bootstrap.min.css" />
+    <title>河北工程技术学院选课系统</title>
+</head>
+<body>
+    <div id="bg">
+        <img src="/elective/student/images/banner.jpg">
+    </div>
+   <!--<header id="hd"></header>--> 
+    <h1>欢迎登陆选课系统</h1>
+        <div class="content">
+            <div id="btns">
+                    <!--<button type="button" class="btn btn-primary btn-lg btn-block" id="seletedc">我要选课</button>-->
+                    <!--<button type="button" class="btn btn-primary btn-lg btn-block" id="curriculum">已选课程</button>-->
+                    <!--<button type="button" class="btn btn-primary btn-lg btn-block" id="achievement">查询成绩</button>-->
+                <figure>
+                    <img src="/elective/student/images/selectCurriculum.png" alt="">
+                    <p>我要选课</p>
+                </figure>
+                <figure>
+                    <img src="/elective/student/images/myCurriculum.png" alt="">
+                    <p>已选课程</p>
+                </figure>
+                <figure>
+                    <img src="/elective/student/images/selectGrade.png" alt="">
+                    <p>查询成绩</p>
+                </figure>
+            </div>
+        </div>
+    <footer id="ft"></footer>
+</body>
+</html>
+<script src="/elective/student/js/jquery_2.2.4.min.js"></script>
+<script type="text/javascript"> 
+		
+$(document).ready(function(){
+    
+    $("#ft").load('../html/footer.html');
+    $("#seletedc").click(function(){
+        location.href = "../html/selectedCurriculum.html";
+    });
+
+    $("#curriculum").click(function(){
+        location.href = "../html/personCenter.html";
+    });
+
+    $("#achievement").click(function(){
+        location.href = "../html/selectedCurriculum.html";
+    });
+
+});
+</script>

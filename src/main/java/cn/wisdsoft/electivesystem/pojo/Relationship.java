@@ -1,5 +1,7 @@
 package cn.wisdsoft.electivesystem.pojo;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.io.Serializable;
 
 /**
@@ -24,7 +26,25 @@ public class Relationship implements Serializable {
      */
     private String stuId;
 
+    /**
+     * 学生名称
+     */
+    private String stuName;
+
     private String remark;
+
+    /**
+     * 查询学生已选课程操作的mapper对象映射（选课表）
+     */
+    private Selection selection;
+
+    public Selection getSelection() {
+        return selection;
+    }
+
+    public void setSelection(Selection selection) {
+        this.selection = selection;
+    }
 
     public Integer getId() {
         return id;
@@ -48,6 +68,14 @@ public class Relationship implements Serializable {
 
     public void setStuId(String stuId) {
         this.stuId = stuId == null ? null : stuId.trim();
+    }
+
+    public String getStuName() {
+        return stuName;
+    }
+
+    public void setStuName(String stuName) {
+        this.stuName = stuName == null ? null : stuName.trim();
     }
 
     public String getRemark() {

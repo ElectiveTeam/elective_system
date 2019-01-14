@@ -8,7 +8,6 @@
     <result column="place" jdbcType="VARCHAR" property="place" />
     <result column="max_number" jdbcType="INTEGER" property="maxNumber" />
     <result column="min_number" jdbcType="INTEGER" property="minNumber" />
-    <result column="status" jdbcType="INTEGER" property="status" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -70,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, cu_id, class_time, place, max_number, min_number, status, remark
+    id, cu_id, class_time, place, max_number, min_number, remark
   </sql>
   <select id="selectByExample" parameterType="cn.wisdsoft.electivesystem.pojo.SelectionExample" resultMap="BaseResultMap">
     select
@@ -105,10 +104,10 @@
   <insert id="insert" parameterType="cn.wisdsoft.electivesystem.pojo.Selection">
     insert into selection (id, cu_id, class_time, 
       place, max_number, min_number, 
-      status, remark)
+      remark)
     values (#{id,jdbcType=INTEGER}, #{cuId,jdbcType=INTEGER}, #{classTime,jdbcType=VARCHAR}, 
       #{place,jdbcType=VARCHAR}, #{maxNumber,jdbcType=INTEGER}, #{minNumber,jdbcType=INTEGER}, 
-      #{status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR})
+      #{remark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.wisdsoft.electivesystem.pojo.Selection">
     insert into selection
@@ -130,9 +129,6 @@
       </if>
       <if test="minNumber != null">
         min_number,
-      </if>
-      <if test="status != null">
-        status,
       </if>
       <if test="remark != null">
         remark,
@@ -156,9 +152,6 @@
       </if>
       <if test="minNumber != null">
         #{minNumber,jdbcType=INTEGER},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
       </if>
       <if test="remark != null">
         #{remark,jdbcType=VARCHAR},
@@ -192,9 +185,6 @@
       <if test="record.minNumber != null">
         min_number = #{record.minNumber,jdbcType=INTEGER},
       </if>
-      <if test="record.status != null">
-        status = #{record.status,jdbcType=INTEGER},
-      </if>
       <if test="record.remark != null">
         remark = #{record.remark,jdbcType=VARCHAR},
       </if>
@@ -211,7 +201,6 @@
       place = #{record.place,jdbcType=VARCHAR},
       max_number = #{record.maxNumber,jdbcType=INTEGER},
       min_number = #{record.minNumber,jdbcType=INTEGER},
-      status = #{record.status,jdbcType=INTEGER},
       remark = #{record.remark,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -235,9 +224,6 @@
       <if test="minNumber != null">
         min_number = #{minNumber,jdbcType=INTEGER},
       </if>
-      <if test="status != null">
-        status = #{status,jdbcType=INTEGER},
-      </if>
       <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
       </if>
@@ -251,7 +237,6 @@
       place = #{place,jdbcType=VARCHAR},
       max_number = #{maxNumber,jdbcType=INTEGER},
       min_number = #{minNumber,jdbcType=INTEGER},
-      status = #{status,jdbcType=INTEGER},
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>

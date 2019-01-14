@@ -294,6 +294,76 @@ public class RelationshipExample {
             return (Criteria) this;
         }
 
+        public Criteria andStuNameIsNull() {
+            addCriterion("stu_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStuNameIsNotNull() {
+            addCriterion("stu_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStuNameEqualTo(String value) {
+            addCriterion("stu_name =", value, "stuName");
+            return (Criteria) this;
+        }
+
+        public Criteria andStuNameNotEqualTo(String value) {
+            addCriterion("stu_name <>", value, "stuName");
+            return (Criteria) this;
+        }
+
+        public Criteria andStuNameGreaterThan(String value) {
+            addCriterion("stu_name >", value, "stuName");
+            return (Criteria) this;
+        }
+
+        public Criteria andStuNameGreaterThanOrEqualTo(String value) {
+            addCriterion("stu_name >=", value, "stuName");
+            return (Criteria) this;
+        }
+
+        public Criteria andStuNameLessThan(String value) {
+            addCriterion("stu_name <", value, "stuName");
+            return (Criteria) this;
+        }
+
+        public Criteria andStuNameLessThanOrEqualTo(String value) {
+            addCriterion("stu_name <=", value, "stuName");
+            return (Criteria) this;
+        }
+
+        public Criteria andStuNameLike(String value) {
+            addCriterion("stu_name like", value, "stuName");
+            return (Criteria) this;
+        }
+
+        public Criteria andStuNameNotLike(String value) {
+            addCriterion("stu_name not like", value, "stuName");
+            return (Criteria) this;
+        }
+
+        public Criteria andStuNameIn(List<String> values) {
+            addCriterion("stu_name in", values, "stuName");
+            return (Criteria) this;
+        }
+
+        public Criteria andStuNameNotIn(List<String> values) {
+            addCriterion("stu_name not in", values, "stuName");
+            return (Criteria) this;
+        }
+
+        public Criteria andStuNameBetween(String value1, String value2) {
+            addCriterion("stu_name between", value1, value2, "stuName");
+            return (Criteria) this;
+        }
+
+        public Criteria andStuNameNotBetween(String value1, String value2) {
+            addCriterion("stu_name not between", value1, value2, "stuName");
+            return (Criteria) this;
+        }
+
         public Criteria andRemarkIsNull() {
             addCriterion("remark is null");
             return (Criteria) this;

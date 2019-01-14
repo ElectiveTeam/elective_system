@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="cn.wisdsoft.electivesystem.pojo.Achievement">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="stu_id" jdbcType="VARCHAR" property="stuId" />
+    <result column="stu_name" jdbcType="VARCHAR" property="stuName" />
     <result column="select_id" jdbcType="INTEGER" property="selectId" />
     <result column="achieve" jdbcType="INTEGER" property="achieve" />
     <result column="status" jdbcType="INTEGER" property="status" />
@@ -72,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, stu_id, select_id, achieve, status, remark
+    id, stu_id, stu_name, select_id, achieve, status, remark
   </sql>
   <select id="selectByExample" parameterType="cn.wisdsoft.electivesystem.pojo.AchievementExample" resultMap="BaseResultMap">
     select
@@ -105,12 +106,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.wisdsoft.electivesystem.pojo.Achievement">
-    insert into achievement (id, stu_id, select_id, 
-      achieve, status, remark
-      )
-    values (#{id,jdbcType=INTEGER}, #{stuId,jdbcType=VARCHAR}, #{selectId,jdbcType=INTEGER}, 
-      #{achieve,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}
-      )
+    insert into achievement (id, stu_id, stu_name, 
+      select_id, achieve, status, 
+      remark)
+    values (#{id,jdbcType=INTEGER}, #{stuId,jdbcType=VARCHAR}, #{stuName,jdbcType=VARCHAR}, 
+      #{selectId,jdbcType=INTEGER}, #{achieve,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.wisdsoft.electivesystem.pojo.Achievement">
     insert into achievement
@@ -120,6 +121,9 @@
       </if>
       <if test="stuId != null">
         stu_id,
+      </if>
+      <if test="stuName != null">
+        stu_name,
       </if>
       <if test="selectId != null">
         select_id,
@@ -140,6 +144,9 @@
       </if>
       <if test="stuId != null">
         #{stuId,jdbcType=VARCHAR},
+      </if>
+      <if test="stuName != null">
+        #{stuName,jdbcType=VARCHAR},
       </if>
       <if test="selectId != null">
         #{selectId,jdbcType=INTEGER},
@@ -170,6 +177,9 @@
       <if test="record.stuId != null">
         stu_id = #{record.stuId,jdbcType=VARCHAR},
       </if>
+      <if test="record.stuName != null">
+        stu_name = #{record.stuName,jdbcType=VARCHAR},
+      </if>
       <if test="record.selectId != null">
         select_id = #{record.selectId,jdbcType=INTEGER},
       </if>
@@ -191,6 +201,7 @@
     update achievement
     set id = #{record.id,jdbcType=INTEGER},
       stu_id = #{record.stuId,jdbcType=VARCHAR},
+      stu_name = #{record.stuName,jdbcType=VARCHAR},
       select_id = #{record.selectId,jdbcType=INTEGER},
       achieve = #{record.achieve,jdbcType=INTEGER},
       status = #{record.status,jdbcType=INTEGER},
@@ -204,6 +215,9 @@
     <set>
       <if test="stuId != null">
         stu_id = #{stuId,jdbcType=VARCHAR},
+      </if>
+      <if test="stuName != null">
+        stu_name = #{stuName,jdbcType=VARCHAR},
       </if>
       <if test="selectId != null">
         select_id = #{selectId,jdbcType=INTEGER},
@@ -223,6 +237,7 @@
   <update id="updateByPrimaryKey" parameterType="cn.wisdsoft.electivesystem.pojo.Achievement">
     update achievement
     set stu_id = #{stuId,jdbcType=VARCHAR},
+      stu_name = #{stuName,jdbcType=VARCHAR},
       select_id = #{selectId,jdbcType=INTEGER},
       achieve = #{achieve,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
