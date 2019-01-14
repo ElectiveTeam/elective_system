@@ -1,24 +1,51 @@
 body h1{
     width: 100%;
-    margin-top:15%;
+    margin-top:5rem;
     text-align: center;
     color: white;
-}
+    background-color: rgba(2, 9, 152,0.6);
+    padding: 20px 0;
 
+
+}
+.content{
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
 #btns{
-    width: 60%;
-    margin: 0 auto;
-    margin-top: 5%;
-}
-
-#btns button{
-    opacity:0.8;
-    margin: 0 auto;
-    margin-top: 2%;
     width: 80%;
-
+    margin: 7% auto;
+    display: flex;
+    justify-content: space-around;
 }
 
+#btns figure{
+    width: 25%;
+    background-color: rgba(2, 9, 152,0.2);
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    padding: 40px 0;
+    /*margin: 0 auto;*/
+    /*margin-top: 2%;*/
+    /*width: 80%;*/
+}
+#btns figure p{
+    font-size: 20px;
+    width:100%;
+    text-align: center;
+    color:white;
+}
+#btns figure img{
+    width: 25%;
+    margin:  1rem 0;
+    display: block;
+}
 
 
 

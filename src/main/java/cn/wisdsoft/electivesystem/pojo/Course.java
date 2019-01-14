@@ -15,7 +15,7 @@ public class Course implements Serializable {
     private Integer id;
 
     /**
-     * 课程名称
+     * 课程组名称
      */
     private String courseName;
 

@@ -11,19 +11,21 @@ import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult;
  * @ClassName SelectedCurriculumService
  * @Description
  * @Author LIZEYU
- * @Date 2019/1/9 7:55
+ * @Date 2019 /1/9 7:55
  * @Version 1.0
- **/
+ */
 public interface SelectedCurriculumService {
 
     /**
-     * @Author 李泽宇
-     * @Description 学生选课
-     * @Date 2019/1/10 14:48
-     * @Param
-     * @return
-     **/
-    ElectiveSystemResult insertRelation(Relationship relationship);
+     * Insert relation elective system result.
+     * 插入选课信息
+     *
+     * @param stuId        the stu id  学生ID
+     * @param stuName      the stu name  学生名称
+     * @param curriculumId the curriculum id  课程ID
+     * @return the elective system result
+     */
+    ElectiveSystemResult insertRelation(String stuId,String stuName,int curriculumId,String yard);
 
 
     /**
@@ -40,7 +42,17 @@ public interface SelectedCurriculumService {
      * 查询当前学期所有课程信息
      *
      * @param termName the term name  学期名称
+     * @param category the category  课程类别
      * @return the elective system result  包含课程信息的JSON数据
      */
-    ElectiveSystemResult selectAllCurriculum(String termName);
+    ElectiveSystemResult selectAllCurriculum(String termName,String category);
+
+    /**
+     * Choose status elective system result.
+     * 判断学生时候可以选课
+     *
+     * @param category the category  课程类别
+     * @return the elective system result  包含数据条数的JSON数据
+     */
+    ElectiveSystemResult selectStatus(String category);
 }

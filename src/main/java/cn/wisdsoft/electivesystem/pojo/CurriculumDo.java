@@ -1,6 +1,7 @@
 package cn.wisdsoft.electivesystem.pojo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * @ Author     ：高伟萌.
@@ -48,7 +49,7 @@ public class CurriculumDo implements Serializable {
     /**
      * 学分
      */
-    private Double credit;
+    private BigDecimal credit;
 
     /**
      * 上课时间
@@ -64,6 +65,8 @@ public class CurriculumDo implements Serializable {
      * 最大人数
      */
     private Integer maxNumber;
+
+    private String remark;
 
     public String getTermName() {
         return termName;
@@ -121,11 +124,11 @@ public class CurriculumDo implements Serializable {
         this.classHour = classHour;
     }
 
-    public Double getCredit() {
+    public BigDecimal getCredit() {
         return credit;
     }
 
-    public void setCredit(Double credit) {
+    public void setCredit(BigDecimal credit) {
         this.credit = credit;
     }
 
@@ -151,5 +154,13 @@ public class CurriculumDo implements Serializable {
 
     public void setMaxNumber(Integer maxNumber) {
         this.maxNumber = maxNumber;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

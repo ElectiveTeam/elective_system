@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Administrator
+  User: SongJunWei
   Date: 2019/1/9
   Time: 20:32
   To change this template use File | Settings | File Templates.
@@ -22,102 +22,18 @@
 <div class="layui-collapse" lay-filter="test"></div>
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    <%--<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>--%>
+</script>
+<script type="text/html" id="status">
+        {{#  if(d.status==1){ }}
+        未审核
+        {{# } else if(d.status==2) { }}
+        已通过
+        {{#  } else { d.status==3}}
+        未通过
+        {{#  } }}
 </script>
 </body>
 </html>
 <script src="/elective/layui/layui.js" charset="utf-8"></script>
-<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
-<script>
-    let couseId = null;
-
-    layui.use(['element', 'layer'], function(){
-        var element = layui.element;
-        var layer = layui.layer;
-
-        //监听折叠
-        element.on('collapse(test)', function(data){
-            layer.msg('展开状态：'+ data.show);
-            // console.log();
-            couseId = $(this).data('id');
-            layui.use('table', function(){
-                var table = layui.table;
-                // console.log(couseId)
-                table.render({
-                    elem: '#test'+couseId
-                    ,url:'http://localhost:8080/course/SelectCurriculum?couId='+couseId
-                    // ,toolbar: '#toolbarDemo'
-                    ,cellMinWidth: 80
-                    ,title: '用户数据表'
-                    ,cols: [[
-                        // {type: 'checkbox', fixed: 'left'}
-                        {field:'id', title:'分组编号', sort: true,align: 'center'}
-                        ,{field:'cuName', title:'课程名称',align: 'center'}
-                        ,{field:'teacherId', title:'教师编号',align: 'center'}
-                        ,{field:'classHour', title:'学时',align: 'center'}
-                        ,{field:'credit', title:'学分',align: 'center'}
-                        ,{field:'grade', title:'年级',align: 'center'}
-                        ,{field:'status', title:'状态',align: 'center'}
-                        ,{fixed: 'right', title:'操作', toolbar: '#barDemo'}
-                    ]]
-                    ,page: false
-                });
-
-                //监听行工具事件
-                table.on('tool(test)', function(obj){
-                    var data = obj.data;
-                    // console.log(obj.data.couId)
-                    if(obj.event === 'del'){
-                        layer.confirm('真的删除行么', function(index){
-                            $.ajax({
-                                url:'http://localhost:8080/course/deleteCourseById',
-                                type:"get",
-                                data:{id:data.couId},
-                                success: function (res) {
-                                    let responseCourse = res.data;
-                                    console.log(res);
-                                    obj.del();
-                                    layer.close(index);
-                                },error: function (res) {
-
-                                }
-                            })
-                        });
-                    } else if(obj.event === 'edit'){
-                        layer.prompt({
-                            formType: 2
-                            ,value: data.email
-                        }, function(value, index){
-                            obj.update({
-                                email: value
-                            });
-                            layer.close(index);
-                        });
-                    }
-                });
-            });
-        });
-    });
-    $(function () {
-        $.ajax({
-            url:'http://localhost:8080/course/selectCource',
-            type:"get",
-            data:{},
-            success: function (res) {
-                let responseCourse = res.data;
-                for (let courseList of responseCourse) {
-                    console.log(courseList);
-                    let ressults="<div class=\"layui-colla-item\">\n" +
-                        "   <h2 class=\"layui-colla-title\" data-id='"+courseList.id+"'>"+courseList.courseName+"</h2>\n" +
-                        "   <div class=\"layui-colla-content\">\n" +
-                        "      <p><table class=\"layui-hide\" id='test"+courseList.id+"' lay-filter=\"test\"></table></p>\n" +
-                        "   </div>\n" +
-                        "</div>";
-                    $(".layui-collapse").append(ressults);
-                }
-            },error: function (res) {
-                
-            }
-        })
-    });
-</script>
+<script src="/elective/js/course/course.js" charset="utf-8"></script>
