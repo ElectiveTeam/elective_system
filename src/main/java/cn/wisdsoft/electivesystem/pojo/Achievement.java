@@ -24,6 +24,22 @@ public class Achievement implements Serializable {
      */
     private String stuName;
     /**
+     * 平时成绩
+     */
+    private Integer usual;
+    /**
+     * 期中成绩
+     */
+    private Integer midterm;
+    /**
+     * 技能考核
+     */
+    private Integer skill;
+    /**
+     * 期末成绩
+     */
+    private Integer finalexam;
+    /**
      * 选课编号
      */
     private Integer selectId;
@@ -156,5 +172,37 @@ public class Achievement implements Serializable {
 
     public void setStuName(String stuName) {
         this.stuName = stuName;
+    }
+
+    public Integer getUsual() {
+        return usual;
+    }
+
+    public void setUsual(Integer usual) {
+        this.usual = usual;
+    }
+
+    public Integer getMidterm() {
+        return midterm;
+    }
+
+    public void setMidterm(Integer midterm) {
+        this.midterm = midterm;
+    }
+
+    public Integer getSkill() {
+        return skill;
+    }
+
+    public void setSkill(Integer skill) {
+        this.skill = skill;
+    }
+
+    public Integer getFinalexam() {
+        return finalexam;
+    }
+
+    public void setFinalexam(Integer finalexam) {
+        this.finalexam = finalexam;
     }
 }

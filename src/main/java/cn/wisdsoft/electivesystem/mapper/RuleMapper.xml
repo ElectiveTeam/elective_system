@@ -1,22 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.wisdsoft.electivesystem.mapper.AchievementMapper">
-  <resultMap id="BaseResultMap" type="cn.wisdsoft.electivesystem.pojo.Achievement">
+<mapper namespace="cn.wisdsoft.electivesystem.mapper.RuleMapper">
+  <resultMap id="BaseResultMap" type="cn.wisdsoft.electivesystem.pojo.Rule">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="stu_id" jdbcType="VARCHAR" property="stuId" />
-    <result column="stu_name" jdbcType="VARCHAR" property="stuName" />
     <result column="select_id" jdbcType="INTEGER" property="selectId" />
     <result column="usual" jdbcType="INTEGER" property="usual" />
     <result column="midterm" jdbcType="INTEGER" property="midterm" />
     <result column="skill" jdbcType="INTEGER" property="skill" />
     <result column="finalexam" jdbcType="INTEGER" property="finalexam" />
-    <result column="achieve" jdbcType="INTEGER" property="achieve" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="term_name" jdbcType="VARCHAR" property="termName" />
-    <result column="cu_name" jdbcType="VARCHAR" property="cuName" />
-    <result column="teacher_id" jdbcType="VARCHAR" property="teacherId" />
-    <result column="credit" jdbcType="DECIMAL" property="credit" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -77,16 +68,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, stu_id, stu_name, select_id, usual, midterm, skill, finalexam, achieve, status,
-    remark
+    id, select_id, usual, midterm, skill, finalexam
   </sql>
-  <select id="selectByExample" parameterType="cn.wisdsoft.electivesystem.pojo.AchievementExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="cn.wisdsoft.electivesystem.pojo.RuleExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from achievement
+    from rule
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -95,42 +85,34 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
+    select 
     <include refid="Base_Column_List" />
-    from achievement
+    from rule
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from achievement
+    delete from rule
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="cn.wisdsoft.electivesystem.pojo.AchievementExample">
-    delete from achievement
+  <delete id="deleteByExample" parameterType="cn.wisdsoft.electivesystem.pojo.RuleExample">
+    delete from rule
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.wisdsoft.electivesystem.pojo.Achievement">
-    insert into achievement (id, stu_id, stu_name,
-      select_id, usual, midterm,
-      skill, finalexam, achieve,
-      status, remark)
-    values (#{id,jdbcType=INTEGER}, #{stuId,jdbcType=VARCHAR}, #{stuName,jdbcType=VARCHAR},
-      #{selectId,jdbcType=INTEGER}, #{usual,jdbcType=INTEGER}, #{midterm,jdbcType=INTEGER},
-      #{skill,jdbcType=INTEGER}, #{finalexam,jdbcType=INTEGER}, #{achieve,jdbcType=INTEGER},
-      #{status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="cn.wisdsoft.electivesystem.pojo.Rule">
+    insert into rule (id, select_id, usual, 
+      midterm, skill, finalexam
+      )
+    values (#{id,jdbcType=INTEGER}, #{selectId,jdbcType=INTEGER}, #{usual,jdbcType=INTEGER}, 
+      #{midterm,jdbcType=INTEGER}, #{skill,jdbcType=INTEGER}, #{finalexam,jdbcType=INTEGER}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="cn.wisdsoft.electivesystem.pojo.Achievement">
-    insert into achievement
+  <insert id="insertSelective" parameterType="cn.wisdsoft.electivesystem.pojo.Rule">
+    insert into rule
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
-      </if>
-      <if test="stuId != null">
-        stu_id,
-      </if>
-      <if test="stuName != null">
-        stu_name,
       </if>
       <if test="selectId != null">
         select_id,
@@ -147,25 +129,10 @@
       <if test="finalexam != null">
         finalexam,
       </if>
-      <if test="achieve != null">
-        achieve,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="remark != null">
-        remark,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=INTEGER},
-      </if>
-      <if test="stuId != null">
-        #{stuId,jdbcType=VARCHAR},
-      </if>
-      <if test="stuName != null">
-        #{stuName,jdbcType=VARCHAR},
       </if>
       <if test="selectId != null">
         #{selectId,jdbcType=INTEGER},
@@ -182,34 +149,19 @@
       <if test="finalexam != null">
         #{finalexam,jdbcType=INTEGER},
       </if>
-      <if test="achieve != null">
-        #{achieve,jdbcType=INTEGER},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="remark != null">
-        #{remark,jdbcType=VARCHAR},
-      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.wisdsoft.electivesystem.pojo.AchievementExample" resultType="java.lang.Long">
-    select count(*) from achievement
+  <select id="countByExample" parameterType="cn.wisdsoft.electivesystem.pojo.RuleExample" resultType="java.lang.Long">
+    select count(*) from rule
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update achievement
+    update rule
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.stuId != null">
-        stu_id = #{record.stuId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.stuName != null">
-        stu_name = #{record.stuName,jdbcType=VARCHAR},
       </if>
       <if test="record.selectId != null">
         select_id = #{record.selectId,jdbcType=INTEGER},
@@ -226,46 +178,26 @@
       <if test="record.finalexam != null">
         finalexam = #{record.finalexam,jdbcType=INTEGER},
       </if>
-      <if test="record.achieve != null">
-        achieve = #{record.achieve,jdbcType=INTEGER},
-      </if>
-      <if test="record.status != null">
-        status = #{record.status,jdbcType=INTEGER},
-      </if>
-      <if test="record.remark != null">
-        remark = #{record.remark,jdbcType=VARCHAR},
-      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update achievement
+    update rule
     set id = #{record.id,jdbcType=INTEGER},
-    stu_id = #{record.stuId,jdbcType=VARCHAR},
-    stu_name = #{record.stuName,jdbcType=VARCHAR},
-    select_id = #{record.selectId,jdbcType=INTEGER},
-    usual = #{record.usual,jdbcType=INTEGER},
-    midterm = #{record.midterm,jdbcType=INTEGER},
-    skill = #{record.skill,jdbcType=INTEGER},
-    finalexam = #{record.finalexam,jdbcType=INTEGER},
-    achieve = #{record.achieve,jdbcType=INTEGER},
-    status = #{record.status,jdbcType=INTEGER},
-    remark = #{record.remark,jdbcType=VARCHAR}
+      select_id = #{record.selectId,jdbcType=INTEGER},
+      usual = #{record.usual,jdbcType=INTEGER},
+      midterm = #{record.midterm,jdbcType=INTEGER},
+      skill = #{record.skill,jdbcType=INTEGER},
+      finalexam = #{record.finalexam,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.wisdsoft.electivesystem.pojo.Achievement">
-    update achievement
+  <update id="updateByPrimaryKeySelective" parameterType="cn.wisdsoft.electivesystem.pojo.Rule">
+    update rule
     <set>
-      <if test="stuId != null">
-        stu_id = #{stuId,jdbcType=VARCHAR},
-      </if>
-      <if test="stuName != null">
-        stu_name = #{stuName,jdbcType=VARCHAR},
-      </if>
       <if test="selectId != null">
         select_id = #{selectId,jdbcType=INTEGER},
       </if>
@@ -281,53 +213,16 @@
       <if test="finalexam != null">
         finalexam = #{finalexam,jdbcType=INTEGER},
       </if>
-      <if test="achieve != null">
-        achieve = #{achieve,jdbcType=INTEGER},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.wisdsoft.electivesystem.pojo.Achievement">
-    update achievement
-    set stu_id = #{stuId,jdbcType=VARCHAR},
-      stu_name = #{stuName,jdbcType=VARCHAR},
-      select_id = #{selectId,jdbcType=INTEGER},
+  <update id="updateByPrimaryKey" parameterType="cn.wisdsoft.electivesystem.pojo.Rule">
+    update rule
+    set select_id = #{selectId,jdbcType=INTEGER},
       usual = #{usual,jdbcType=INTEGER},
       midterm = #{midterm,jdbcType=INTEGER},
       skill = #{skill,jdbcType=INTEGER},
-      finalexam = #{finalexam,jdbcType=INTEGER},
-      achieve = #{achieve,jdbcType=INTEGER},
-      status = #{status,jdbcType=INTEGER},
-      remark = #{remark,jdbcType=VARCHAR}
+      finalexam = #{finalexam,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="editStuAchieve">
-    update achievement set achieve = #{achieve,jdbcType=INTEGER} where stu_id = #{stuId,jdbcType=VARCHAR} and select_id = #{selectId,jdbcType=INTEGER}
-  </update>
-  <update id="saveAchieve" parameterType="Integer">
-    update achievement set status = 1 where select_id = #{selectId,jdbcType=INTEGER}
-  </update>
-  <select id="selectGrade" parameterType="String" resultMap="BaseResultMap">
-    SELECT tr.term_name,cm.teacher_id ,cm.cu_name,cm.credit,a.achieve
-    FROM achievement a,curriculum cm,selection s,course c,term_resource tr
-    WHERE a.select_id=s.id AND s.cu_id=cm.id AND cm.cou_id=c.id AND c.tr_id=tr.id AND a.stu_id=#{stuId} AND a.`status`=1
-  </select>
-  <insert id="insertExcelList">
-    INSERT INTO achievement(
-    stu_id,
-    select_id,
-    achieve,
-    status
-    )
-    VALUES
-    <foreach collection="list" index="index" separator="," item="item">
-      ('${item[0]}', #{selectId,jdbcType=INTEGER}, '${item[2]}',0)
-    </foreach>
-  </insert>
 </mapper>
