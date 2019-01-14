@@ -54,7 +54,7 @@
                         <dd><a data-id="2" data-uri="" class="my-demo">授权模块</a></dd>
                         <dd><a data-id="3" data-uri="" class="my-demo">课程模块</a></dd>
                         <dd><a data-id="4" data-uri="" class="my-demo">审核模块</a></dd>
-                        <dd><a data-id="5" data-uri="" class="my-demo">统计模块</a></dd>
+                        <dd><a data-id="5" data-uri="/statistics/list" class="my-demo">统计模块</a></dd>
                         <dd><a data-id="6" data-uri="" class="my-demo">课程组模块</a></dd>
                     </dl>
                 </li>
