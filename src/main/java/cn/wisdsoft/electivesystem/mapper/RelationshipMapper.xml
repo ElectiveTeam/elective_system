@@ -212,7 +212,7 @@
     <!--
       查询学生已选课程
     -->
-    <select id="selectUserCurriculum" resultMap="myMap">
+  <select id="selectUserCurriculum" resultMap="myMap">
     SELECT
       t.id AS termId,
       term_name AS termName,
@@ -234,6 +234,9 @@
       cu.id = s.cu_id AND
       s.id = r.select_id AND
       r.stu_id = #{stuId}
+      <if test="termName != null">
+        AND t.term_name = #{termName}
+      </if>
     ORDER BY t.id ASC
   </select>
   <resultMap id="myMap" type="cn.wisdsoft.electivesystem.pojo.TermResource">

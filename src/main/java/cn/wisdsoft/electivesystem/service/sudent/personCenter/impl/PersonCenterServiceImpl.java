@@ -1,6 +1,7 @@
 package cn.wisdsoft.electivesystem.service.sudent.personCenter.impl;
 
 import cn.wisdsoft.electivesystem.mapper.RelationshipMapper;
+import cn.wisdsoft.electivesystem.mapper.TermResourceMapper;
 import cn.wisdsoft.electivesystem.pojo.StudentDo;
 import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult;
 import cn.wisdsoft.electivesystem.service.sudent.personCenter.PersonCenterService;
@@ -20,7 +21,6 @@ import java.util.List;
 @Service
 public class PersonCenterServiceImpl implements PersonCenterService {
 
-
     private final RelationshipMapper relationshipMapper;
 
     @Autowired
@@ -30,7 +30,7 @@ public class PersonCenterServiceImpl implements PersonCenterService {
 
     @Override
     public ElectiveSystemResult selectUserCurriculum(String stuId) {
-        List<StudentDo> studentDos = relationshipMapper.selectUserCurriculum(stuId);
+        List<StudentDo> studentDos = relationshipMapper.selectUserCurriculum(stuId,null);
         return ElectiveSystemResult.ok(studentDos);
     }
 

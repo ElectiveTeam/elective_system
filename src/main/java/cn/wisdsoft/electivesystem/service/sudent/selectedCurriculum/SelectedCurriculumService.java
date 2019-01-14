@@ -23,6 +23,7 @@ public interface SelectedCurriculumService {
      * @param stuId        the stu id  学生ID
      * @param stuName      the stu name  学生名称
      * @param curriculumId the curriculum id  课程ID
+     * @param yard         the yard
      * @return the elective system result
      */
     ElectiveSystemResult insertRelation(String stuId,String stuName,int curriculumId,String yard);
@@ -55,4 +56,14 @@ public interface SelectedCurriculumService {
      * @return the elective system result  包含数据条数的JSON数据
      */
     ElectiveSystemResult selectStatus(String category);
+
+    /**
+     * Select curriculum now elective system result.
+     * 查询学生当前学期已选课程
+     *
+     * @param stuId   the stu id  学生ID
+     * @param college the college  学院名称
+     * @return the elective system result  包含选课信息的JSON数据
+     */
+    ElectiveSystemResult selectCurriculumNow(String stuId,String college);
 }

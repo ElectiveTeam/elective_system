@@ -1,6 +1,7 @@
 package cn.wisdsoft.electivesystem.service.sudent.selectedCurriculum.impl;
 
 import cn.wisdsoft.electivesystem.mapper.CurriculumMapper;
+import cn.wisdsoft.electivesystem.mapper.TermResourceMapper;
 import cn.wisdsoft.electivesystem.pojo.*;
 import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult;
 import cn.wisdsoft.electivesystem.mapper.RelationshipMapper;
@@ -8,6 +9,7 @@ import cn.wisdsoft.electivesystem.service.sudent.selectedCurriculum.SelectedCurr
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,10 +27,13 @@ public class SelectedCurriculumServiceImpl implements SelectedCurriculumService 
 
     private final RelationshipMapper relationshipMapper;
 
+    private final TermResourceMapper termResourceMapper;
+
     @Autowired
-    public SelectedCurriculumServiceImpl(CurriculumMapper curriculumMapper, RelationshipMapper relationshipMapper) {
+    public SelectedCurriculumServiceImpl(CurriculumMapper curriculumMapper, RelationshipMapper relationshipMapper, TermResourceMapper termResourceMapper) {
         this.curriculumMapper = curriculumMapper;
         this.relationshipMapper = relationshipMapper;
+        this.termResourceMapper = termResourceMapper;
     }
 
     @Override
@@ -40,11 +45,11 @@ public class SelectedCurriculumServiceImpl implements SelectedCurriculumService 
     @Override
     public ElectiveSystemResult selectAllCurriculum(String termName, String category) {
         List<CurriculumDo> curriculumDos = curriculumMapper.selectAllCurriculum(termName, category);
+        RelationshipExample example = new RelationshipExample();
+        RelationshipExample.Criteria criteria = example.createCriteria();
         curriculumDos.forEach((curriculumDo -> {
             Integer curriculumId = curriculumDo.getCurriculumId();
             int selectionId = relationshipMapper.selectSelectionId(curriculumId);
-            RelationshipExample example = new RelationshipExample();
-            RelationshipExample.Criteria criteria = example.createCriteria();
             criteria.andSelectIdEqualTo(selectionId);
             long counts = relationshipMapper.countByExample(example);
             curriculumDo.setRemark(counts < curriculumDo.getMaxNumber() ? "招生中" : "已招满");
@@ -73,6 +78,21 @@ public class SelectedCurriculumServiceImpl implements SelectedCurriculumService 
             return ElectiveSystemResult.build(401, "选课功能暂未开放");
         }
         return ElectiveSystemResult.build(200, "可以选课");
+    }
+
+    @Override
+    public ElectiveSystemResult selectCurriculumNow(String stuId, String college) {
+        TermResourceExample example = new TermResourceExample();
+        TermResourceExample.Criteria criteria = example.createCriteria();
+        criteria.andCollegeEqualTo(college);
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(3);
+        criteria.andStatusIn(list);
+        List<TermResource> termResources = termResourceMapper.selectByExample(example);
+        TermResource termResource = termResources.get(0);
+        String termName = termResource.getTermName();
+        return ElectiveSystemResult.ok(relationshipMapper.selectUserCurriculum(stuId, termName));
     }
 
     @Override
