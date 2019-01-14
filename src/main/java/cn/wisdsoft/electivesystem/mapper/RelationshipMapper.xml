@@ -236,30 +236,89 @@
       r.stu_id = #{stuId}
     ORDER BY t.id ASC
   </select>
-    <resultMap id="myMap" type="cn.wisdsoft.electivesystem.pojo.TermResource">
-        <id property="id" column="termId" />
-        <result property="termName" column="termName" />
-        <result property="college" column="college" />
-        <result property="status" column="termStatus" />
-        <collection property="studentDos" ofType="cn.wisdsoft.electivesystem.pojo.StudentDo">
-            <result property="curriculumId" column="curriculumId" />
-            <result property="cuName" column="cuName" />
-            <result property="place" column="place" />
-            <result property="classTime" column="classTime" />
-            <result property="classHour" column="classHour" />
-            <result property="credit" column="credit" />
-            <result property="grade" column="grade" />
-            <result property="selectId" column="selectId" />
-            <result property="teacherName" column="teacherName" />
-        </collection>
-    </resultMap>
-
-
-    <!--
-  学生退课
+  <resultMap id="myMap" type="cn.wisdsoft.electivesystem.pojo.TermResource">
+      <id property="id" column="termId" />
+      <result property="termName" column="termName" />
+      <result property="college" column="college" />
+      <result property="status" column="termStatus" />
+      <collection property="studentDos" ofType="cn.wisdsoft.electivesystem.pojo.StudentDo">
+          <result property="curriculumId" column="curriculumId" />
+          <result property="cuName" column="cuName" />
+          <result property="place" column="place" />
+          <result property="classTime" column="classTime" />
+          <result property="classHour" column="classHour" />
+          <result property="credit" column="credit" />
+          <result property="grade" column="grade" />
+          <result property="selectId" column="selectId" />
+          <result property="teacherName" column="teacherName" />
+      </collection>
+  </resultMap>
+  <!--
+    学生退课
   -->
-    <delete id="delRelationByStuIdAndSelectId">
+  <delete id="delRelationByStuIdAndSelectId">
     delete from relationship
     where stu_id = #{stuId} AND select_id = #{selectId};
   </delete>
+  <!--
+    判断学生是否可以选课
+  -->
+  <select id="selectStatus" resultType="cn.wisdsoft.electivesystem.pojo.TermResource">
+    select open_time,close_time from term_resource
+      WHERE
+      (college = '校选' or college = #{category}) AND
+      (status = 1 or status = 3);
+  </select>
+  <!--
+    判断学生是否已选对应课程
+  -->
+  <select id="selectChooseStatus" resultType="integer">
+    select count(*) from relationship as r,selection as s,curriculum as c
+	where
+	r.stu_id = #{stuId} and
+	r.select_id = s.id and
+	s.cu_id = c.id and
+	c.id = #{curriculumId};
+  </select>
+  <!--
+    通过课程ID查询选课ID
+  -->
+  <select id="selectSelectionId" resultType="integer">
+    select s.id from curriculum as c,selection as s where c.id = s.cu_id and c.id = #{curriculumId}
+  </select>
+  <!--
+    查询学生院选课和校选课选课条数
+  -->
+  <select id="selectYard" resultType="integer">
+    SELECT count(*)
+      FROM
+        relationship as r,
+        selection as s,
+        curriculum as c,
+        course as co,
+        term_resource as t
+      WHERE
+        r.select_id = s.id and
+        s.cu_id = c.id and
+        c.cou_id = co.id and
+        co.tr_id = t.id and
+        r.stu_id = #{stuId} and
+        t.college = #{yard};
+  </select>
+  <select id="selectSchool" resultType="integer">
+    SELECT count(*)
+      FROM
+        relationship as r,
+        selection as s,
+        curriculum as c,
+        course as co,
+        term_resource as t
+      WHERE
+        r.select_id = s.id and
+        s.cu_id = c.id and
+        c.cou_id = co.id and
+        co.tr_id = t.id and
+        r.stu_id = #{stuId} and
+        t.college = '校选';
+  </select>
 </mapper>

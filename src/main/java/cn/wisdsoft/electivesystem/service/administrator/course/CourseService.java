@@ -4,6 +4,8 @@ import cn.wisdsoft.electivesystem.pojo.Course;
 import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult;
 import cn.wisdsoft.electivesystem.pojo.utils.PageResult;
 
+import java.util.List;
+
 /**
  * <p>ClassName: CourseService</p>
  * <p>Description:课程组模块</p>
@@ -21,4 +23,6 @@ public interface CourseService {
     ElectiveSystemResult insertCourse(Course course);
 
     ElectiveSystemResult updateCource(Course course);
+
+    List<Course> SelectAllCourse();
 }

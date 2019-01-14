@@ -1,5 +1,7 @@
 package cn.wisdsoft.electivesystem.service.administrator.curriculum;
 
+import cn.wisdsoft.electivesystem.pojo.Curriculum;
+import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult;
 import cn.wisdsoft.electivesystem.pojo.utils.PageResult;
 
 /**
@@ -13,4 +15,6 @@ import cn.wisdsoft.electivesystem.pojo.utils.PageResult;
 public interface CurriculumService {
 
     PageResult selectCurri(int couId,int pageNum,int PageSize);
+
+    ElectiveSystemResult updateCourse(Curriculum curriculum);
 }

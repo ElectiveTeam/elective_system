@@ -18,15 +18,14 @@ public interface SelectedCurriculumService {
 
     /**
      * Insert relation elective system result.
+     * 插入选课信息
      *
-     * @param relationship the relationship
-     * @return elective system result
-     * @Author 李泽宇
-     * @Description 学生选课
-     * @Date 2019 /1/10 14:48
-     * @Param
+     * @param stuId        the stu id  学生ID
+     * @param stuName      the stu name  学生名称
+     * @param curriculumId the curriculum id  课程ID
+     * @return the elective system result
      */
-    ElectiveSystemResult insertRelation(Relationship relationship);
+    ElectiveSystemResult insertRelation(String stuId,String stuName,int curriculumId,String yard);
 
 
     /**
@@ -47,4 +46,13 @@ public interface SelectedCurriculumService {
      * @return the elective system result  包含课程信息的JSON数据
      */
     ElectiveSystemResult selectAllCurriculum(String termName,String category);
+
+    /**
+     * Choose status elective system result.
+     * 判断学生时候可以选课
+     *
+     * @param category the category  课程类别
+     * @return the elective system result  包含数据条数的JSON数据
+     */
+    ElectiveSystemResult selectStatus(String category);
 }

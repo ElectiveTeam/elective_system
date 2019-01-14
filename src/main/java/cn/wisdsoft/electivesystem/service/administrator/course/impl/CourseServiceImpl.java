@@ -94,4 +94,10 @@ public class CourseServiceImpl implements CourseService {
         }
         return ElectiveSystemResult.build(200,"更改分组成功");
     }
+
+    @Override
+    public List<Course> SelectAllCourse() {
+        List<Course> courseList = courseMapper.SelectCource();
+        return courseList;
+    }
 }

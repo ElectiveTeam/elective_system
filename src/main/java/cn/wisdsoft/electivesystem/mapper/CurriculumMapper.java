@@ -42,4 +42,11 @@ public interface CurriculumMapper {
      * @return  包含课程信息的集合
      */
     List<CurriculumDo> selectAllCurriculum(@Param("termName") String termName,@Param("category") String category);
+
+    /**
+     * 查询最大人数
+     * @param curriculumId  课程ID
+     * @return  返回最大人数
+     */
+    int selectMaxNumber(int curriculumId);
 }
