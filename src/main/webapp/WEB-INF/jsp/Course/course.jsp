@@ -8,14 +8,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@page isELIgnored="false"%>
+<%@page isELIgnored="false" %>
 <html>
 <head>
     <title>Title</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="/elective/layui/css/layui.css"  media="all">
+    <link rel="stylesheet" href="/elective/layui/css/layui.css" media="all">
     <script src="/elective/js/jquery_2.2.4.min.js" charset="UTF-8"></script>
 </head>
 <body>
@@ -25,13 +25,13 @@
     <%--<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>--%>
 </script>
 <script type="text/html" id="status">
-        {{#  if(d.status==1){ }}
-        未审核
-        {{# } else if(d.status==2) { }}
-        已通过
-        {{#  } else { d.status==3}}
-        未通过
-        {{#  } }}
+    {{#  if(d.status==1){ }}
+    未审核
+    {{# } else if(d.status==2) { }}
+    已通过
+    {{#  } else { d.status==3}}
+    未通过
+    {{#  } }}
 </script>
 </body>
 </html>

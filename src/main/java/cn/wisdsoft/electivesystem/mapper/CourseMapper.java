@@ -33,4 +33,6 @@ public interface CourseMapper {
      * @return
      */
     List<Course> SelectCource();
+
+    int deleteCourseNotUse(@Param("college") String college);
 }

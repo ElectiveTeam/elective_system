@@ -19,10 +19,11 @@ public interface ApplicationService {
      *
      * @param page 页数
      * @param limit 行数
+     * @param key 个人令牌
      * @return cn.wisdsoft.electivesystem.pojo.utils.PageResult<cn.wisdsoft.electivesystem.pojo.Curriculum>
      * @date 9:47 2019/1/9
      */
-    PageResult<Curriculum> findAllByPage(int page, int limit);
+    PageResult<Curriculum> findAllByPage(int page, int limit, String key);
 
     /**
      * 作用:提交审核
@@ -43,4 +44,13 @@ public interface ApplicationService {
      * @date 10:14 2019/1/9
      */
     int updateCurriculum(Integer id, Integer status, @RequestParam(required = false) String reason);
+
+    /**
+     * 作用:通过课程编号查询信息
+     *
+     * @param id 课程编号
+     * @return cn.wisdsoft.electivesystem.pojo.Curriculum
+     * @date 22:31 2019/1/10
+     */
+    Curriculum findCurriculumById(int id);
 }

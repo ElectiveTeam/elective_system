@@ -18,7 +18,7 @@ public interface CourseService {
 
     PageResult SelectCource();
 
-    ElectiveSystemResult deleteCourseById(Integer id);
+    ElectiveSystemResult deleteCourseNotUse(String college) ;
 
     ElectiveSystemResult insertCourse(Course course);
 
