@@ -15,11 +15,11 @@ $(document).ready(function(){
 
                     location.href = "../html/selectedCurriculum.html";
                 }else{
-                    $("#myModal").modal('toggle');
+                    $("#myModal").modal('show');
 
                     $("#closeMo").click(function(){
+                        $("#myModal").modal({backdrop:false});
 
-                        window.location.reload();
                     });
                 }
             }
