@@ -47,6 +47,7 @@ $(()=>{
                 });
                 $(`#${flag}`).append(content);
                 content = ``;
+                flag++;
             })
         },
         error : () =>{
