@@ -1,14 +1,17 @@
 package cn.wisdsoft.electivesystem.controller.administrator.term;
 
-import cn.wisdsoft.electivesystem.pojo.TermResource;
-import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemConfig;
-import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult;
-import cn.wisdsoft.electivesystem.service.administrator.term.TermResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import cn.wisdsoft.electivesystem.pojo.TermResource;
+import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemConfig;
+import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult;
+import cn.wisdsoft.electivesystem.pojo.utils.PageResult;
+import cn.wisdsoft.electivesystem.service.administrator.term.TermResourceService;
 
 /**
  * <p>ClassName: TermResourceController</p>
@@ -39,6 +42,86 @@ public class TermResourceController {
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     @ResponseBody
     public ElectiveSystemResult insertTermResource(TermResource termResource) {
-        return null;
+        termResource.setStatus(0);
+    	return termResourceService.insertTermResource(termResource);
     }
+    /**
+     * 作用:更改
+     *
+     * @param termResource 学期对象
+     * @return cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult
+     * @date 16:30 2019/1/8
+     */
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @ResponseBody
+    public ElectiveSystemResult updateTermResource(TermResource termResource) {
+		return termResourceService.updateTermResource(termResource);	
+    }
+    /**
+     * 作用:学院查询状态
+     * @return cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult
+     * @date 8:36 2019/1/10
+     */
+    @RequestMapping(value = "/status", method = RequestMethod.POST)
+    @ResponseBody
+    public ElectiveSystemResult statusTermResource(String college) {
+    	return termResourceService.statusTermResource(college);
+     	
+    }
+     
+    /**
+     * 作用:待定
+     * @return cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult
+     * @date 15:18 2019/1/10
+     */ 
+//    /**
+//     * 作用:删除
+//     *
+//     * @param termResource 学期对象
+//     * @return cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult
+//     * @date 16:30 2019/1/8
+//     */
+//    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+//    @ResponseBody
+//    public ElectiveSystemResult deleteTermResource(TermResource termResource) {
+//		return termResourceService.deleteTermResource(termResource);
+//    }
+    
+    @RequestMapping(value="/term",method = RequestMethod.GET)
+	public String term() {
+		return "term/term";
+	}
+      
+    @RequestMapping(value="/termAdd",method = RequestMethod.GET)
+	public String termAdd() {
+		return "term/term_add";
+	}
+    
+    @RequestMapping(value = "/findAll", method = RequestMethod.GET)
+    @ResponseBody
+    public PageResult<TermResource> findAll() {
+    	return termResourceService.findAll();
+    }
+    
+    @RequestMapping(value="/termEdit",method = RequestMethod.GET)
+	public String termEdit(Integer id,Model model) {
+    	//根据id查询数据
+    	TermResource term = termResourceService.seleTermById(id);
+    	//将查询到的数据，放在下面    	
+    	model.addAttribute("term", term);
+    	System.out.println(term);
+		return "term/term_edit";
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,17 +1,20 @@
 package cn.wisdsoft.electivesystem.service.administrator.curriculum.impl;
 
-import cn.wisdsoft.electivesystem.mapper.CurriculumMapper;
-import cn.wisdsoft.electivesystem.pojo.Curriculum;
-import cn.wisdsoft.electivesystem.pojo.CurriculumExample;
-import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult;
-import cn.wisdsoft.electivesystem.pojo.utils.PageResult;
-import cn.wisdsoft.electivesystem.service.administrator.curriculum.CurriculumService;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
+import cn.wisdsoft.electivesystem.mapper.CurriculumMapper;
+import cn.wisdsoft.electivesystem.pojo.Curriculum;
+import cn.wisdsoft.electivesystem.pojo.CurriculumExample;
+import cn.wisdsoft.electivesystem.pojo.CurriculumExample.Criteria;
+import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult;
+import cn.wisdsoft.electivesystem.pojo.utils.PageResult;
+import cn.wisdsoft.electivesystem.service.administrator.curriculum.CurriculumService;
 
 /**
  * <p>ClassName: CurriculumServiceImpl</p>
@@ -24,11 +27,11 @@ import java.util.List;
 @Service
 public class CurriculumServiceImpl implements CurriculumService {
 
-    @Autowired
-    private CurriculumMapper curriculumMapper;
+	private final CurriculumMapper curriculumMapper;
 
-    public CurriculumServiceImpl() {
-
+	@Autowired
+    public CurriculumServiceImpl(CurriculumMapper curriculumMapper) {
+           this.curriculumMapper = curriculumMapper;
     }
 
 
@@ -64,4 +67,27 @@ public class CurriculumServiceImpl implements CurriculumService {
         }
         return ElectiveSystemResult.ok();
     }
+@Override
+	public ElectiveSystemResult increaseCurriculum(Curriculum curriculum) {
+		curriculumMapper.insert(curriculum);
+		return ElectiveSystemResult.ok();
+	}
+
+	@Override
+	public ElectiveSystemResult xiugaiCurriculum(Curriculum curriculum) {
+		curriculumMapper.updateByPrimaryKey(curriculum);
+		return ElectiveSystemResult.ok();
+	}
+
+	@Override
+	public PageResult<Curriculum> selectCurriculum(int pageNum, int pageSize) {
+		PageHelper.startPage(pageNum, pageSize);
+		CurriculumExample example = new CurriculumExample();
+		example.setOrderByClause("status");
+		Criteria criteria = example.createCriteria();
+		criteria.andStatusNotEqualTo(0);
+		List<Curriculum> curriList = curriculumMapper.selectByExample(example);
+		PageInfo<Curriculum> info = new PageInfo<>(curriList);
+		return PageResult.ok(curriList, info.getTotal());
+	}
 }

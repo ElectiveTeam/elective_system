@@ -25,7 +25,8 @@
     <mvc:resources mapping="/elective/student/css/**" location="/css/" />
     <mvc:resources mapping="/elective/student/js/**" location="/js/" />
     <mvc:resources mapping="/elective/student/images/**" location="/images/" />
-
+    <mvc:resources mapping="/elective/ckeditor/**" location="/WEB-INF/ckeditor/" />
+    <mvc:resources mapping="/elective/upload/**" location="/WEB-INF/upload/" />
 
     <!-- 定义跳转的文件的前后缀 ，视图模式配置 -->
     <bean

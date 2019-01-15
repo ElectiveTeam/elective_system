@@ -56,7 +56,7 @@
 <script src="/elective/layui/layui.js" charset="utf-8"></script>
 <script>
     let id = "${curId}";
-    console.log(${curId});
+    <%--console.log(${curId});--%>
     layui.use(['form', 'layedit', 'laydate'], function () {
         var form = layui.form
             , layer = layui.layer
