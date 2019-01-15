@@ -79,6 +79,12 @@ h2{
     text-decoration:underline;
 }
 
+#changePass{
+    margin-left: 1rem;
+    color: black;
+    text-decoration:underline;
+}
+
 #back{
     margin-left: 1rem;
     color: black;
