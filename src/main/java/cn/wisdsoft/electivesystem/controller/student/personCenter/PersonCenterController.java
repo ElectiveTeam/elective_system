@@ -40,6 +40,7 @@ public class PersonCenterController {
      * 测试完成
      *
      * @param stuId the stu id  学生ID（学号）
+     *
      * @return the elective system result  包含课程信息的JSON数据
      */
     @RequestMapping(value = "/selectUserCurriculum",method = RequestMethod.GET)

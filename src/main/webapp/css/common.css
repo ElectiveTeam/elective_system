@@ -34,13 +34,13 @@
     padding-right: 50px;
 }
 
-#xb{
+.xb{
     width: 25%;
     height: 6rem;
     padding-left: 50px;
 }
 
-#xb img{
+.xb img{
     display: block;
     width: 280px;
     height: 100px;
@@ -74,6 +74,12 @@ h2{
 }
 
 #logout{
+    margin-left: 1rem;
+    color: black;
+    text-decoration:underline;
+}
+
+#changePass{
     margin-left: 1rem;
     color: black;
     text-decoration:underline;

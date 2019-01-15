@@ -34,11 +34,11 @@ public interface RelationshipMapper {
 
     /**
      * 查询学生已选课程
-     *
-     * @param stuId 学生ID
+     * @param stuId  学生ID
+     * @param termName  学期名称
      * @return 自定义Vo类 list
      */
-    List<StudentDo> selectUserCurriculum(String stuId);
+    List<StudentDo> selectUserCurriculum(@Param("stuId") String stuId,@Param("termName") String termName);
 
     /**
      * @Author 李泽宇
