@@ -3,78 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <link rel="stylesheet" type="text/css" href="/elective/student/css/cudetails.css" />
-    <link rel="stylesheet" type="text/css" href="/elective/student/css/bootstrap.min.css" />
-    <script src="/elective/student/js/jquery_2.2.4.min.js"></script>
-    <script src="/elective/student/js/popper.min.js"></script>
-    <script src="/elective/student/js/twitter-bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/elective/student/css/cudetails.css"/>
+    <link rel="stylesheet" type="text/css" href="/elective/student/css/bootstrap.min.css"/>
     <title>课程详情</title>
 </head>
 <body>
-    <div id="bg">
-        <img src="/elective/student/images/banner.jpg">
-    </div>
-   <header id="hd"></header>
+<div id="bg">
+    <img src="/elective/student/images/banner.jpg">
+</div>
+<header id="hd"></header>
 
-   <div class="card">
-    <div class="card-header">
-        软件学院
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">课程名称</h5>
-      <p class="card-text">数据结构</p>
-      <h5 class="card-title">任课教师</h5>
-      <p class="card-text">孙伟光</p>
-      <h5 class="card-title">上课时间</h5>
-      <p class="card-text">2:30-3:00</p>
-      <h5 class="card-title">上课地点</h5>
-      <p class="card-text">4-107</p>
-      <h5 class="card-title">课程简介</h5>
-      <p class="card-text">暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介</p>
-      <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" id="choo">选课</button> 
+<div class="card">
+    <!--<div class="card-header">-->
+        <!--软件学院-->
+    <!--</div>-->
+    <!--<div class="card-body">-->
+        <!--<input type="text" hidden id="curriculumId" value="123">-->
+        <!--<div class="myTable">-->
+            <!--<div class="myRow">-->
+                <!--<h5 class="card-title">课程名称</h5>-->
+                <!--<p class="card-text">数据结构</p>-->
+            <!--</div>-->
+            <!--<div class="myRow">-->
+                <!--<h5 class="card-title">任课教师</h5>-->
+                <!--<p class="card-text">孙伟光</p>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="myTable">-->
+            <!--<div class="myRow">-->
+                <!--<h5 class="card-title">上课时间</h5>-->
+                <!--<p class="card-text">2:30-3:00</p>-->
+            <!--</div>-->
+            <!--<div class="myRow">-->
+                <!--<h5 class="card-title">上课地点</h5>-->
+                <!--<p class="card-text">4-107</p>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="myTable">-->
+            <!--<div class="myRow">-->
+                <!--<h5 class="card-title">学时</h5>-->
+                <!--<p class="card-text">24</p>-->
+            <!--</div>-->
+            <!--<div class="myRow">-->
+                <!--<h5 class="card-title">学分</h5>-->
+                <!--<p class="card-text">2</p>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<h5 class="card-title">课程简介</h5>-->
+        <!--<p class="card-text">暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介暂无简介</p>-->
+        <!--<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" id="choo">选课</button>-->
+    <!--</div>-->
+</div>
 
+<!-- 选课模态框 -->
+<div class="modal fade" tabindex="-1" role="dialog" id="tips">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <!-- 模态框头部 -->
+            <div class="modal-header">
+                <h4 class="modal-title">温馨提示</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <!-- 模态框主体 -->
+            <div class="modal-body tips_body">
+                这是内容
+            </div>
+            <!-- 模态框底部 -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="yes">是</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">否</button>
+            </div>
+        </div>
     </div>
-   </div>
+</div>
 
-   <!-- 选课模态框 -->
-<div class="modal fade" id="myModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <!-- 模态框头部 -->
-      <div class="modal-header">
-        <h4 class="modal-title">温馨提示</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <!-- 模态框主体 -->
-      <div class="modal-body">
-        你现在不能选课。
-      </div>
-      <!-- 模态框底部 -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-      </div>
+<div class="modal fade" tabindex="-1" role="dialog" id="tips1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <!-- 模态框头部 -->
+            <div class="modal-header">
+                <h4 class="modal-title">温馨提示</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <!-- 模态框主体 -->
+            <div class="modal-body tips1_body">
+                这是内容
+            </div>
+            <!-- 模态框底部 -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="yeskey">确定</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 
-   <footer id="ft"></footer>
-  </body>
+<footer id="ft"></footer>
+</body>
 </html>
 <!--<script src="../elective/student/js/jquery_2.2.4.min.js"></script>-->
-<script type="text/javascript"> 
-		
-$(document).ready(function(){
-    $("#hd").load('../html/header.html');
-    $("#ft").load('../html/footer.html');
+<script src="/elective/student/js/jquery_2.2.4.min.js"></script>
+<script src="/elective/student/js/cudetails.js"></script>
+<script src="/elective/student/js/popper.min.js"></script>
+<script src="/elective/student/js/twitter-bootstrap.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#hd").load('../html/header.html');
+        $("#ft").load('../html/footer.html');
 
 
-    $("#myModal").on("hidden.bs.modal click", function () {
-      //关闭模态框后清除模态框数据
-      window.location.reload();
-});
+        // $("#myModal").on("hidden.bs.modal click", function () {
+        //     //关闭模态框后清除模态框数据
+        //     window.location.reload();
+        // });
 
 
-});
+    });
 </script>

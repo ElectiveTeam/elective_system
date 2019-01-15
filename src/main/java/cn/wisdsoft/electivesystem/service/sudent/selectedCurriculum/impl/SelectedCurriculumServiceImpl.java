@@ -38,8 +38,8 @@ public class SelectedCurriculumServiceImpl implements SelectedCurriculumService 
 
     @Override
     public ElectiveSystemResult selectCurriculum(int curriculumId) {
-        Curriculum curriculum = curriculumMapper.selectByPrimaryKey(curriculumId);
-        return ElectiveSystemResult.ok(curriculum);
+        CurriculumDo curriculumDo = curriculumMapper.selectDetails(curriculumId);
+        return ElectiveSystemResult.ok(curriculumDo);
     }
 
     @Override
@@ -93,6 +93,24 @@ public class SelectedCurriculumServiceImpl implements SelectedCurriculumService 
         TermResource termResource = termResources.get(0);
         String termName = termResource.getTermName();
         return ElectiveSystemResult.ok(relationshipMapper.selectUserCurriculum(stuId, termName));
+    }
+
+    @Override
+    public ElectiveSystemResult selectTermName(String college) {
+        TermResourceExample example = new TermResourceExample();
+        TermResourceExample.Criteria criteria = example.createCriteria();
+        criteria.andCollegeEqualTo(college);
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(3);
+        criteria.andStatusIn(list);
+        List<TermResource> termResources = termResourceMapper.selectByExample(example);
+        return ElectiveSystemResult.ok(termResources.get(0));
+    }
+	
+	@Override
+    public ElectiveSystemResult checkCurriculum(String stuId) {
+        return ElectiveSystemResult.ok(relationshipMapper.checkCurriculum(stuId));
     }
 
     @Override

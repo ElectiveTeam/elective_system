@@ -389,8 +389,30 @@
   <select id="selectMaxNumber" resultType="integer">
     select s.max_number from curriculum as c,selection as s where s.cu_id = c.id and c.id = #{curriculumId};
   </select>
-   <select id="selectCurriculum" resultMap="BaseResultMap">
-  	select <include refid="Base_Column_List"/>
-  	form curriculum
+
+  <select id="selectDetails" resultType="cn.wisdsoft.electivesystem.pojo.CurriculumDo">
+    SELECT
+		t.term_name AS termName,
+		t.college AS college,
+		cu.id AS courseId,
+		c.id AS curriculumId,
+		c.cu_name AS curriculumName,
+		c.teacher_name AS teacherName,
+		s.id AS selectionId,
+		s.class_time AS classTime,
+		s.place AS place,
+		c.class_hour AS classHour,
+		c.credit AS credit,
+		c.`describe` AS `describe`
+	FROM
+		curriculum AS c,
+		course AS cu,
+		term_resource AS t,
+		selection AS s
+	WHERE
+		c.cou_id = cu.id AND
+		cu.tr_id = t.id AND
+		s.cu_id = c.id AND
+		c.id = #{curriculumId}
   </select>
 </mapper>

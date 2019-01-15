@@ -220,6 +220,7 @@
       t.`status` AS termStatus,
       cu.id AS curriculumId,
       cu.cu_name AS cuName,
+      c.id AS courseId,
       class_time AS classTime,
       place AS place,
       class_hour AS classHour,
@@ -247,6 +248,7 @@
       <collection property="studentDos" ofType="cn.wisdsoft.electivesystem.pojo.StudentDo">
           <result property="curriculumId" column="curriculumId" />
           <result property="cuName" column="cuName" />
+          <result property="courseId" column="courseId" />
           <result property="place" column="place" />
           <result property="classTime" column="classTime" />
           <result property="classHour" column="classHour" />
@@ -323,5 +325,19 @@
         co.tr_id = t.id and
         r.stu_id = #{stuId} and
         t.college = '校选';
+  </select>
+  <select id="checkCurriculum" resultType="integer">
+    SELECT DISTINCT
+      co.id
+    FROM
+      relationship AS r,
+      selection AS s,
+      curriculum AS c,
+      course AS co
+    WHERE
+      r.select_id = s.id
+      AND s.cu_id = c.id
+      AND c.cou_id = co.id
+      AND r.stu_id = #{stuId};
   </select>
 </mapper>
