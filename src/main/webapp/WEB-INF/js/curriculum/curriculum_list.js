@@ -2,7 +2,7 @@ layui.use('table', function () {
     var table = layui.table;
     table.render({
         elem: '#major' //指定原始表格元素选择器（推荐id选择器）
-        , url: 'http://192.168.6.174:8080/curriculum/findAllByPage'
+        , url: 'http://localhost:8080/curriculum/findAllByPage'
         , id: 'majorReload'
         , cols: [[{
             field: 'id', title: '课程编号', sort: true
@@ -28,13 +28,11 @@ layui.use('table', function () {
     table.on('tool(test)', function (obj) {
         var data = obj.data;
         if (obj.event === 'success') {
-            layer.confirm('确认同意吗', function (index) {
-                        layer.open({
-                            type: 2,
-                            content: 'http://localhost:8080/application/insertSelection/'+obj.data.id,
-                            area: ['550px', '500px'],
-                            offset: ['25px', '250px']
-                        });
+            layer.open({
+                type: 2,
+                content: 'http://localhost:8080/application/insertSelection/' + obj.data.id,
+                area: ['800px', '500px'],
+                offset: ['25px', '250px']
             });
         } else if (obj.event === 'refuse') {
             $.ajax({
@@ -42,24 +40,24 @@ layui.use('table', function () {
                 type: "post",
                 data: {
                     'id': obj.data.id,
-                    'status' : 3
+                    'status': 3
                 }, success: function (data) {
                     layer.msg("更改成功");
                 }, error: function (data) {
                     layer.msg("服务器异常");
                 }
             })
-        } else if(obj.event === 'info') {
+        } else if (obj.event === 'info') {
             layer.open({
                 type: 2,
-                content: 'http://localhost:8080/application/find/'+obj.data.id,
-                area: ['550px', '500px'],
+                content: 'http://localhost:8080/application/find/' + obj.data.id,
+                area: ['800px', '500px'],
                 offset: ['25px', '250px']
             })
-        } else if(obj.event === 'success_info') {
+        } else if (obj.event === 'success_info') {
             layer.open({
                 type: 2,
-                content: 'http://localhost:8080/application/selectionInfo/'+obj.data.id,
+                content: 'http://localhost:8080/application/selectionInfo/' + obj.data.id,
                 area: ['550px', '500px'],
                 offset: ['25px', '250px']
             })
@@ -81,12 +79,23 @@ $("#CatCourse").click(function () {
         maxmin: true,
         content: '/course/'
     });
-})
+});
+$("#term").click(function () {
+    layer.open({
+        type: 2,
+        title: '查看学期',
+        area: ['800px', '580px'],
+        fixed: false, //不固定
+        maxmin: true,
+        // offset: ['25px', '250px'],
+        content: '/term/term'
+    });
+});
 function reload() {
     var table = layui.table;
     let category = $('#categoryName').val();
     console.log(category === "" || category == null);
-    if(category === "" || category == null) {
+    if (category === "" || category == null) {
         $('#categoryName').val('1')
     }
     //执行重载

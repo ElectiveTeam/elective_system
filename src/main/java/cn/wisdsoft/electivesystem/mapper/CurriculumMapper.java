@@ -49,4 +49,9 @@ public interface CurriculumMapper {
      * @return  返回最大人数
      */
     int selectMaxNumber(int curriculumId);
+	 /**
+     * 查询所有的课程 
+     * @return
+     */
+    List<Curriculum> selectCurriculum();
 }

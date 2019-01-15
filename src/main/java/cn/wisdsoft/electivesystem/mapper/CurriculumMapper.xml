@@ -129,17 +129,17 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.wisdsoft.electivesystem.pojo.Curriculum">
+  <insert id="insert" parameterType="cn.wisdsoft.electivesystem.pojo.Curriculum" keyProperty="id" useGeneratedKeys="true">
     insert into curriculum (id, cu_name, teacher_id, 
       teacher_name, class_hour, credit, 
       grade, status, cou_id, 
-      remark, describe)
+      remark,`describe`)
     values (#{id,jdbcType=INTEGER}, #{cuName,jdbcType=VARCHAR}, #{teacherId,jdbcType=VARCHAR}, 
       #{teacherName,jdbcType=VARCHAR}, #{classHour,jdbcType=INTEGER}, #{credit,jdbcType=DECIMAL}, 
       #{grade,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{couId,jdbcType=INTEGER}, 
       #{remark,jdbcType=VARCHAR}, #{describe,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="cn.wisdsoft.electivesystem.pojo.Curriculum">
+  <insert id="insertSelective" parameterType="cn.wisdsoft.electivesystem.pojo.Curriculum" keyProperty="id" useGeneratedKeys="true">
     insert into curriculum
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -339,7 +339,7 @@
       status = #{status,jdbcType=INTEGER},
       cou_id = #{couId,jdbcType=INTEGER},
       remark = #{remark,jdbcType=VARCHAR},
-      describe = #{describe,jdbcType=LONGVARCHAR}
+      `describe` = #{describe,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.wisdsoft.electivesystem.pojo.Curriculum">
@@ -352,7 +352,8 @@
       grade = #{grade,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER},
       cou_id = #{couId,jdbcType=INTEGER},
-      remark = #{remark,jdbcType=VARCHAR}
+      remark = #{remark,jdbcType=VARCHAR},
+      `describe` = #{describe,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectAllCurriculum" resultType="cn.wisdsoft.electivesystem.pojo.CurriculumDo">
@@ -387,5 +388,9 @@
   -->
   <select id="selectMaxNumber" resultType="integer">
     select s.max_number from curriculum as c,selection as s where s.cu_id = c.id and c.id = #{curriculumId};
+  </select>
+   <select id="selectCurriculum" resultMap="BaseResultMap">
+  	select <include refid="Base_Column_List"/>
+  	form curriculum
   </select>
 </mapper>
