@@ -4,7 +4,7 @@ import cn.wisdsoft.electivesystem.mapper.CourseMapper;
 import cn.wisdsoft.electivesystem.mapper.CurriculumMapper;
 import cn.wisdsoft.electivesystem.pojo.Curriculum;
 import cn.wisdsoft.electivesystem.pojo.CurriculumExample;
-import cn.wisdsoft.electivesystem.pojo.Teacher;
+import cn.wisdsoft.electivesystem.pojo.VO.Teacher;
 import cn.wisdsoft.electivesystem.pojo.utils.PageResult;
 import cn.wisdsoft.electivesystem.service.administrator.applicatiom.ApplicationService;
 import com.github.pagehelper.PageHelper;
