@@ -3,7 +3,6 @@ package cn.wisdsoft.electivesystem.controller.administrator.application;
 import cn.wisdsoft.electivesystem.pojo.Curriculum;
 import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemConfig;
 import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult;
-import cn.wisdsoft.electivesystem.pojo.utils.PageResult;
 import cn.wisdsoft.electivesystem.service.administrator.applicatiom.ApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,20 +28,20 @@ public class ApplicationController {
         this.applicationService = applicationService;
     }
 
-    /**
-     * 作用:
-     *
-     * @param page 页数
-     * @param limit 行数
-     * @param key 个人身份验证token
-     * @return cn.wisdsoft.electivesystem.pojo.utils.PageResult<Curriculum>
-     * @date 9:11 2019/1/9
-     */
-    @RequestMapping(value = "/find", method = RequestMethod.GET)
-    @ResponseBody
-    public PageResult<Curriculum> findAllByPage(Integer page, Integer limit, String key) {
-        return applicationService.findAllByPage(page, limit, key);
-    }
+//    /**
+//     * 作用:
+//     *
+//     * @param page 页数
+//     * @param limit 行数
+//     * @param key 个人身份验证token
+//     * @return cn.wisdsoft.electivesystem.pojo.utils.PageResult<Curriculum>
+//     * @date 9:11 2019/1/9
+//     */
+//    @RequestMapping(value = "/find", method = RequestMethod.GET)
+//    @ResponseBody
+//    public PageResult<Curriculum> findAllByPage(Integer page, Integer limit, String key) {
+//        return applicationService.findAllByPage(page, limit, key);
+//    }
 
     /**
      * 作用:提交审核

@@ -415,4 +415,14 @@
 		s.cu_id = c.id AND
 		c.id = #{curriculumId}
   </select>
+  <select id="selectCurriculum" resultMap="BaseResultMap">
+  	select <include refid="Base_Column_List"/>
+  	form curriculum
+  </select>
+  <select id="findCurriculumByCollegeNameAndStatus" resultMap="BaseResultMap">
+  	SELECT c.* FROM curriculum c,course cou, term_resource term 
+	WHERE term.id = cou.tr_id AND cou.id = c.cou_id AND
+	term.status != 7 AND term.college = #{ collegeName }
+	AND c.status != 0 ORDER BY c.status
+  </select>
 </mapper>

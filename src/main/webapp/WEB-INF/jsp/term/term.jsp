@@ -82,11 +82,22 @@ layui.use('table', function(){
   //监听行工具事件
   table.on('tool(test)', function(obj){
     var data = obj.data;
-    //console.log(data);
+    console.log(data);
     if(obj.event === 'del'){
       layer.confirm('真的删除行么', function(index){
-        obj.del();
-        layer.close(index);
+    	  $.ajax({
+              url: 'http://localhost:8080/term/delete',
+              type: "post",
+              data: {
+                  'termResource': obj.data.id,
+              }, success: function (data) {
+            	  obj.del();
+                  layer.close(index);
+              }, error: function (data) {
+                  layer.msg("该课程已被使用！");
+              }
+          })
+        
       });
     } else if(obj.event === 'edit'){
     	//prompt层
@@ -94,8 +105,8 @@ layui.use('table', function(){
     		  type: 2, 
     		  title :'编辑学期',
     		  closeBtn: 1, //显示关闭按钮
-    		  area: ['500px', '500px'],
-    		  content: '/term/termEdit?id='+data.id
+    		  area: ['500px', '600px'],
+    		  content: '/term/termEdit?id='+data.id+"&states="+data.status
     	});
     }
   });
@@ -104,7 +115,7 @@ $("#addTerm").click(function(){
 	//prompt层
 	layer.open({
 		  type: 2, 
-		  title :'编辑学期',
+		  title :'新建学期',
 		  closeBtn: 1, //显示关闭按钮
 		  area: ['500px', '400px'],
 		  content: '/term/termAdd'

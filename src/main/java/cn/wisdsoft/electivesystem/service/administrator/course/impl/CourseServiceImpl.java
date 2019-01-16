@@ -2,12 +2,12 @@ package cn.wisdsoft.electivesystem.service.administrator.course.impl;
 
 import cn.wisdsoft.electivesystem.mapper.CourseMapper;
 import cn.wisdsoft.electivesystem.pojo.Course;
+import cn.wisdsoft.electivesystem.pojo.CourseVo;
 import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult;
 import cn.wisdsoft.electivesystem.pojo.utils.PageResult;
 import cn.wisdsoft.electivesystem.service.administrator.course.CourseService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.apache.ibatis.javassist.runtime.Desc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,17 +32,17 @@ public class CourseServiceImpl implements CourseService {
     }
 
     /**
-    * @Description: 查询所有课程组信息
-    * @param: [PageSize, PageNum]
+    * @Description: 查询该学院下的所有课程组信息
+    * @param: [college]
     * @return: cn.wisdsoft.electivesystem.pojo.utils.PageResult
     * @Author:  SongJunWei
-    * @CreateDate:  2019/1/8 19:23
+    * @CreateDate:  2019/1/15 11:23
     */
     @Override
-    public PageResult SelectCource() {
+    public PageResult SelectCourceByCollege( String college){
 //        PageHelper.startPage(PageNum,PageSize,"id desc");
         PageHelper.orderBy("id DESC");
-        List<Course> courses = courseMapper.SelectCource();
+        List<CourseVo> courses = courseMapper.SelectCourceByCollege(college);
         PageInfo pageInfo = new PageInfo(courses);
         return PageResult.ok(courses,pageInfo.getTotal());
     }
@@ -77,7 +77,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
    /**
-    * @Description: 更该分组成功
+    * @Description: 更该分组
     * @param: [course]
     * @return: cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult
     * @Author:  SongJunWei
@@ -93,8 +93,8 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<Course> SelectAllCourse() {
-        List<Course> courseList = courseMapper.SelectCource();
+    public List<CourseVo> SelectAllCourse(String college) {
+        List<CourseVo> courseList = courseMapper.SelectCourceByCollege(college);
         return courseList;
     }
 }

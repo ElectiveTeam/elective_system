@@ -52,7 +52,7 @@
                         <%--data-uri中填写@Controller注解下面的@RequestMapping注解的value值 加上 方法对应的@RequestMapping注解的value值--%>
                         <dd><a data-id="1" data-uri="" class="my-demo">学期模块</a></dd>
                         <dd><a data-id="2" data-uri="" class="my-demo" onclick="power()">授权模块</a></dd>
-                        <dd><a data-id="3" data-uri="" class="my-demo">课程模块</a></dd>
+                        <dd><a data-id="3" data-uri="/application/toPage" class="my-demo">课程模块</a></dd>
                         <dd><a data-id="4" data-uri="" class="my-demo">审核模块</a></dd>
                         <dd><a data-id="5" data-uri="" class="my-demo">统计模块</a></dd>
                         <dd><a data-id="6" data-uri="" class="my-demo">课程组模块</a></dd>
