@@ -56,7 +56,7 @@ public class AchievementServiceImpl implements AchievementService {
     }
 
     @Override
-    public ElectiveSystemResult uploadAchieve(String[] stuId, int selectId, int[] achieve) {
+    public ElectiveSystemResult uploadAchieve(String[] stuId, int selectId, Float[] achieve) {
         int size = stuId.length;
         int flag = 0;
         for (int i=0;i<size;i++){

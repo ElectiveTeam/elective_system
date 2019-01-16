@@ -124,7 +124,7 @@ public class ExportUtil {
                         hssfCell.setCellStyle(cellStyle);
                         hssfCell.setCellValue((String) obj_2);
                         break;
-                    case "java.lang.Double":
+                    case "double":
                         cellStyle.setDataFormat(HSSFDataFormat.getBuiltinFormat("0.00"));
                         hssfCell.setCellStyle(cellStyle);
                         hssfCell.setCellValue((Double) obj_2);
@@ -132,6 +132,7 @@ public class ExportUtil {
                 }
             }
         }
+        myHeader.clear();
     }
 //
 //    /**

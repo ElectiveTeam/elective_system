@@ -67,8 +67,8 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
-	public List<Curriculum> selectByTeacherId(String teacherId) {
-		return curriculumMapper.selByTeacherId(teacherId);
+	public List<Curriculum> selectByTeacherId(int status,String teacherId) {
+		return curriculumMapper.selByTeacherId(status,teacherId);
 	}
 
 }

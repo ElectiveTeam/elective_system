@@ -101,7 +101,6 @@
                 finalexam = 0;
             }
             var achieve = (usual*u+midterm*m+skill*s+finalexam*f)/100;
-            console.log(achieve);
             $.ajax({
                 url: 'http://localhost:8080/achievement/editStuAchieve',
                 type: "post",

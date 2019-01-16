@@ -15,10 +15,7 @@ layui.use(['table','upload'] ,function () {
                 field: 'cuName', title: '课程',align: 'center'
             },{
                 fixed: 'right', title:'操作', toolbar: '#barDemo',align: 'center'
-            }]],
-        done:function (res) {
-            console.log(res);
-        }
+            }]]
 
     });
     table.on('tool(test)', function (obj) {

@@ -42,7 +42,7 @@ public class RuleController {
         if (teacher==null){
             return "home_page/login.jsp";
         }
-        List<Curriculum> curriculumList = teacherService.selectByTeacherId(teacher.getWorknumber());
+        List<Curriculum> curriculumList = teacherService.selectByTeacherId(5,teacher.getWorknumber());
         model.addAttribute(curriculumList);
         return "Achievement/addrule";
     }
@@ -68,7 +68,10 @@ public class RuleController {
     @RequestMapping(value = "/addRule",method = RequestMethod.POST)
     @ResponseBody
     public ElectiveSystemResult addRule(Rule rule){
-        return ruleService.insert(rule);
+        if (ruleService.check(rule.getId())){
+            return ruleService.insert(rule);
+        }
+        return ElectiveSystemResult.build(500,"该课程已存在规则");
     }
 
     @RequestMapping(value = "/editRuleById",method = RequestMethod.POST)

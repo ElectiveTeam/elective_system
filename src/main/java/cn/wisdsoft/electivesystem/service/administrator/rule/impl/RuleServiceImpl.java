@@ -62,4 +62,13 @@ public class RuleServiceImpl implements RuleService {
         }
         return PageResult.build(500,"暂无数据");
     }
+
+    @Override
+    public boolean check(int id) {
+        Rule rule = ruleMapper.selectByPrimaryKey(id);
+        if (rule==null){
+            return true;
+        }
+        return false;
+    }
 }

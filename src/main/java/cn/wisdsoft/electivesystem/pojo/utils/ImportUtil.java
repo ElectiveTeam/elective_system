@@ -40,14 +40,15 @@ public class ImportUtil {
                 break;
             case STRING:
                 value = cell.getStringCellValue();
+
                 break;
             case NUMERIC:
                 if ("yyyy-mm-dd".equals(cell.getCellStyle().getDataFormatString())) {
                     value = sdf.format(cell.getDateCellValue());
                 } else if ("General".equals(cell.getCellStyle().getDataFormatString())) {
-                    value = df.format(cell.getNumericCellValue());
-                } else {
                     value = df1.format(cell.getNumericCellValue());
+                } else {
+                    value = df.format(cell.getNumericCellValue());
                 }
                 break;
             case BLANK:

@@ -17,8 +17,6 @@ $(function () {
                 selectId:selectId
             },
             success:function (res) {
-                 console.log(res);
-
                  let content = `<tr>
                                     <td>平时成绩</td>
                                     <td>${res.data[1].usual}%</td>

@@ -100,11 +100,14 @@
             exts: 'xls|xlsx',
             field: 'fileType',
             data:{
-                selectId:1
+                selectId:${id}
             },
             done: function (msg) {
                 var table = layui.table;
                 window.location.reload();
+            },
+            error:function () {
+                layer.msg('请勿重复导入', {icon: 5, time: 1000});
             }
         })
     })
@@ -112,11 +115,11 @@
         layui.use('table', function () {
             var table = layui.table;
             var data = table.cache.achieveReload;
-            var selectId=1;
+            var selectId=${id};
             var formData = new FormData();
             formData.append("model", JSON.stringify(data));
             formData.append("selectId", selectId);
-            var url = "${pageContext.request.contextPath}/achievement/exportExcel";
+            var url = "http://localhost:8080/achievement/exportExcel";
             var xhr = new XMLHttpRequest();
             xhr.open("post", url, true);
             xhr.responseType = "blob";
@@ -124,7 +127,6 @@
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     var name = xhr.getResponseHeader("Content-disposition");
-                    console.log(name);
                     var fileName = name.substring(21, name.length);
                     var filename = decodeURIComponent(fileName);
                     var blob = new Blob([xhr.response], {type: 'text/xls'});
@@ -143,7 +145,7 @@
             url:'http://localhost:8080/achievement/saveAchieve',
             type:'post',
             data:{
-                selectId: 1
+                selectId: ${id}
             },
             success:function () {
                 window.location.reload()

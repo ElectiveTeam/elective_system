@@ -15,7 +15,6 @@ $(function () {
                 stuId:jsonData.id
             },
             success:function (res) {
-                 console.log(res);
                  if(res.data === null){
                      let content = `<a class="list-group-item list-group-item-action flex-column align-items-start">
                                             <div class="nonecu">

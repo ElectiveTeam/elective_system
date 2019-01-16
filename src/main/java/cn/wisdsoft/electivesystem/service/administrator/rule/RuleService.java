@@ -17,4 +17,6 @@ public interface RuleService {
     public Rule getRuleBySelectId(int selectId);
     //通过教师Id和课程名查询规则
     public PageResult getRuleByTeacherId(String teacherId,String cuName);
+
+    public boolean check(int id);
 }

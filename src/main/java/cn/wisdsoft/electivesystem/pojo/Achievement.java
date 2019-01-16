@@ -26,19 +26,19 @@ public class Achievement implements Serializable {
     /**
      * 平时成绩
      */
-    private Integer usual;
+    private double usual;
     /**
      * 期中成绩
      */
-    private Integer midterm;
+    private double midterm;
     /**
      * 技能考核
      */
-    private Integer skill;
+    private double skill;
     /**
      * 期末成绩
      */
-    private Integer finalexam;
+    private double finalexam;
     /**
      * 选课编号
      */
@@ -47,7 +47,7 @@ public class Achievement implements Serializable {
     /**
      * 成绩
      */
-    private Integer achieve;
+    private double achieve;
 
     /**
      * 状态（0未发布，不可查看，1已发布，可查看）
@@ -98,11 +98,11 @@ public class Achievement implements Serializable {
         this.selectId = selectId;
     }
 
-    public Integer getAchieve() {
+    public double getAchieve() {
         return achieve;
     }
 
-    public void setAchieve(Integer achieve) {
+    public void setAchieve(double achieve) {
         this.achieve = achieve;
     }
 
@@ -162,35 +162,35 @@ public class Achievement implements Serializable {
         this.stuName = stuName;
     }
 
-    public Integer getUsual() {
+    public double getUsual() {
         return usual;
     }
 
-    public void setUsual(Integer usual) {
+    public void setUsual(double usual) {
         this.usual = usual;
     }
 
-    public Integer getMidterm() {
+    public double getMidterm() {
         return midterm;
     }
 
-    public void setMidterm(Integer midterm) {
+    public void setMidterm(double midterm) {
         this.midterm = midterm;
     }
 
-    public Integer getSkill() {
+    public double getSkill() {
         return skill;
     }
 
-    public void setSkill(Integer skill) {
+    public void setSkill(double skill) {
         this.skill = skill;
     }
 
-    public Integer getFinalexam() {
+    public double getFinalexam() {
         return finalexam;
     }
 
-    public void setFinalexam(Integer finalexam) {
+    public void setFinalexam(double finalexam) {
         this.finalexam = finalexam;
     }
 

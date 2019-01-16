@@ -66,5 +66,5 @@ public interface CurriculumMapper {
     List<Curriculum> findCurriculumByCollegeNameAndStatus(@Param("collegeName") String collegeName);
     CurriculumDo selectDetails(int curriculumId);
 
-    List<Curriculum> selByTeacherId(String teacherId);
+    List<Curriculum> selByTeacherId(@Param("status") int status,@Param("teacherId") String teacherId);
 }

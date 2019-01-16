@@ -418,10 +418,10 @@
 		s.cu_id = c.id AND
 		c.id = #{curriculumId}
   </select>
-    <select id="selByTeacherId" parameterType="String" resultMap="BaseResultMap">
+    <select id="selByTeacherId" resultMap="BaseResultMap">
     select s.id ,cc.cu_name
     FROM selection s,curriculum cc,course c,term_resource t
-    WHERE s.cu_id = cc.id AND cc.cou_id = c.id AND c.tr_id = t.id AND t.`status` = 5 and cc.teacher_id = #{teacherId}
+    WHERE s.cu_id = cc.id AND cc.cou_id = c.id AND c.tr_id = t.id AND t.`status` = #{status} and cc.teacher_id = #{teacherId}
   </select>
   <select id="selectCurriculum" resultMap="BaseResultMap">
   	select <include refid="Base_Column_List"/>
