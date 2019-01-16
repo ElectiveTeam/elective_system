@@ -1,6 +1,7 @@
 package cn.wisdsoft.electivesystem.controller.administrator.course;
 
-import cn.wisdsoft.electivesystem.pojo.Course;
+import cn.wisdsoft.electivesystem.pojo.CourseVo;
+import cn.wisdsoft.electivesystem.pojo.VO.Teacher;
 import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemConfig;
 import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult;
 import cn.wisdsoft.electivesystem.pojo.utils.PageResult;
@@ -10,8 +11,12 @@ import cn.wisdsoft.electivesystem.service.administrator.term.TermResourceService
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -47,8 +52,10 @@ public class CourseController {
     */
     @RequestMapping(value = "/selectCource",method = RequestMethod.GET)
     @ResponseBody
-    public PageResult SelectCourse(){
-        PageResult pageResult = courseService.SelectCource();
+    public PageResult SelectCourse(HttpSession session){
+        Teacher teacher = (Teacher) session.getAttribute("key");
+        String college = ElectiveSystemConfig.map.get(teacher.getTeaPower());
+        PageResult pageResult = courseService.SelectCourceByCollege(college);
         return pageResult;
     }
 
@@ -73,12 +80,12 @@ public class CourseController {
     * @Author:  SongJunWei
     * @CreateDate:  2019/1/9 15:02
     */
-    @RequestMapping(value = "/insertCourse",method = RequestMethod.POST)
-    @ResponseBody
-    public ElectiveSystemResult insertCourse(Course course){
-        ElectiveSystemResult electiveSystemResult = courseService.insertCourse(course);
-        return electiveSystemResult;
-    }
+//    @RequestMapping(value = "/insertCourse",method = RequestMethod.POST)
+//    @ResponseBody
+//    public ElectiveSystemResult insertCourse(Course course){
+//        ElectiveSystemResult electiveSystemResult = courseService.insertCourse(course);
+//        return electiveSystemResult;
+//    }
 
 //    /**
 //     * 跳转增加分组页面
@@ -96,8 +103,10 @@ public class CourseController {
      * @return
      */
     @RequestMapping("/courseEdit")
-    public String updateCourse(Model model,String curId,String cuName,String courseName){
-        List<Course> courseList = courseService.SelectAllCourse();
+    public String updateCourse(Model model, String curId, String cuName, String courseName, HttpSession session){
+        Teacher teacher = (Teacher) session.getAttribute("key");
+        String college = ElectiveSystemConfig.map.get(teacher.getTeaPower());
+        List<CourseVo> courseList = courseService.SelectAllCourse(college);
         model.addAttribute("courseList",courseList);
         model.addAttribute("cuName",cuName);
         model.addAttribute("curId",curId);

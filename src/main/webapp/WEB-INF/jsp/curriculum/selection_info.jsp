@@ -72,7 +72,7 @@
         <label for="describe" class="layui-form-label">
             <span class="x-red">*</span>简介
         </label>
-        <div class="layui-input-inline" style="width: 80%;">
+        <div class="layui-input-inline" style="width: 65%;">
             <input type="text" id="describe" disabled name="describe" value="${ curriculum.describe }"
                    autocomplete="off" class="layui-input" style="display: none"/>
         </div>

@@ -33,7 +33,7 @@
             </div>
         </div>
     </div>
-    <div class="layui-form-item">
+    <!-- <div class="layui-form-item">
         <div class="layui-inline">
             <label class="layui-form-label">开放时间：</label>
             <div class="layui-input-inline">
@@ -41,8 +41,8 @@
                        placeholder="yyyy-MM-dd HH:mm:ss">
             </div>
         </div>
-    </div>
-    <div class="layui-form-item">
+    </div> -->
+    <!--<div class="layui-form-item">
         <div class="layui-inline">
             <label class="layui-form-label">截止时间：</label>
             <div class="layui-input-inline">
@@ -50,7 +50,7 @@
                        placeholder="yyyy-MM-dd HH:mm:ss">
             </div>
         </div>
-    </div>
+    </div>-->
     <%--<div class="layui-inline">--%>
     <%--<label class="layui-form-label">当前状态：</label>--%>
     <%--<div class="layui-input-inline">--%>

@@ -6,8 +6,13 @@ $(function () {
         data:{},
         success: function (res) {
             let responseCourse = res.data;
+            console.log(responseCourse);
+            if(responseCourse.length<=0){
+                let NoItem = `<blockquote class="layui-elem-quote">尚未有教师申请课程，故没有课程组，这属于正常现象。</blockquote>`;
+                $("#CourseContent").append(NoItem);
+                return;
+            }
             for (let courseList of responseCourse) {
-                console.log(courseList);
                 let ressults=`
                 <div class="layui-colla-item">
                     <h2 class="layui-colla-title" data-id="${courseList.id}">${courseList.courseName}</h2>
@@ -26,7 +31,7 @@ $(function () {
                         if(data.show===true){
                             //分组编号
                             couseId = $(this).data("id");
-                            console.log(couseId);
+                            // console.log(couseId);
                             layui.use('table', function(){
                                 var table = layui.table;
                                 table.render({
@@ -55,37 +60,23 @@ $(function () {
                                     //课程组名称
                                     let str = $(obj.tr).parents(".layui-colla-content").siblings(".layui-colla-title").html();
                                     var arr = str.split("<")[0];
-                                    if(obj.event === 'del'){
-                                        // console.log($(obj.tr).parents(".layui-table-main").find("tr"));
-                                        //查看该分组下有几门课程，将小于一的组删除
-                                        // let trs = $(obj.tr).parents(".layui-table-main").find("tr");
-                                        // if(trs.length<=1){
-                                        // layer.confirm('真的删除行么', function(index){
-                                        //     $.ajax({
-                                        //         url:'http://localhost:8080/course/deleteCourseById',
-                                        //         type:"get",
-                                        //         data:{id:data.couId},
-                                        //         success: function (res) {
-                                        //             let responseCourse = res.data;
-                                        //             console.log(res);
-                                        //             obj.del();
-                                        //             layer.close(index);
-                                        //         },error: function (res) {
-                                        //
-                                        //         }
-                                        //     })
-                                        // });
-                                        // }
-                                    } else if(obj.event === 'edit'){
-                                        layer.open({
-                                            type: 2,
-                                            title :'修改分组',
-                                            offset: 't',
-                                            area: ['455px', '400px'],
-                                            skin: 'layui-layer-demo', //样式类名
-                                            closeBtn: 1, //显示关闭按钮
-                                            content: '/course/courseEdit?curId='+data.id+"&cuName="+data.cuName+"&courseName="+arr
-                                        });
+                                    if(obj.event === 'edit'){
+                                        if(courseList.status>=1){
+                                            $("#courseButton_edit").attr('disabled',"true");
+                                            //提示层
+                                            layer.msg('只能在申请中才能修改分组哦！');
+                                        }else {
+                                            $('#courseButton_edit').removeAttr("disabled");
+                                            layer.open({
+                                                type: 2,
+                                                title :'修改分组',
+                                                offset: 't',
+                                                area: ['455px', '400px'],
+                                                skin: 'layui-layer-demo', //样式类名
+                                                closeBtn: 1, //显示关闭按钮
+                                                content: '/course/courseEdit?curId='+data.id+"&cuName="+data.cuName+"&courseName="+arr
+                                            });
+                                        }
                                     }
                                 });
                             });
@@ -94,7 +85,7 @@ $(function () {
                 });
             }
         },error: function (res) {
-
+            layer.msg('很抱歉，服务器端报错了！');
         }
     })
 });

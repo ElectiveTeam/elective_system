@@ -14,8 +14,8 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>产品添加</title>
-    <link rel="stylesheet" type="text/css" href="/js/layui/css/layui.css">
-    <script type="text/javascript" src="/js/jquery-2.2.4-min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/elective/layui/css/layui.css">
+    <script type="text/javascript" src="/elective/js/jquery_2.2.4.min.js"></script>
 </head>
 
 <body>
@@ -29,8 +29,6 @@
                 <input type="text" id="cuName" disabled name="cuName"
                        autocomplete="off" class="layui-input" value="${ curriculum.cuName }"/>
             </div>
-        </div>
-        <div class="layui-form-item">
             <label for="teacherName" class="layui-form-label">
                 <span class="x-red">*</span>授课人
             </label>
@@ -47,8 +45,6 @@
                 <input type="text" id="course.courseName" disabled name="course.courseName" value="${ curriculum.course.courseName }"
                        autocomplete="off" class="layui-input"/>
             </div>
-        </div>
-        <div class="layui-form-item">
             <label for="grade" class="layui-form-label">
                 <span class="x-red">*</span>年级
             </label>
@@ -65,8 +61,6 @@
                 <input type="text" id="classHour" disabled name="classHour" value="${ curriculum.classHour }"
                        autocomplete="off" class="layui-input"/>
             </div>
-        </div>
-        <div class="layui-form-item">
             <label for="credit" class="layui-form-label">
                 <span class="x-red">*</span>学分
             </label>
@@ -79,7 +73,7 @@
             <label for="describe" class="layui-form-label">
                 <span class="x-red">*</span>简介
             </label>
-            <div class="layui-input-inline">
+            <div class="layui-input-inline" style="width: 75%;">
                 <input type="text" id="describe" disabled name="describe" value="${ curriculum.describe }"
                        autocomplete="off" class="layui-input"/>
             </div>

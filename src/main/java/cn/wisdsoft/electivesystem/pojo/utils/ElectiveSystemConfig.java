@@ -1,5 +1,8 @@
 package cn.wisdsoft.electivesystem.pojo.utils;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * <p>ClassName: ElectiveSystemConfig</p>
  * <p>Description:</p>
@@ -21,6 +24,22 @@ public class ElectiveSystemConfig {
     public final static String TERM_MAPPING = "/term";
     public final static String ACHIEVEMENT_MAPPING = "/achievement";
     public final static String STATISTICS_MAPPING = "/statistics";
+    //编号对应的学院
+    public final static Map<String, String> map = new HashMap<>();
+    
+    static {
+    	map.put("HGXY0001", "软件学院");
+    	map.put("HGXY0002", "建筑学院");
+    	map.put("HGXY0003", "工程管理学院");
+    	map.put("HGXY0004", "经济管理学院");
+    	map.put("HGXY0005", "信息技术学院");
+    	map.put("HGXY0006", "人文学院");
+    	map.put("HGXY0007", "土木工程学院");
+    	map.put("HGXY0008", "会计学院");
+    	map.put("1", "校选");
+    	map.put("0", "无权限");
+    }
+    
     public ElectiveSystemConfig() {
 
     }

@@ -49,7 +49,7 @@ public class TeacherLogin {
                 String subject = claims.getSubject();
                 JSONObject tea = JSONObject.parseObject(subject);
                 Teacher teacher1 = JSONObject.parseObject(tea.get("teacher").toString(), Teacher.class);
-                session.setAttribute(TeacherKey,teacher1);
+                session.setAttribute("key",teacher1);
                 return ElectiveSystemResult.ok(teacher1);
             } catch (Exception e) {
                 e.printStackTrace();

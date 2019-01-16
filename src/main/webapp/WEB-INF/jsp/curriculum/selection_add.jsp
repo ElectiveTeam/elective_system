@@ -72,7 +72,7 @@
         <label for="describe" class="layui-form-label">
             <span class="x-red">*</span>简介
         </label>
-        <div class="layui-input-inline" style="width: 80%;">
+        <div class="layui-input-inline" style="width: 75%;">
             <input type="text" id="describe" disabled name="describe" value="${ curriculum.describe }"
                    autocomplete="off" class="layui-input" style="display: none"/>
         </div>
@@ -85,7 +85,7 @@
                 <span class="x-red">*</span>上课时间
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="classTime" lay-verify="required" name="classTime" value="123456"
+                <input type="text" id="classTime" lay-verify="required" name="classTime" value=""
                        autocomplete="off" class="layui-input"/>
             </div>
             <label for="place" class="layui-form-label">

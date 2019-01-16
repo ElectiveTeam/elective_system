@@ -70,22 +70,17 @@ public class TermResourceController {
     }
      
     /**
-     * 作用:待定
+     * 作用:删除
+     *
+     * @param termResource 学期对象
      * @return cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult
-     * @date 15:18 2019/1/10
-     */ 
-//    /**
-//     * 作用:删除
-//     *
-//     * @param termResource 学期对象
-//     * @return cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult
-//     * @date 16:30 2019/1/8
-//     */
-//    @RequestMapping(value = "/delete", method = RequestMethod.POST)
-//    @ResponseBody
-//    public ElectiveSystemResult deleteTermResource(TermResource termResource) {
-//		return termResourceService.deleteTermResource(termResource);
-//    }
+     * @date 16:30 2019/1/8
+     */
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @ResponseBody
+    public ElectiveSystemResult deleteTermResource(Integer termResource) {
+		return termResourceService.deleteTermResource(termResource);
+    }
     
     @RequestMapping(value="/term",method = RequestMethod.GET)
 	public String term() {
@@ -104,11 +99,12 @@ public class TermResourceController {
     }
     
     @RequestMapping(value="/termEdit",method = RequestMethod.GET)
-	public String termEdit(Integer id,Model model) {
+	public String termEdit(Integer id,String states,Model model) {
     	//根据id查询数据
     	TermResource term = termResourceService.seleTermById(id);
     	//将查询到的数据，放在下面    	
     	model.addAttribute("term", term);
+    	model.addAttribute("states", states);
     	System.out.println(term);
 		return "term/term_edit";
 	}
