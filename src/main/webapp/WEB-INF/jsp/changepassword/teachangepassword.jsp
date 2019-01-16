@@ -14,7 +14,7 @@
 </head>
 <body>
 <div class="bg">
-    <img src="/elective/img/banner.jpg"/>
+    <img src="/elective/student/images/banner.jpg"/>
 </div>
 <input type="text" id="id" value="${TeaId}" hidden>
 <div class="bigbox">
@@ -45,7 +45,7 @@
     </div>
 </div>
 </body>
-<script src="/elective/js/jquery.js"></script>
+<script src="/elective/student/js/jquery_2.2.4.min.js"></script>
 <script type="text/javascript">
     $("#chongzhi").click(function(){
         $("#password").val("");

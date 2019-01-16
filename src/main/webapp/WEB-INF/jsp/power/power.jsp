@@ -29,7 +29,7 @@
     </form>
 
 </body>
-<script src="/elective/js/jquery.js"></script>
+<script src="/elective/student/js/jquery_2.2.4.min.js"></script>
 <script src="${pageContext.request.contextPath}/elective/layui/layui.all.js"></script>
 <script type="text/javascript">
     layui.use('form', function() {

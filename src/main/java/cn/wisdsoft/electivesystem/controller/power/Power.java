@@ -21,20 +21,18 @@ public class Power {
     @ResponseBody
     public List<Teacher> PowerSousuo(String zhigonghao){
         System.out.println(zhigonghao);
-        List<Teacher> teachers = new ArrayList<>();
+        List<Teacher> teachers = new ArrayList<Teacher>();
         HashMap<String,String> map = new HashMap<>();
         map.put("worknumber",zhigonghao);
         String a = HttpClientUtil.doGet("http://192.168.6.180:8080/info/findTeacher",map);
-        System.out.println("***************************************************************");
-        System.out.println(a);
-        System.out.println("***************************************************************");
         JSONObject jsonObject = JSONObject.parseObject(a);
         String result = jsonObject.get("data").toString();
+        jsonObject = JSONObject.parseObject(result);
+        result = jsonObject.get("findtea").toString();
+        System.out.println("==============================================================");
+        System.out.println(result);
+        System.out.println("==============================================================");
         teachers = JSONObject.parseArray(result, cn.wisdsoft.electivesystem.pojo.VO.Teacher.class);
-        System.out.println("====================================================================");
-        System.out.println(teachers);
-        System.out.println("====================================================================");
-        
         return teachers;
     }
 
