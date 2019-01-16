@@ -9,6 +9,7 @@ import cn.wisdsoft.electivesystem.service.sudent.selectedCurriculum.SelectedCurr
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -45,11 +46,11 @@ public class SelectedCurriculumServiceImpl implements SelectedCurriculumService 
     @Override
     public ElectiveSystemResult selectAllCurriculum(String termName, String category) {
         List<CurriculumDo> curriculumDos = curriculumMapper.selectAllCurriculum(termName, category);
-        RelationshipExample example = new RelationshipExample();
-        RelationshipExample.Criteria criteria = example.createCriteria();
         curriculumDos.forEach((curriculumDo -> {
             Integer curriculumId = curriculumDo.getCurriculumId();
             int selectionId = relationshipMapper.selectSelectionId(curriculumId);
+            RelationshipExample example = new RelationshipExample();
+            RelationshipExample.Criteria criteria = example.createCriteria();
             criteria.andSelectIdEqualTo(selectionId);
             long counts = relationshipMapper.countByExample(example);
             long maxNumber = curriculumDo.getMaxNumber();
@@ -78,13 +79,10 @@ public class SelectedCurriculumServiceImpl implements SelectedCurriculumService 
         Date open = termResource.getOpenTime();
         Date close = termResource.getCloseTime();
         Date now = new Date();
-        long l, day, hour, min;
         if (now.compareTo(open) < 0) {
-            l = open.getTime() - now.getTime();
-            day = l / (24 * 60 * 60 * 1000);
-            hour = (l / (60 * 60 * 1000) - day * 24);
-            min = ((l / (60 * 1000)) - day * 24 * 60 - hour * 60);
-            return ElectiveSystemResult.build(402, "距离选课还有" + day + "天" + hour + "小时" + min + "分钟！");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            String openTime = sdf.format(open);
+            return ElectiveSystemResult.build(402, "选课时间将在"+openTime+"开启，请耐心等待");
         }
         if (now.compareTo(close) > 0) {
             return ElectiveSystemResult.build(401, "选课功能暂未开放");
