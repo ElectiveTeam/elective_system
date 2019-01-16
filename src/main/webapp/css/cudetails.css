@@ -12,3 +12,13 @@
     margin-top:6%; 
     width: 70%;
 } */
+.myTable{
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    margin-bottom: 25px;
+}
+.myRow{
+    width: 50%;
+}

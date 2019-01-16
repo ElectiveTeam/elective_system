@@ -36,8 +36,26 @@
 
 .tk2{
     float:right;
-    color: red;
+    color: yellow;
     font-size:15px; 
+}
+
+.tk3{
+    float:right;
+    color: orange;
+    font-size:15px;
+}
+
+.tk4{
+    float:right;
+    color: red;
+    font-size:15px;
+}
+
+.tk5{
+    float:right;
+    color: grey;
+    font-size:15px;
 }
 
 .my{

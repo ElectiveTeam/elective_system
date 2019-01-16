@@ -45,29 +45,34 @@
 
 <!-- 引入 ECharts 文件 -->
 <script src="/elective/js/echarts.js"></script>
+
 <script type="text/javascript" src="/elective/js/jquery_2.2.4.min.js"></script>
+
 <script src="/elective/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript">
-    layui.use(['form'], function () {
+    layui.use(['form','layer'], function () {
         var form = layui.form;
+        var layer = layui.layer;
+
     })
     $("#find").click(function () {
         $.ajax({
             url:"${pageContext.request.contextPath }/statistics/findElectiveEcharts",
             type:"GET",
             data:{
-                college: "1",
                 teacherName : $("#teacherName").val(),
                 termName : $("#termName").val()
             },
             success : function(msg){
                 console.log(msg);
-                var cuName = [];
-                var countNum = [];
-                for (i = 0; i < msg.data.length; i++) {
-                    cuName.push(msg.data[i].cuName);
-                    countNum.push(msg.data[i].countNum);
-                }
+                var status = msg.status;
+                if(status==200){
+                    var cuName = [];
+                    var countNum = [];
+                    for (i = 0; i < msg.data.length; i++) {
+                        cuName.push(msg.data[i].cuName);
+                        countNum.push(msg.data[i].countNum);
+                    }
                     // 基于准备好的dom，初始化echarts实例
                     var myChart = echarts.init(document.getElementById('main'));
 
@@ -95,6 +100,9 @@
                             barMaxWidth : 30
                         }]
                     });
+                }else {
+                    alert("暂无该老师数据");
+                }
             },
             error : function(){
                 console.log("失败");

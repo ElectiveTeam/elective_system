@@ -2,8 +2,10 @@ package cn.wisdsoft.electivesystem.mapper;
 
 import cn.wisdsoft.electivesystem.pojo.Course;
 import cn.wisdsoft.electivesystem.pojo.CourseExample;
-import java.util.List;
+import cn.wisdsoft.electivesystem.pojo.CourseVo;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface CourseMapper {
     long countByExample(CourseExample example);
@@ -31,10 +33,10 @@ public interface CourseMapper {
     int updateByPrimaryKey(Course record);
 
     /**
-     * 无条件查询所有的分组
+     * 查询本学期，该学院下，的所有的分组
      * @return
      */
-    List<Course> SelectCource();
+    List<CourseVo> SelectCourceByCollege(@Param("college") String college);
 
     int deleteCourseNotUse(@Param("college") String college);
 

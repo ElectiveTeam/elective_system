@@ -207,15 +207,17 @@
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="SelectCource" resultMap="BaseResultMap">
-    SELECT id,course_name FROM course
+  <select id="SelectCourceByCollege" resultType="cn.wisdsoft.electivesystem.pojo.CourseVo">
+    SELECT DISTINCT c.id,c.course_name,te.`status` as `status`
+    FROM course AS c ,curriculum AS cu ,term_resource AS te
+    WHERE cu.cou_id = c.id AND c.tr_id = te.id AND cu.`status` &gt;0 AND te.`status` &lt; 7 AND te.college = #{college}
   </select>
   <!--删除本学院的没有课程的组-->
   <delete id="deleteCourseNotUse">
     DELETE FROM course WHERE
       id in(SELECT id FROM (SELECT course.id,curriculum.cou_id
       FROM course LEFT JOIN curriculum ON curriculum.cou_id = course.id WHERE curriculum.cou_id IS NULL) as course_Curri)
-      and tr_id =(SELECT  id from term_resource WHERE college=#{college})
+      and tr_id =(SELECT  id from term_resource WHERE college=#{college} and `status` &lt; 7)
   </delete>
   <select id="findCourseCount" resultType="Integer">
   	SELECT cou_id FROM curriculum GROUP BY cou_id HAVING COUNT(*)&lt;=1;

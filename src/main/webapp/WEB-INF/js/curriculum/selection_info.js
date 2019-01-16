@@ -33,7 +33,7 @@ layui.use('layedit', function(){
     //自定义工具栏
     let index = layedit.build('describe', {
         tool: ['face', 'link', 'unlink', '|', 'left', 'center', 'right']
-        ,height: 100
+        ,height: 150
     });
 
     $('.site-demo-layedit').on('click', function(){

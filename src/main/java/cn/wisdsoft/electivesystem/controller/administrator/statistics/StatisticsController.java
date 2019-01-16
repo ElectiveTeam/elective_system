@@ -2,6 +2,7 @@ package cn.wisdsoft.electivesystem.controller.administrator.statistics;
 
 import cn.wisdsoft.electivesystem.pojo.Relationship;
 import cn.wisdsoft.electivesystem.pojo.Statistics;
+import cn.wisdsoft.electivesystem.pojo.VO.Teacher;
 import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemConfig;
 import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult;
 import cn.wisdsoft.electivesystem.pojo.utils.PageResult;
@@ -12,6 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * <p>ClassName: StatisticsController</p>
@@ -27,14 +31,17 @@ public class StatisticsController {
 
     private final StatisticsService statisticsService;
 
+    private final HttpServletRequest request;
+
     @Autowired
     
-    public StatisticsController(StatisticsService statisticsService) {
+    public StatisticsController(StatisticsService statisticsService, HttpServletRequest request) {
         this.statisticsService = statisticsService;
+        this.request = request;
     }
 
-    @RequestMapping(value="/index",method=RequestMethod.GET)
-    public String index() {return "/home_page/index";}
+    /*@RequestMapping(value="/index",method=RequestMethod.GET)
+    public String index() {return "/home_page/index";}*/
 
     /**
      * 打开选课统计详情表格页面并绑定后台查询的学期
@@ -49,14 +56,15 @@ public class StatisticsController {
 
     /**
      * 根据学期和学院统计选课情况
-     * @param college
      * @param termName
      * @return
      */
     @RequestMapping(value="/findElective",method=RequestMethod.GET)
     @ResponseBody
-    public PageResult<Statistics> findElective(String college,String termName,int limit,int page){
-		return statisticsService.findElective(page,limit,college, termName);
+    public PageResult<Statistics> findElective(String termName,int limit,int page){
+        HttpSession session = request.getSession();
+        Teacher teacher = (Teacher) session.getAttribute("key");
+        return statisticsService.findElective(page,limit,teacher.getTeaPower(), termName);
     }
 
     /**
@@ -72,15 +80,16 @@ public class StatisticsController {
 
     /**
      * 根据学期，选课类型，教师统计选课人数图表
-     * @param college
      * @param ternName
      * @param teacherName
      * @return
      */
     @RequestMapping(value="/findElectiveEcharts",method = RequestMethod.GET)
     @ResponseBody
-    public ElectiveSystemResult findElectiveEcharts(String college,String ternName,String teacherName) {
-        return statisticsService.findEleciveEcharts(college,ternName,teacherName);
+    public ElectiveSystemResult findElectiveEcharts(String ternName,String teacherName) {
+        HttpSession session = request.getSession();
+        Teacher teacher = (Teacher) session.getAttribute("key");
+        return statisticsService.findEleciveEcharts(teacher.getTeaPower(),ternName,teacherName);
     }
 
     @RequestMapping(value="/edit",method=RequestMethod.GET)

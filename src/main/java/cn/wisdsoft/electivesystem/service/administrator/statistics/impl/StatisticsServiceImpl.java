@@ -79,7 +79,7 @@ public class StatisticsServiceImpl implements StatisticsService {
 		}
 		List<Statistics> electiveList = statisticsMapper.findElective(colleges, termName);
 		/*System.out.println(electiveList);*/
-		if(electiveList != null) {
+		if(electiveList.size()>0) {
 			return PageResult.ok(electiveList,electiveList.size());
 		}else {
 			return PageResult.build(420, "没查到数据");
@@ -117,7 +117,7 @@ public class StatisticsServiceImpl implements StatisticsService {
 			colleges = "会计学院";
 		}
 		List<Statistics> electiveEchartsList = statisticsMapper.findElectiveEcharts(colleges,termName,teacherName);
-		if (electiveEchartsList!=null){
+		if (electiveEchartsList.size()>0){
 			return ElectiveSystemResult.ok(electiveEchartsList);
 		}else{
 			return ElectiveSystemResult.build(420, "没查到数据");

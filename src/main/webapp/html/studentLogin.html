@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="/elective/student/css/studentLogin.css" />
+		<link rel="stylesheet" type="text/css" href="/elective/layui/css/layui.css"/>
+		<meta charset="UTF-8">
+		<title>学生登录</title>
+	</head>
+	<body>
+		<div class="bg">
+			<img src="/elective/student/images/banner.jpg"/>
+		</div>
+		<div class="bigbox">
+			<div class="big1">
+				<div class="biaoti">
+					<p><h2>学生选课系统</h2></p>
+				</div>
+				<form class="layui-form" action="">
+				  <div class="layui-form-item">
+				    <label class="layui-form-label">学号</label>
+				    <div class="layui-input-block">
+				      <input type="text" id="xuehao" name="title" required  lay-verify="required" placeholder="请输入学号" autocomplete="off" class="layui-input" style="width: 70%;">
+				    </div>
+				  </div>
+				   <div class="layui-form-item">
+				    <label class="layui-form-label">密码</label>
+				    <div class="layui-input-block">
+				      <input type="password" id="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input"style="width: 70%;">
+				    </div>
+				  </div>
+				  <div class="layui-form-item">
+				    <div class="layui-input-block">
+				      <button type="button" class="layui-btn" lay-submit lay-filter="formDemo" onclick="yzlogin()">立即提交</button>
+				      <button type="reset" class="layui-btn layui-btn-primary" id="chongzhi">重置</button>
+				    </div>
+				  </div>
+				</form>
+			</div>
+		</div>
+	</body>
+	<script src="/elective/student/js/jquery_2.2.4.min.js"></script>
+	<script src="/elective/student/js/studentLogin.js"></script>
+</html>

@@ -66,4 +66,22 @@ public interface SelectedCurriculumService {
      * @return the elective system result  包含选课信息的JSON数据
      */
     ElectiveSystemResult selectCurriculumNow(String stuId,String college);
+
+    /**
+     * Select Term Name elective system result.
+     * 查询学生当前学期名称
+     *
+     * @param college the college  学院名称
+     * @return the elective system result  包含学期信息的JSON数据
+     */
+    ElectiveSystemResult selectTermName(String college);
+	
+	/**
+     * Check curriculum elective system result.
+     * 检查课程（查询学生选的所有课程组ID）
+     *
+     * @param stuId the stu id  学生ID
+     * @return the elective system result  包含课程组ID的JSON数据
+     */
+    ElectiveSystemResult checkCurriculum(String stuId);
 }

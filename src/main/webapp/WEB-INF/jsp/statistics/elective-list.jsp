@@ -59,7 +59,6 @@
                 elem: '#test',
                 width: 1050,
                 where: {
-                    college: "1",
                     termName: $("#termName").val()
                 },
                 url: "${pageContext.request.contextPath }/statistics/findElective",

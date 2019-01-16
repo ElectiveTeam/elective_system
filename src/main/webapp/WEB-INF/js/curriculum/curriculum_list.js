@@ -5,22 +5,22 @@ layui.use('table', function () {
         , url: 'http://localhost:8080/curriculum/findAllByPage'
         , id: 'majorReload'
         , cols: [[{
-            field: 'id', title: '课程编号', sort: true
+            field: 'id', title: '课程编号', sort: true,hide:true
         }, {
-            field: 'cuName', title: '课程名称'
+            field: 'cuName', title: '课程名称', align: 'center'
         }, {
-            field: 'price', title: '教师名称'
+            field: 'price', title: '教师名称', align: 'center'
         }, {
-            field: 'classHour', title: '学时'
+            field: 'classHour', title: '学时', align: 'center'
         }, {
-            field: 'credit', title: '学分'
+            field: 'credit', title: '学分', align: 'center'
         }, {
-            field: 'grade', title: '年级'
+            field: 'grade', title: '年级', align: 'center'
         }, {
-            field: 'status', title: '审核状态',
+            field: 'status', title: '审核状态', align: 'center',unresize: true,
             templet: '#show'
         }, {
-            fixed: 'right', align: 'center', title: '操作', toolbar: '#barDemo'
+            fixed: 'right', align: 'center', title: '操作', unresize: true, toolbar: '#barDemo'
         }]],
         page: true
     });
@@ -51,14 +51,14 @@ layui.use('table', function () {
             layer.open({
                 type: 2,
                 content: 'http://localhost:8080/application/find/' + obj.data.id,
-                area: ['800px', '500px'],
+                area: ['850px', '500px'],
                 offset: ['25px', '250px']
             })
         } else if (obj.event === 'success_info') {
             layer.open({
                 type: 2,
                 content: 'http://localhost:8080/application/selectionInfo/' + obj.data.id,
-                area: ['550px', '500px'],
+                area: ['850px', '500px'],
                 offset: ['25px', '250px']
             })
         }

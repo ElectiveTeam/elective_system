@@ -3,8 +3,9 @@ package cn.wisdsoft.electivesystem.mapper;
 import cn.wisdsoft.electivesystem.pojo.Curriculum;
 import cn.wisdsoft.electivesystem.pojo.CurriculumDo;
 import cn.wisdsoft.electivesystem.pojo.CurriculumExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface CurriculumMapper {
     long countByExample(CurriculumExample example);
@@ -54,4 +55,12 @@ public interface CurriculumMapper {
      * @return
      */
     List<Curriculum> selectCurriculum();
+    
+    /**
+     * 通过学院和状态查询所有课程
+     * @param collegeName
+     * @return
+     */
+    List<Curriculum> findCurriculumByCollegeNameAndStatus(@Param("collegeName") String collegeName);
+    CurriculumDo selectDetails(int curriculumId);
 }
