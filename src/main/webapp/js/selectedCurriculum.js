@@ -68,7 +68,7 @@ $(() => {
                                 curriculumId,
                                 courseId
                             } = item;
-                            if (`${remark}` === '招生中') {
+                            if (`${remark}` === 'green') {
                                 content += `<a class="list-group-item list-group-item-action flex-column align-items-start" id="myTrue">
                                         <input type="text" class="courseId" hidden value="${courseId}"/>
                                         <input type="text" class="curriculumId" hidden value="${curriculumId}">
@@ -84,9 +84,67 @@ $(() => {
                                         </p>
                                         <small class="text-muted"><span>学分：</span><span>${credit}</span></small>
                                         <small class="text-muted cutime"><span>学时：</span><span>${classHour}</span></small>
-                                        <small class="text-muted"><span class="tk1">${remark}</span></small>
+                                        <small class="text-muted"><span class="tk1">招生中</span></small>
                                     </a>`;
-                            } else {
+                            }
+                            else if (`${remark}` === 'yellow') {
+                                content += `<a class="list-group-item list-group-item-action flex-column align-items-start" id="myTrue">
+                                        <input type="text" class="courseId" hidden value="${courseId}"/>
+                                        <input type="text" class="curriculumId" hidden value="${curriculumId}">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">${curriculumName}</h5>
+                                            <small class="text-muted">${teacherName}</small>
+                                        </div>
+                                        <p class="mb-1 cuinfo">
+                                            <span>地点:</span>
+                                            <span>${place}</span>
+                                            <span class="cutime">时间:</span>
+                                            <span>${classTime}</span>
+                                        </p>
+                                        <small class="text-muted"><span>学分：</span><span>${credit}</span></small>
+                                        <small class="text-muted cutime"><span>学时：</span><span>${classHour}</span></small>
+                                        <small class="text-muted"><span class="tk2">招生中</span></small>
+                                    </a>`;
+                            }
+                            else if (`${remark}` === 'orange') {
+                                content += `<a class="list-group-item list-group-item-action flex-column align-items-start" id="myTrue">
+                                        <input type="text" class="courseId" hidden value="${courseId}"/>
+                                        <input type="text" class="curriculumId" hidden value="${curriculumId}">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">${curriculumName}</h5>
+                                            <small class="text-muted">${teacherName}</small>
+                                        </div>
+                                        <p class="mb-1 cuinfo">
+                                            <span>地点:</span>
+                                            <span>${place}</span>
+                                            <span class="cutime">时间:</span>
+                                            <span>${classTime}</span>
+                                        </p>
+                                        <small class="text-muted"><span>学分：</span><span>${credit}</span></small>
+                                        <small class="text-muted cutime"><span>学时：</span><span>${classHour}</span></small>
+                                        <small class="text-muted"><span class="tk3">招生中</span></small>
+                                    </a>`;
+                            }
+                            else if (`${remark}` === 'red') {
+                                content += `<a class="list-group-item list-group-item-action flex-column align-items-start" id="myTrue">
+                                        <input type="text" class="courseId" hidden value="${courseId}"/>
+                                        <input type="text" class="curriculumId" hidden value="${curriculumId}">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">${curriculumName}</h5>
+                                            <small class="text-muted">${teacherName}</small>
+                                        </div>
+                                        <p class="mb-1 cuinfo">
+                                            <span>地点:</span>
+                                            <span>${place}</span>
+                                            <span class="cutime">时间:</span>
+                                            <span>${classTime}</span>
+                                        </p>
+                                        <small class="text-muted"><span>学分：</span><span>${credit}</span></small>
+                                        <small class="text-muted cutime"><span>学时：</span><span>${classHour}</span></small>
+                                        <small class="text-muted"><span class="tk4">招生中</span></small>
+                                    </a>`;
+                            }
+                            else{
                                 content += `<a class="list-group-item list-group-item-action flex-column align-items-start" id="myFalse">
                                         <input type="text" class="teacherName" hidden value="${courseId}"/>
                                         <input type="text" class="curriculumId" hidden value="${curriculumId}">
@@ -102,7 +160,7 @@ $(() => {
                                         </p>
                                         <small class="text-muted"><span>学分：</span><span>${credit}</span></small>
                                         <small class="text-muted cutime"><span>学时：</span><span>${classHour}</span></small>
-                                        <small class="text-muted"><span class="tk2">${remark}</span></small>
+                                        <small class="text-muted"><span class="tk5">已招满</span></small>
                                     </a>`;
                             }
                         });

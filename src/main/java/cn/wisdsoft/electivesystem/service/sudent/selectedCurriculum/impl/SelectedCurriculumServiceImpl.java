@@ -66,6 +66,7 @@ public class SelectedCurriculumServiceImpl implements SelectedCurriculumService 
             }
         }));
         return ElectiveSystemResult.ok(curriculumDos);
+
     }
 
     @Override

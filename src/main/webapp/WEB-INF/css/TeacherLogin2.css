@@ -26,7 +26,9 @@
 }
 .big1{
 	width: 30%;
-	background-color: #4476A7;
+	border-radius: 10px;
+	background-color: rgba(2, 9, 152,0.2);
+	margin: 0 auto;
 }
 .biaoti{
 	width: 100%;
@@ -34,4 +36,12 @@
 	display: flex;
 	justify-content: center;
 	align-content: center;
+}
+.biaoti h2{
+	color: black;
+	font-size: 24px;
+}
+
+.layui-btn{
+	margin-left: 2rem;
 }

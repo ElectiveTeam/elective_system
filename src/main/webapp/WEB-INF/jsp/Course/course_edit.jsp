@@ -79,7 +79,7 @@
                     window.parent.location.reload();
                     //关闭当前frame
                     parent.layer.close(index);
-                    layer.msg("更新成功");
+                    // layer.msg("更新成功");
                 }, error: function (res) {
                     console.log("失败"+res);
                 }
