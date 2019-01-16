@@ -17,7 +17,7 @@
         <div class="layui-inline">
             <label class="layui-form-label">课程</label>
             <div class="layui-input-inline">
-                <select id="curriculum" lay-verify="required" lay-search="">
+                <select id="curriculum" lay-verify="required" >
                     <option value="">请选择课程</option>
                     <c:forEach items="${curriculumList}" var="curriculumList">
                         <c:choose>
@@ -37,7 +37,7 @@
                 <span class="x-red">*</span>平时成绩
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="usual" name="usual"
+                <input type="text" id="usual" name="usual" lay-verify="required"
                        autocomplete="off" class="layui-input" value=""/>
             </div>
         </div>
@@ -46,7 +46,7 @@
                 <span class="x-red">*</span>期中成绩
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="midTerm" name="midTerm"
+                <input type="text" id="midTerm" name="midTerm" lay-verify="required"
                        autocomplete="off" class="layui-input" value=""/>
             </div>
         </div>
@@ -55,7 +55,7 @@
                 <span class="x-red">*</span>技能考核
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="skill" name="skill"
+                <input type="text" id="skill" name="skill" lay-verify="required"
                        autocomplete="off" class="layui-input" value=""/>
             </div>
         </div>
@@ -64,7 +64,7 @@
                 <span class="x-red">*</span>期末成绩
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="finalexam" name="finalexam"
+                <input type="text" id="finalexam" name="finalexam" lay-verify="required"
                        autocomplete="off" class="layui-input" value=""/>
             </div>
         </div>
