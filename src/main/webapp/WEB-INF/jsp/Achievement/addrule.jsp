@@ -13,7 +13,7 @@
 </head>
 <body>
 <div style="padding: 15px;">
-    <div class="layui-form-item">
+    <div class="layui-form">
         <div class="layui-inline">
             <label class="layui-form-label">课程</label>
             <div class="layui-input-inline">
