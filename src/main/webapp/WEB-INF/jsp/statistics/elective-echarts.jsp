@@ -6,54 +6,102 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
 <html>
 <head>
-    <title>选课统计图表</title>
-    <!-- 引入 ECharts 文件 -->
-    <script src="/elective/js/echarts.js"></script>
-    <script type="text/javascript" src="/elective/js/jquery_2.2.4.min.js"></script>
+    <meta charset="utf-8">
+    <title>选课情况统计图</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/elective/layui/css/layui.css" media="all">
 </head>
 <body>
+
+<div class="layui-form" style="margin:0.75rem 0 0 0.75rem">
+    <div class="layui-inline">
+        <label class="layui-form-label">教师姓名：</label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" placeholder="请输入教师姓名" id="teacherName">
+        </div>
+    </div>
+    <div class="layui-inline">
+        <label class="layui-form-label">学期：</label>
+        <div class="layui-input-inline">
+            <select name="modules" id="termName">
+                <option value="" selected="">请选择学期</option>
+                <c:forEach items="${TermList}" var="TermList">
+                    <option value="${TermList.termName}">${TermList.termName}</option>
+                </c:forEach>
+            </select>
+        </div>
+    </div>
+
+    <button type="button" class="layui-btn" id="find"><i class="layui-icon">&#xe615</i></button>
+</div>
 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-<div id="main" style="width: 600px;height:400px;"></div>
+<div id="main" style="width: 700px;height:400px;padding:3rem 0 0 3rem"></div>
+
+<!-- 引入 ECharts 文件 -->
+<script src="/elective/js/echarts.js"></script>
+<script type="text/javascript" src="/elective/js/jquery_2.2.4.min.js"></script>
+<script src="/elective/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript">
-    // 基于准备好的dom，初始化echarts实例
-    var myChart = echarts.init(document.getElementById('main'));
-
-    // 指定图表的配置项和数据
-    var option = {
-        title: {
-            text: '选课人数统计图表'
-        },
-        tooltip: {},
-        legend: {
-            data:['人数']
-        },
-        xAxis: {
-            data: []
-        },
-        yAxis: {},
-        series: [{
-            name: '人数',
-            type: 'bar',
-            data: []
-        }]
-    };
-
-    // 异步加载数据
-    $.get('${pageContext.request.contextPath }/statistics/findElective').done(function (data) {
-        // 填入数据
-        myChart.setOption({
-            xAxis: {
-                data: data.cuName
+    layui.use(['form'], function () {
+        var form = layui.form;
+    })
+    $("#find").click(function () {
+        $.ajax({
+            url:"${pageContext.request.contextPath }/statistics/findElectiveEcharts",
+            type:"GET",
+            data:{
+                college: "1",
+                teacherName : $("#teacherName").val(),
+                termName : $("#termName").val()
             },
-            series: [{
-                // 根据名字对应到相应的系列
-                name: '人数',
-                data: data.countNum
-            }]
-        });
-    });
+            success : function(msg){
+                console.log(msg);
+                var cuName = [];
+                var countNum = [];
+                for (i = 0; i < msg.data.length; i++) {
+                    cuName.push(msg.data[i].cuName);
+                    countNum.push(msg.data[i].countNum);
+                }
+                    // 基于准备好的dom，初始化echarts实例
+                    var myChart = echarts.init(document.getElementById('main'));
+
+                    // 显示标题，图例和空的坐标轴
+                    myChart.setOption({
+                        title: {
+                            text: '选课总人数统计图'
+
+                        },
+                        tooltip: {},
+                        legend: {
+                            data: ['人数']
+                        },
+                        xAxis: {
+                            type: 'category',
+                            data: cuName,
+                        },
+                        yAxis: {
+                            type:'value'
+                        },
+                        series: [{
+                            name: '人数',
+                            type: 'bar',
+                            data: countNum,
+                            barMaxWidth : 30
+                        }]
+                    });
+            },
+            error : function(){
+                console.log("失败");
+            }
+        })
+
+    })
 </script>
 </body>
 </html>

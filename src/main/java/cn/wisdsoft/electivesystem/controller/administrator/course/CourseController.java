@@ -80,16 +80,16 @@ public class CourseController {
         return electiveSystemResult;
     }
 
-    /**
-     * 跳转增加分组页面
-     * @return
-     */
-    @RequestMapping("/JumpCourse")
-    public String JumpCourse(Model model){
-        ElectiveSystemResult electiveSystemResult = termResourceService.selectAllTerm();
-        model.addAttribute("term",electiveSystemResult);
-        return "/Course/insertCourse";
-    }
+//    /**
+//     * 跳转增加分组页面
+//     * @return
+//     */
+//    @RequestMapping("/JumpCourse")
+//    public String JumpCourse(Model model){
+//        ElectiveSystemResult electiveSystemResult = termResourceService.selectAllTerm();
+//        model.addAttribute("term",electiveSystemResult);
+//        return "/Course/insertCourse";
+//    }
 
     /**
      * 跳转更改分组页面

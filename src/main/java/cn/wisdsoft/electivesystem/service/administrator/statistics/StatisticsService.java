@@ -1,5 +1,6 @@
 package cn.wisdsoft.electivesystem.service.administrator.statistics;
 
+import cn.wisdsoft.electivesystem.pojo.Relationship;
 import cn.wisdsoft.electivesystem.pojo.Statistics;
 import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult;
 import cn.wisdsoft.electivesystem.pojo.utils.PageResult;
@@ -13,16 +14,36 @@ import cn.wisdsoft.electivesystem.pojo.utils.PageResult;
  * @date 2019/1/8 15:26
  */
 public interface StatisticsService {
+
 	/**
 	 * 查询所有学期
 	 * @return
 	 */
 	ElectiveSystemResult findTerm();
+
 	/**
-	 * 统计选课情况
+	 * 统计选课情况表格
 	 * @param college
 	 * @param termName
 	 * @return
 	 */
 	PageResult<Statistics> findElective(int page,int limit,String college,String termName);
+
+	/**
+	 * 统计选课人数图表
+	 * @param college
+	 * @param termName
+	 * @param teacherName
+	 * @return
+	 */
+	ElectiveSystemResult findEleciveEcharts(String college,String termName,String teacherName);
+
+	/**
+	 * 查询某门课选课的学生信息
+	 * @param page
+	 * @param limit
+	 * @param selectid
+	 * @return
+	 */
+	public PageResult<Relationship> findStu(int page,int limit,int selectid);
 }

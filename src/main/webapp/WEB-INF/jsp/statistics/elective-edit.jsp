@@ -6,46 +6,47 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>éè¯¾è¯¦æç»è®¡</title>
+  <title>选课详情统计</title>
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <link rel="stylesheet" href="../layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="/elective/layui/css/layui.css"  media="all">
 </head>
 <body>
 
 
 
 <table class="layui-hide" id="test"></table>
-              
-<script type="text/javascript" src="../js/jquery.min.js" ></script>
-<script src="../layui/layui.js" charset="utf-8"></script>
 
-<script type="text/html" id="toolbarDemo">
-  <div class="layui-btn-container">
-    <button class="layui-btn layui-btn-sm" lay-event="getCheckData">å­¦é¢åå¸é¥¼ç¶å¾</button>
-    
-  </div>
-</script>
+<%--<script type="text/javascript" src="/elective/js/jquery.min.js" ></script>--%>
+
+<script src="/elective/layui/layui.js" charset="utf-8"></script>
 
 <script>
-layui.use('table', function(){
-  var table = layui.table;
-  
-  table.render({
-    elem: '#test'
-    ,width: 600
-    ,url:'../json/list2.json'
-    ,toolbar: '#toolbarDemo'
-    ,cols: [[
-      {field:'college_name', width:200, title: 'å­¦é¢', align: 'center'}
-      ,{field:'stu_num', width:200, title: 'å­¦å·', align: 'center'}
-      ,{field:'stu_name', width:200, title: 'å§å', align: 'center'}
-    ]]
-    ,page: true
+  var selectId = ${selectid};
+  layui.use('table', function(){
+    var table = layui.table;
+
+    table.render({
+      elem: '#test',
+      where: {
+        selectid: selectId
+      },
+      url:'${pageContext.request.contextPath }/statistics/findstu',
+      toolbar: '#toolbarDemo',
+      cellMinWidth: 180,
+      cols: [[
+        {field:'stuId', title: '学号', align: 'center'}
+        ,{field:'stuName', title: '姓名', align: 'center'}
+      ]],
+      done: function (msg) {
+        console.log(msg);
+
+      },
+      page: true
+    });
+
   });
-  
-});
 </script>
 
 </body>

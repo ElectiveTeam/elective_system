@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wisdsoft.electivesystem.mapper.CurriculumPageMapper">
+  <resultMap id="BaseResultMap" type="cn.wisdsoft.electivesystem.pojo.CurriculumPage">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="cu_name" jdbcType="VARCHAR" property="cuName" />
+    <result column="teacher_id" jdbcType="VARCHAR" property="teacherId" />
+    <result column="class_hour" jdbcType="INTEGER" property="classHour" />
+    <result column="cou_id" jdbcType="INTEGER" property="couId" />
+    <result column="tr_id" jdbcType="INTEGER" property="trId" />
+    <result column="term_name" jdbcType="VARCHAR" property="termName" />
+  </resultMap>
+  <!-- 根据教师id,申请状态，学期名称查询 -->
+  <select id="selectCurriculumPage" resultMap="BaseResultMap">
+    SELECT curriculum.id,curriculum.cu_name,curriculum.teacher_id,curriculum.class_hour,curriculum.credit,curriculum.grade,curriculum.`status`,curriculum.cou_id,curriculum.`describe`,curriculum.remark,course.tr_id,term_resource.college,term_resource.term_name 
+    from curriculum,course,term_resource 
+    WHERE  course.id = curriculum.cou_id
+	<if test="teacherId!= null and teacherId!= ''">
+		AND teacher_id =#{teacherId}
+	</if>
+	<if test="status!= null and status!= ''">
+		AND curriculum.`status`=#{status}
+	</if>
+	<if test="termName!= null and termName!= ''">
+		AND term_resource.term_name=#{termName}
+	</if>
+  </select>
+  
+  
+</mapper>

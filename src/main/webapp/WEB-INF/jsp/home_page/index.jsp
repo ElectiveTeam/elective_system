@@ -50,21 +50,35 @@
                     <a href="javascript:;">管理员管理</a>
                     <dl class="layui-nav-child">
                         <%--data-uri中填写@Controller注解下面的@RequestMapping注解的value值 加上 方法对应的@RequestMapping注解的value值--%>
-                        <dd><a data-id="1" data-uri="" class="my-demo">学期模块</a></dd>
                         <dd><a data-id="2" data-uri="" class="my-demo">授权模块</a></dd>
-                        <dd><a data-id="3" data-uri="" class="my-demo">课程模块</a></dd>
-                        <dd><a data-id="4" data-uri="" class="my-demo">审核模块</a></dd>
-                        <dd><a data-id="5" data-uri="/statistics/list" class="my-demo">统计模块</a></dd>
-                        <dd><a data-id="6" data-uri="" class="my-demo">课程组模块</a></dd>
+                        <dd><a data-id="3" data-uri="application/toPage" class="my-demo">课程模块</a></dd>
+                        <dd>
+                            <a data-id="4" data-uri="" class="my-demo">统计汇总</a>
+                            <dl class="layui-nav-child">
+                                <%--data-uri中填写@Controller注解下面的@RequestMapping注解的value值 加上 方法对应的@RequestMapping注解的value值--%>
+                                <dd><a data-id="31" data-uri="/statistics/list" class="my-demo">选课情况统计表</a></dd>
+                                <dd><a data-id="32" data-uri="/statistics/Echarts" class="my-demo">选课人数统计图</a></dd>
+                                <dd><a data-id="33" data-uri="" class="my-demo">选课成绩统计表</a></dd>
+                                <dd><a data-id="34" data-uri="" class="my-demo">选课成绩统计图</a></dd>
+                            </dl>
+                        </dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item layui-nav-itemed">
                     <a href="javascript:;">课程管理</a>
                     <dl class="layui-nav-child">
                         <dd><a data-id="7" data-uri="" class="my-demo">课程列表</a></dd>
-                        <dd><a data-id="8" data-uri="" class="my-demo">申请课程</a></dd>
-                        <dd><a data-id="9" data-uri="" class="my-demo">取消课程</a></dd>
-                        <dd><a data-id="10" data-uri="" class="my-demo">驳回课程</a></dd>
+                        <dd><a data-id="8" data-uri="teacher/courseAdd" class="my-demo">申请课程</a></dd>
+                        <dd>
+                            <a data-id="9" data-uri="" class="my-demo">申请列表</a>
+                            <dl class="layui-nav-child">
+                                <%--data-uri中填写@Controller注解下面的@RequestMapping注解的value值 加上 方法对应的@RequestMapping注解的value值--%>
+                                <dd><a data-id="21" data-uri="" class="my-demo">未提交申请</a></dd>
+                                <dd><a data-id="22" data-uri="" class="my-demo">待审核申请</a></dd>
+                                <dd><a data-id="23" data-uri="" class="my-demo">已核准申请</a></dd>
+                                <dd><a data-id="24" data-uri="" class="my-demo">被驳回申请</a></dd>
+                            </dl>
+                        </dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item"><a data-id="11" data-uri="" class="my-demo">成绩管理</a></li>
@@ -78,7 +92,8 @@
             </ul>
             <div class="layui-tab-content">
                 <div class="layui-tab-item layui-show">
-                    <iframe frameborder="0" name="content" scrolling="yes" width="100%" height="560px" id="myFrame"></iframe>
+                    <iframe frameborder="0" name="content" scrolling="yes" width="100%" height="560px"
+                            id="myFrame"></iframe>
                 </div>
             </div>
         </div>

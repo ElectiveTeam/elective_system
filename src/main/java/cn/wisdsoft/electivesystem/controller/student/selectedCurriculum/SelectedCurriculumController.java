@@ -25,6 +25,9 @@ public class SelectedCurriculumController {
     private final SelectedCurriculumService selectedCurriculumService;
 
     /**
+     * Instantiates a new Selected curriculum controller.
+     *
+     * @param selectedCurriculumService the selected curriculum service
      * @Author 李泽宇
      * @Description 注入业务层
      * @Date 2019 /1/10 14:55
@@ -96,5 +99,19 @@ public class SelectedCurriculumController {
     @ResponseBody
     public ElectiveSystemResult chooseStatus(String category) {
         return selectedCurriculumService.selectStatus(category);
+    }
+
+    /**
+     * Chosen curriculum elective system result.
+     * 查询学生当前学期选择课程
+     *
+     * @param stuId   the stu id  学生ID
+     * @param college the college  学院名称
+     * @return the elective system result  包含选课信息的JSON数据
+     */
+    @RequestMapping(value = "/chosenCurriculum",method = RequestMethod.GET)
+    @ResponseBody
+    public ElectiveSystemResult chosenCurriculum(String stuId,String college) {
+        return selectedCurriculumService.selectCurriculumNow(stuId, college);
     }
 }

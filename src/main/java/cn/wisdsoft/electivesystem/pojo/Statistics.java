@@ -57,8 +57,13 @@ public class Statistics {
     /**
 	 * 已选人数
 	 */
-    
     private Integer countNum;
+
+	/**
+	 *选课id
+	 */
+	private Integer selectId;
+
 
 	public Integer getId() {
 		return id;
@@ -128,9 +133,7 @@ public class Statistics {
 		this.classTime = classTime;
 	}
 
-	public String getPlace() {
-		return place;
-	}
+	public String getPlace() { return place; }
 
 	public void setPlace(String place) {
 		this.place = place;
@@ -143,6 +146,12 @@ public class Statistics {
 	public void setCountNum(Integer countNum) {
 		this.countNum = countNum;
 	}
-    
-    
+
+	public Integer getSelectId() {
+		return selectId;
+	}
+
+	public void setSelectId(Integer selectId) {
+		this.selectId = selectId;
+	}
 }
