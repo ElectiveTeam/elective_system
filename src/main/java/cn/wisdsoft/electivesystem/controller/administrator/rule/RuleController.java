@@ -2,7 +2,7 @@ package cn.wisdsoft.electivesystem.controller.administrator.rule;
 
 import cn.wisdsoft.electivesystem.pojo.Curriculum;
 import cn.wisdsoft.electivesystem.pojo.Rule;
-import cn.wisdsoft.electivesystem.pojo.Teacher;
+import cn.wisdsoft.electivesystem.pojo.VO.Teacher;
 import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemConfig;
 import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult;
 import cn.wisdsoft.electivesystem.pojo.utils.PageResult;
@@ -35,14 +35,14 @@ public class RuleController {
     public String rule(){
         return "Achievement/rule";
     }
-    
     @RequestMapping(value = "/add")
     public String addrule(HttpSession session,Model model){
         Teacher teacher = (Teacher) session.getAttribute("key");
+
         if (teacher==null){
             return "home_page/login.jsp";
         }
-        List<Curriculum> curriculumList = teacherService.selectByTeacherId(teacher.getTeacherId());
+        List<Curriculum> curriculumList = teacherService.selectByTeacherId(teacher.getWorknumber());
         model.addAttribute(curriculumList);
         return "Achievement/addrule";
     }
@@ -54,7 +54,7 @@ public class RuleController {
         if(teacher==null){
             return PageResult.build(500,"请登录");
         }
-        return ruleService.getRuleByTeacherId(teacher.getTeacherId(),cuName);
+        return ruleService.getRuleByTeacherId(teacher.getWorknumber(),cuName);
     }
 
     @RequestMapping(value = "/getRuleById/{id}",method = RequestMethod.GET)

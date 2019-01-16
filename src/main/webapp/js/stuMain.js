@@ -23,14 +23,12 @@ $(document).ready(function(){
                 success: function(data) {
                     console.log(data);
                     if (data.status == 200){
-
                         location.href = "http://localhost:8080/elective/html/selectedCurriculum.html";
                     }else{
+                        $(".modal-body").text(data.msg);
                         $("#myModal").modal('show');
-
                         $("#closeMo").click(function(){
                             $("#myModal").modal({backdrop:'static',keyboard:false});
-
                         });
                     }
                 }

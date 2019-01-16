@@ -68,7 +68,7 @@ $(() => {
                                 curriculumId,
                                 courseId
                             } = item;
-                            if (`${remark}` === '招生中') {
+                            if (`${remark}` === 'green') {
                                 content += `<a class="list-group-item list-group-item-action flex-column align-items-start" id="myTrue">
                                         <input type="text" class="courseId" hidden value="${courseId}"/>
                                         <input type="text" class="curriculumId" hidden value="${curriculumId}">
@@ -84,7 +84,61 @@ $(() => {
                                         </p>
                                         <small class="text-muted"><span>学分：</span><span>${credit}</span></small>
                                         <small class="text-muted cutime"><span>学时：</span><span>${classHour}</span></small>
-                                        <small class="text-muted"><span class="tk1">${remark}</span></small>
+                                        <small class="text-muted"><span class="tk1">招生中</span></small>
+                                    </a>`;
+                            } else if (`${remark}` === 'yellow') {
+                                content += `<a class="list-group-item list-group-item-action flex-column align-items-start" id="myTrue">
+                                        <input type="text" class="courseId" hidden value="${courseId}"/>
+                                        <input type="text" class="curriculumId" hidden value="${curriculumId}">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">${curriculumName}</h5>
+                                            <small class="text-muted">${teacherName}</small>
+                                        </div>
+                                        <p class="mb-1 cuinfo">
+                                            <span>地点:</span>
+                                            <span>${place}</span>
+                                            <span class="cutime">时间:</span>
+                                            <span>${classTime}</span>
+                                        </p>
+                                        <small class="text-muted"><span>学分：</span><span>${credit}</span></small>
+                                        <small class="text-muted cutime"><span>学时：</span><span>${classHour}</span></small>
+                                        <small class="text-muted"><span class="tk2">招生中</span></small>
+                                    </a>`;
+                            } else if (`${remark}` === 'orange') {
+                                content += `<a class="list-group-item list-group-item-action flex-column align-items-start" id="myTrue">
+                                        <input type="text" class="courseId" hidden value="${courseId}"/>
+                                        <input type="text" class="curriculumId" hidden value="${curriculumId}">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">${curriculumName}</h5>
+                                            <small class="text-muted">${teacherName}</small>
+                                        </div>
+                                        <p class="mb-1 cuinfo">
+                                            <span>地点:</span>
+                                            <span>${place}</span>
+                                            <span class="cutime">时间:</span>
+                                            <span>${classTime}</span>
+                                        </p>
+                                        <small class="text-muted"><span>学分：</span><span>${credit}</span></small>
+                                        <small class="text-muted cutime"><span>学时：</span><span>${classHour}</span></small>
+                                        <small class="text-muted"><span class="tk3">招生中</span></small>
+                                    </a>`;
+                            } else if (`${remark}` === 'red') {
+                                content += `<a class="list-group-item list-group-item-action flex-column align-items-start" id="myTrue">
+                                        <input type="text" class="courseId" hidden value="${courseId}"/>
+                                        <input type="text" class="curriculumId" hidden value="${curriculumId}">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">${curriculumName}</h5>
+                                            <small class="text-muted">${teacherName}</small>
+                                        </div>
+                                        <p class="mb-1 cuinfo">
+                                            <span>地点:</span>
+                                            <span>${place}</span>
+                                            <span class="cutime">时间:</span>
+                                            <span>${classTime}</span>
+                                        </p>
+                                        <small class="text-muted"><span>学分：</span><span>${credit}</span></small>
+                                        <small class="text-muted cutime"><span>学时：</span><span>${classHour}</span></small>
+                                        <small class="text-muted"><span class="tk4">招生中</span></small>
                                     </a>`;
                             } else {
                                 content += `<a class="list-group-item list-group-item-action flex-column align-items-start" id="myFalse">
@@ -102,7 +156,7 @@ $(() => {
                                         </p>
                                         <small class="text-muted"><span>学分：</span><span>${credit}</span></small>
                                         <small class="text-muted cutime"><span>学时：</span><span>${classHour}</span></small>
-                                        <small class="text-muted"><span class="tk2">${remark}</span></small>
+                                        <small class="text-muted"><span class="tk5">已招满</span></small>
                                     </a>`;
                             }
                         });
@@ -190,33 +244,35 @@ $(() => {
             });
 
             $(".cugroup").on("click", ".tk", (_node) => {
-                let myChoose = sessionStorage.getItem("myChoose");
-                if (myChoose != null) {
-                    sessionStorage.removeItem("myChoose");
-                }
-                $.ajax({
-                    url: 'http://localhost:8080/student/personCenter/delRelationByStuIdAndSelectId',
-                    type: 'get',
-                    data: {
-                        stuId: stuId,
-                        selectId: $(_node.currentTarget).siblings("input[class='selectId']").val()
-                    },
-                    success: res => {
-                        // alert("删除成功!");
-                        if (res.status === 200) {
-                            // console.log(_node.currentTarget);
-                            // alert($(_node.currentTarget).siblings("input[class='courseId']").val());
-                            $(_node.currentTarget).parent().remove();
-                            $("#myModal").modal({backdrop: 'static', keyboard: false});
-                            $("#myModal").modal('show');
-                        } else {
-                            alert("删除失败");
+                $(".tips_body").text("是否确认退课（如果退课后又想选此课，满员概不负责）？");
+                $("#tips").modal({backdrop: 'static', keyboard: false});
+                $("#tips").modal('show');
+                $("#yes").click(() => {
+                    $("#tips").modal('hide');
+                    $.ajax({
+                        url: 'http://localhost:8080/student/personCenter/delRelationByStuIdAndSelectId',
+                        type: 'get',
+                        data: {
+                            stuId: stuId,
+                            selectId: $(_node.currentTarget).siblings("input[class='selectId']").val()
+                        },
+                        success: res => {
+                            // alert("删除成功!");
+                            if (res.status === 200) {
+                                // console.log(_node.currentTarget);
+                                // alert($(_node.currentTarget).siblings("input[class='courseId']").val());
+                                $(_node.currentTarget).parent().remove();
+                                $("#myModal").modal({backdrop: 'static', keyboard: false});
+                                $("#myModal").modal('show');
+                            } else {
+                                alert("删除失败");
+                            }
+                        },
+                        error: () => {
+                            alert("服务器错误4");
                         }
-                    },
-                    error: () => {
-                        alert("服务器错误4");
-                    }
-                })
+                    })
+                });
             });
 
 

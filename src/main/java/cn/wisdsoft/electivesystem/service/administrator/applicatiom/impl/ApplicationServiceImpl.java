@@ -4,7 +4,11 @@ import cn.wisdsoft.electivesystem.mapper.CourseMapper;
 import cn.wisdsoft.electivesystem.mapper.CurriculumMapper;
 import cn.wisdsoft.electivesystem.pojo.Curriculum;
 import cn.wisdsoft.electivesystem.pojo.CurriculumExample;
-import cn.wisdsoft.electivesystem.pojo.Teacher;
+import cn.wisdsoft.electivesystem.pojo.VO.Teacher;
+import cn.wisdsoft.electivesystem.mapper.TermResourceMapper;
+import cn.wisdsoft.electivesystem.pojo.*;
+import cn.wisdsoft.electivesystem.pojo.VO.Teacher;
+import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemConfig;
 import cn.wisdsoft.electivesystem.pojo.utils.PageResult;
 import cn.wisdsoft.electivesystem.service.administrator.applicatiom.ApplicationService;
 import com.github.pagehelper.PageHelper;
@@ -34,11 +38,14 @@ public class ApplicationServiceImpl implements ApplicationService {
 
     private final HttpServletRequest request;
 
+    private final TermResourceMapper termResourceMapper;
+
     @Autowired
-    public ApplicationServiceImpl(CurriculumMapper curriculumMapper, CourseMapper courseMapper, HttpServletRequest request) {
+    public ApplicationServiceImpl(CurriculumMapper curriculumMapper, CourseMapper courseMapper, HttpServletRequest request, TermResourceMapper termResourceMapper) {
         this.curriculumMapper = curriculumMapper;
         this.courseMapper = courseMapper;
         this.request = request;
+        this.termResourceMapper = termResourceMapper;
     }
 
     /**
@@ -54,9 +61,18 @@ public class ApplicationServiceImpl implements ApplicationService {
     @Override
     public PageResult<Curriculum> findAllByPage(int page, int limit, String key) {
         HttpSession session = request.getSession();
-        Teacher teacher = (Teacher) session.getAttribute(key);
+        Teacher teacher = (Teacher) session.getAttribute("key");
+        List<TermResource> termResources =
+                termResourceMapper.selectByCollege(ElectiveSystemConfig.map.get(teacher.getTeaPower()));
+        if (termResources == null || termResources.size() ==0) {
+            return PageResult.ok(null, 0);
+        }
+        CourseExample courseExample = new CourseExample();
+        CourseExample.Criteria courseExampleCriteria = courseExample.createCriteria();
+        courseExampleCriteria.andTrIdEqualTo(termResources.get(0).getId());
+        List<Course> courses = courseMapper.selectByExample(courseExample);
         List<Integer> couIds = new ArrayList<>();
-
+        courses.forEach(course -> couIds.add(course.getId()));
         PageHelper.startPage(page, limit);
         CurriculumExample curriculumExample = new CurriculumExample();
         CurriculumExample.Criteria curriculumExampleCriteria

@@ -32,7 +32,7 @@ public interface TermResourceService {
 	 * @param termResource 学期对象
 	 * @return
 	 */
-	ElectiveSystemResult deleteTermResource(TermResource termResource);
+	ElectiveSystemResult deleteTermResource(Integer termResource);
 	/**
 	 * 学院查询状态
 	 * @param termResource 学期对象

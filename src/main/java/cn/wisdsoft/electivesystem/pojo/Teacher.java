@@ -14,16 +14,7 @@ public class Teacher implements Serializable {
 
     private static final long serialVersionUID = -4536819850963576829L;
 
-    private String teacherId;
     public Teacher() {
 
-    }
-
-    public String getTeacherId() {
-        return teacherId;
-    }
-
-    public void setTeacherId(String teacherId) {
-        this.teacherId = teacherId;
     }
 }

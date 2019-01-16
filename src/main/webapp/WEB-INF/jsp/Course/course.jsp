@@ -19,9 +19,9 @@
     <script src="/elective/js/jquery_2.2.4.min.js" charset="UTF-8"></script>
 </head>
 <body>
-<div class="layui-collapse" lay-filter="test"></div>
+<div class="layui-collapse" id="CourseContent" lay-filter="test"></div>
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs" id="courseButton_edit" lay-event="edit">编辑</a>
     <%--<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>--%>
 </script>
 <script type="text/html" id="status">
@@ -36,4 +36,4 @@
 </body>
 </html>
 <script src="/elective/layui/layui.js" charset="utf-8"></script>
-<script src="/elective/js/course/course.js" charset="utf-8"></script>
+<script src="/elective/js/course/course_info.js" charset="utf-8"></script>

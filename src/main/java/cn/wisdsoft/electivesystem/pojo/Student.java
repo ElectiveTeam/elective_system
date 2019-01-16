@@ -12,17 +12,8 @@ import java.io.Serializable;
  */
 public class Student implements Serializable {
 
-    private String stuId;
     public Student() {
 
 
-    }
-
-    public String getStudentId() {
-        return stuId;
-    }
-
-    public void setStudentId(String studentId) {
-        this.stuId = studentId;
     }
 }

@@ -1,23 +1,24 @@
 package cn.wisdsoft.electivesystem.service.administrator.term.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-
 import cn.wisdsoft.electivesystem.mapper.CourseMapper;
 import cn.wisdsoft.electivesystem.mapper.TermResourceMapper;
-import cn.wisdsoft.electivesystem.pojo.CourseExample;
 import cn.wisdsoft.electivesystem.pojo.TermResource;
 import cn.wisdsoft.electivesystem.pojo.TermResourceExample;
 import cn.wisdsoft.electivesystem.pojo.TermResourceExample.Criteria;
+import cn.wisdsoft.electivesystem.pojo.VO.Teacher;
+import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemConfig;
 import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult;
 import cn.wisdsoft.electivesystem.pojo.utils.PageResult;
 import cn.wisdsoft.electivesystem.service.administrator.term.TermResourceService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>ClassName: TermResourceServiceImpl</p>
@@ -35,14 +36,20 @@ public class TermResourceServiceImpl implements TermResourceService {
 	
 	private final CourseMapper courseMapper;
 	
+	private final HttpServletRequest request;
+	
 	@Autowired
-    public TermResourceServiceImpl(TermResourceMapper termResourceMapper, CourseMapper courseMapper) {
+    public TermResourceServiceImpl(TermResourceMapper termResourceMapper, CourseMapper courseMapper, HttpServletRequest request) {
 		this.termResourceMapper = termResourceMapper;
 		this.courseMapper = courseMapper;
+		this.request = request;
     }
 
 	@Override
 	public ElectiveSystemResult insertTermResource(TermResource termResource) {
+		HttpSession session = request.getSession();
+		Teacher teacher = (Teacher) session.getAttribute("key");
+		termResource.setCollege(ElectiveSystemConfig.map.get(teacher.getTeaPower()));
 		termResourceMapper.insert(termResource);
 		return ElectiveSystemResult.ok();
 	}
@@ -50,7 +57,9 @@ public class TermResourceServiceImpl implements TermResourceService {
 	@Override
 	public ElectiveSystemResult updateTermResource(TermResource termResource) {
 		if(termResource.getStatus() == 1) {
-			courseMapper.deleteCourseNotUse("软件学院");
+			HttpSession session = request.getSession();
+			Teacher teacher = (Teacher) session.getAttribute("key");
+			courseMapper.deleteCourseNotUse(ElectiveSystemConfig.map.get(teacher.getTeaPower()));
 //			CourseExample example = new CourseExample();
 //			cn.wisdsoft.electivesystem.pojo.CourseExample.Criteria criteria = example.createCriteria();
 //			criteria.andIdIn(list);
@@ -61,9 +70,9 @@ public class TermResourceServiceImpl implements TermResourceService {
 	}
 
 	@Override
-	public ElectiveSystemResult deleteTermResource(TermResource termResource) {
-		Integer id = 1;
-		termResourceMapper.deleteByPrimaryKey(id);
+	public ElectiveSystemResult deleteTermResource(Integer termResource) {
+	
+		termResourceMapper.deleteByPrimaryKey(termResource);
 		return ElectiveSystemResult.ok();
 	}
 
@@ -82,12 +91,15 @@ public class TermResourceServiceImpl implements TermResourceService {
 
 	@Override
 	public PageResult<TermResource> findAll() {
-		// TODO 自动生成的方法存根
-		PageHelper.startPage(1, 1000);
-		TermResourceExample example = new TermResourceExample();
-		example.setOrderByClause("id desc");
-		Criteria criteria = example.createCriteria();
-		List<TermResource> termResources = termResourceMapper.selectByExample(example);
+		HttpSession session = request.getSession();
+		Teacher teacher = (Teacher) session.getAttribute("key");
+		PageHelper.startPage(1, 1000,"id desc");
+//		TermResourceExample example = new TermResourceExample();
+//		example.setOrderByClause("id desc");
+//		Criteria criteria = example.createCriteria();
+//		criteria.andCollegeEqualTo("软件学院");
+//		List<TermResource> termResources = termResourceMapper.selectByExample(example);
+		List<TermResource> termResources = termResourceMapper.selectByCollege(ElectiveSystemConfig.map.get(teacher.getTeaPower()));
 		PageInfo<TermResource> pageinfo = new PageInfo<>(termResources);
 		return PageResult.ok(termResources, pageinfo.getTotal());
 	}

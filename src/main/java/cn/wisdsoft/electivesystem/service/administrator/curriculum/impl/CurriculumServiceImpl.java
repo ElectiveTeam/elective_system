@@ -1,20 +1,21 @@
 package cn.wisdsoft.electivesystem.service.administrator.curriculum.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-
 import cn.wisdsoft.electivesystem.mapper.CurriculumMapper;
 import cn.wisdsoft.electivesystem.pojo.Curriculum;
 import cn.wisdsoft.electivesystem.pojo.CurriculumExample;
-import cn.wisdsoft.electivesystem.pojo.CurriculumExample.Criteria;
+import cn.wisdsoft.electivesystem.pojo.VO.Teacher;
+import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemConfig;
 import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult;
 import cn.wisdsoft.electivesystem.pojo.utils.PageResult;
 import cn.wisdsoft.electivesystem.service.administrator.curriculum.CurriculumService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * <p>ClassName: CurriculumServiceImpl</p>
@@ -29,9 +30,12 @@ public class CurriculumServiceImpl implements CurriculumService {
 
 	private final CurriculumMapper curriculumMapper;
 
+	private final HttpServletRequest request;
+
 	@Autowired
-    public CurriculumServiceImpl(CurriculumMapper curriculumMapper) {
+    public CurriculumServiceImpl(CurriculumMapper curriculumMapper, HttpServletRequest request) {
            this.curriculumMapper = curriculumMapper;
+           this.request = request;
     }
 
 
@@ -81,12 +85,11 @@ public class CurriculumServiceImpl implements CurriculumService {
 
 	@Override
 	public PageResult<Curriculum> selectCurriculum(int pageNum, int pageSize) {
+		HttpSession session = request.getSession();
+		Teacher teacher = (Teacher) session.getAttribute("key");
 		PageHelper.startPage(pageNum, pageSize);
-		CurriculumExample example = new CurriculumExample();
-		example.setOrderByClause("status");
-		Criteria criteria = example.createCriteria();
-		criteria.andStatusNotEqualTo(0);
-		List<Curriculum> curriList = curriculumMapper.selectByExample(example);
+		List<Curriculum> curriList = curriculumMapper
+				.findCurriculumByCollegeNameAndStatus(ElectiveSystemConfig.map.get(teacher.getTeaPower()));
 		PageInfo<Curriculum> info = new PageInfo<>(curriList);
 		return PageResult.ok(curriList, info.getTotal());
 	}

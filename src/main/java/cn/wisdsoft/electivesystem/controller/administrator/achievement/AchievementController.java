@@ -1,6 +1,7 @@
 package cn.wisdsoft.electivesystem.controller.administrator.achievement;
 
 import cn.wisdsoft.electivesystem.pojo.*;
+import cn.wisdsoft.electivesystem.pojo.VO.Teacher;
 import cn.wisdsoft.electivesystem.pojo.utils.*;
 import cn.wisdsoft.electivesystem.service.administrator.achievement.AchievementService;
 import cn.wisdsoft.electivesystem.service.administrator.rule.RuleService;
@@ -169,7 +170,7 @@ public class AchievementController {
         if (teacher==null){
             return PageResult.build(500,"请登录");
         }
-        List<Curriculum> curriculumList = teacherService.selectByTeacherId(teacher.getTeacherId());
+        List<Curriculum> curriculumList = teacherService.selectByTeacherId(teacher.getWorknumber());
         for (int i = 0; i <curriculumList.size() ; i++) {
             System.out.println(curriculumList.get(i));
         }
