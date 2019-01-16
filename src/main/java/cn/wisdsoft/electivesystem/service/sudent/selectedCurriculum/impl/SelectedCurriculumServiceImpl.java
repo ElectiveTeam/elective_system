@@ -52,7 +52,18 @@ public class SelectedCurriculumServiceImpl implements SelectedCurriculumService 
             int selectionId = relationshipMapper.selectSelectionId(curriculumId);
             criteria.andSelectIdEqualTo(selectionId);
             long counts = relationshipMapper.countByExample(example);
-            curriculumDo.setRemark(counts < curriculumDo.getMaxNumber() ? "招生中" : "已招满");
+            long maxNumber = curriculumDo.getMaxNumber();
+            if(counts <= maxNumber * 0.25) {
+                curriculumDo.setRemark("green");
+            } else if(counts <= maxNumber * 0.5) {
+                curriculumDo.setRemark("yellow");
+            } else if (counts <= maxNumber * 0.8) {
+                curriculumDo.setRemark("orange");
+            } else if (counts < maxNumber) {
+                curriculumDo.setRemark("red");
+            } else {
+                curriculumDo.setRemark("grey");
+            }
         }));
         return ElectiveSystemResult.ok(curriculumDos);
     }
