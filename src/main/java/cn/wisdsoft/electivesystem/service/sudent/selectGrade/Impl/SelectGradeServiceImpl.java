@@ -23,4 +23,9 @@ public class SelectGradeServiceImpl implements SelectGradeService {
         }
         return ElectiveSystemResult.build(400,"查询失败");
     }
+
+    @Override
+    public Achievement selByStuIdAndSelId(String stuId, int selectId) {
+        return achievementMapper.selByStuIdAndSelId(stuId,selectId);
+    }
 }

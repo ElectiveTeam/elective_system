@@ -14,7 +14,7 @@
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="term_name" jdbcType="VARCHAR" property="termName" />
     <result column="cu_name" jdbcType="VARCHAR" property="cuName" />
-    <result column="teacher_id" jdbcType="VARCHAR" property="teacherId" />
+    <result column="teacher_name" jdbcType="VARCHAR" property="teacherName" />
     <result column="credit" jdbcType="DECIMAL" property="credit" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
@@ -317,7 +317,7 @@
     WHERE select_id = #{selectId}
   </select>
   <select id="selectGrade" parameterType="String" resultMap="BaseResultMap">
-    SELECT tr.term_name,cm.teacher_id ,cm.cu_name,cm.credit,a.achieve
+    SELECT a.select_id,a.stu_id,tr.term_name,cm.teacher_name ,cm.cu_name,a.usual,a.midterm,a.skill,a.finalexam,cm.credit,a.achieve
     FROM achievement a,curriculum cm,selection s,course c,term_resource tr
     WHERE a.select_id=s.id AND s.cu_id=cm.id AND cm.cou_id=c.id AND c.tr_id=tr.id AND a.stu_id=#{stuId} AND a.`status`=1
   </select>
@@ -336,4 +336,12 @@
       '${achievement.finalexam}', '${achievement.achieve}',0)
     </foreach>
   </insert>
+  <select id="selByStuIdAndSelId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from achievement where stu_id = #{stuId} and select_id = #{selectId}
+  </select>
+  <select id="getStudentBySelId" parameterType="Integer" resultMap="BaseResultMap">
+    SELECT * FROM relationship WHERE select_id = #{selectId}
+  </select>
 </mapper>

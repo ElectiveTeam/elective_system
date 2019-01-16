@@ -51,4 +51,8 @@ public interface CurriculumMapper {
      * @return  返回最大人数
      */
     int selectMaxNumber(int curriculumId);
+
+    CurriculumDo selectDetails(int curriculumId);
+
+    List<Curriculum> selByTeacherId(String teacherId);
 }

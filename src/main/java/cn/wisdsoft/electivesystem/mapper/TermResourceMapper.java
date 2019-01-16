@@ -2,8 +2,9 @@ package cn.wisdsoft.electivesystem.mapper;
 
 import cn.wisdsoft.electivesystem.pojo.TermResource;
 import cn.wisdsoft.electivesystem.pojo.TermResourceExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface TermResourceMapper {
     long countByExample(TermResourceExample example);
@@ -29,4 +30,10 @@ public interface TermResourceMapper {
     int updateByPrimaryKey(TermResource record);
 
     List<TermResource> selectAllCource();
+//    TermResource seleTermById(Integer id);
+
+    /*查询学期资源表中当前时间处于申请状态的学院*/
+    List<TermResource> selectBytimetype();
+
+    int selStatusBySelId(int selectId);
 }

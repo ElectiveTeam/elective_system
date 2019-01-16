@@ -65,12 +65,8 @@ public class Achievement implements Serializable {
     /**
      * 教师
      */
-    private  String teacher;
+    private  String teacherName;
 
-    /**
-     * 教师Id
-     */
-    private  String teacherId;
     /**
      * 学分
      */
@@ -126,12 +122,12 @@ public class Achievement implements Serializable {
         this.remark = remark == null ? null : remark.trim();
     }
 
-    public String getTeacher() {
-        return teacher;
+    public String getTeacherName() {
+        return teacherName;
     }
 
-    public void setTeacher(String teacher) {
-        this.teacher = teacher;
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
     }
 
     public double getCredit() {
@@ -156,14 +152,6 @@ public class Achievement implements Serializable {
 
     public void setTermName(String termName) {
         this.termName = termName;
-    }
-
-    public String getTeacherId() {
-        return teacherId;
-    }
-
-    public void setTeacherId(String teacherId) {
-        this.teacherId = teacherId;
     }
 
     public String getStuName() {
@@ -221,8 +209,7 @@ public class Achievement implements Serializable {
                 ", status=" + status +
                 ", cuName='" + cuName + '\'' +
                 ", termName='" + termName + '\'' +
-                ", teacher='" + teacher + '\'' +
-                ", teacherId='" + teacherId + '\'' +
+                ", teacher='" + teacherName + '\'' +
                 ", credit=" + credit +
                 ", remark='" + remark + '\'' +
                 '}';

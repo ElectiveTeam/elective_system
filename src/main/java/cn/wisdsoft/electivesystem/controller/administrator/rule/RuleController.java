@@ -1,11 +1,13 @@
 package cn.wisdsoft.electivesystem.controller.administrator.rule;
 
+import cn.wisdsoft.electivesystem.pojo.Curriculum;
 import cn.wisdsoft.electivesystem.pojo.Rule;
 import cn.wisdsoft.electivesystem.pojo.Teacher;
 import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemConfig;
 import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult;
 import cn.wisdsoft.electivesystem.pojo.utils.PageResult;
 import cn.wisdsoft.electivesystem.service.administrator.rule.RuleService;
+import cn.wisdsoft.electivesystem.service.teacher.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = ElectiveSystemConfig.RULE_MAPPING)
@@ -25,6 +28,8 @@ public class RuleController {
     public RuleController(RuleService ruleService) {
         this.ruleService = ruleService;
     }
+    @Autowired
+    private TeacherService teacherService;
 
     @RequestMapping(value = "/")
     public String rule(){
@@ -32,28 +37,28 @@ public class RuleController {
     }
     
     @RequestMapping(value = "/add")
-    public String addrule(){
+    public String addrule(HttpSession session,Model model){
+        Teacher teacher = (Teacher) session.getAttribute("key");
+        if (teacher==null){
+            return "home_page/login.jsp";
+        }
+        List<Curriculum> curriculumList = teacherService.selectByTeacherId(teacher.getTeacherId());
+        model.addAttribute(curriculumList);
         return "Achievement/addrule";
     }
 
-//    @RequestMapping(value = "/getRule",method = RequestMethod.GET)
-//    @ResponseBody
-//    public PageResult getRuleByTeacherId(HttpSession session,String key,String cuName){
-//        Teacher teacher = (Teacher) session.getAttribute(key);
-//        if(teacher==null){
-//            return PageResult.build(500,"请登录");
-//        }
-//        return ruleService.getRuleByTeacherId(teacher.getTeacherId(),cuName);
-//    }
     @RequestMapping(value = "/getRule",method = RequestMethod.GET)
     @ResponseBody
-    public PageResult getRuleByTeacherId(String teacherId,String cuName){
-        return ruleService.getRuleByTeacherId(teacherId,cuName);
+    public PageResult getRuleByTeacherId(HttpSession session,String cuName){
+        Teacher teacher = (Teacher) session.getAttribute("key");
+        if(teacher==null){
+            return PageResult.build(500,"请登录");
+        }
+        return ruleService.getRuleByTeacherId(teacher.getTeacherId(),cuName);
     }
 
     @RequestMapping(value = "/getRuleById/{id}",method = RequestMethod.GET)
     public String getRuleById(@PathVariable int id,Model model){
-//        return ruleService.getRuleByIById(id);
         Rule rule = ruleService.getRuleById(id);
         model.addAttribute(rule);
         System.out.println(rule);

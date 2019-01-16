@@ -17,6 +17,8 @@ public interface CourseMapper {
     int insertSelective(Course record);
 
     List<Course> selectByExample(CourseExample example);
+    //根据课程名称模糊查询课组
+    List<Course> selectByName(@Param("course_name") String course_name, @Param("tr_id")String term_id);
 
     Course selectByPrimaryKey(Integer id);
 
@@ -35,4 +37,6 @@ public interface CourseMapper {
     List<Course> SelectCource();
 
     int deleteCourseNotUse(@Param("college") String college);
+
+    List<Integer> findCourseCount();
 }

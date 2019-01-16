@@ -85,6 +85,13 @@
       order by ${orderByClause}
     </if>
   </select>
+  
+  <!-- 查询学期资源表中当前时间处于申请状态的学院 -->
+  <select id="selectBytimetype" parameterType="cn.wisdsoft.electivesystem.pojo.TermResourceExample" resultMap="BaseResultMap">
+    select * from term_resource where status=0 and (select now() between open_time and close_time) 
+  </select>
+  
+  
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -243,5 +250,10 @@
   <select id="selectAllCource" resultMap="BaseResultMap">
     select <include refid="Base_Column_List"/>
     from term_resource
+  </select>
+  <select id="selStatusBySelId" parameterType="Integer" resultType="Integer">
+    SELECT tr.`status`
+    FROM term_resource tr,course c,curriculum cc,selection s
+    WHERE s.cu_id = cc.id AND cc.cou_id = c.id AND c.tr_id = tr.id AND s.id = #{selectId}
   </select>
 </mapper>

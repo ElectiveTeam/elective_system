@@ -90,4 +90,11 @@ public interface RelationshipMapper {
      * @return  返回选课条数
      */
     int selectSchool(String stuId);
+
+    /**
+     * 查询学生选择的课程组
+     * @param stuId  学生ID
+     * @return  包含课程组ID的列表
+     */
+    List<Integer> checkCurriculum(String stuId);
 }

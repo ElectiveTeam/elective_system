@@ -27,8 +27,8 @@ public interface RuleMapper {
     int updateByPrimaryKeySelective(Rule record);
 
     int updateByPrimaryKey(Rule rule);
-
+    //通过选课Id查询规则
     Rule selectBySelectId(Integer selectId);
-
+    //条件查询规则
     List<Rule> selByTeacherId(@Param("teacherId") String teacherId,@Param("cuName") String cuName);
 }

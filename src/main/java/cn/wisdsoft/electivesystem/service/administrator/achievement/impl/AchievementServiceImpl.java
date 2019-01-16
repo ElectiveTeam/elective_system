@@ -50,7 +50,9 @@ public class AchievementServiceImpl implements AchievementService {
         if (size>0){
             return PageResult.ok(achievements,size);
         }
-        return null;
+        List<Achievement> achievementList = achievementMapper.getStudentBySelId(selectId);
+        int length = achievementList.size();
+        return PageResult.ok(achievementList,length);
     }
 
     @Override

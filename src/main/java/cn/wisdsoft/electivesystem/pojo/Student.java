@@ -15,6 +15,7 @@ public class Student implements Serializable {
     private String stuId;
     public Student() {
 
+
     }
 
     public String getStudentId() {

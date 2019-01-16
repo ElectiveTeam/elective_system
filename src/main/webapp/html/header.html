@@ -11,19 +11,36 @@
 				<div class="xb"><img src="/elective/student/images/hbxb.png"></div>
 				<h2>选课系统</h2>
 				<div class="spans">
-					<span id="college">软件学院</span>
-					<span id="stu_name">李泽宇</span>
+					<span id="college"></span>
+					<span id="stu_name"></span>
 					<span id="welcome">同学，欢迎登录</span>
-					<span id="logout"><a href="#">退出登陆</a></span>
-					<span id="changePass"><a href="#">修改密码</a></span>
-					<span id="back"><a onclick="homePage()" href="javascript:void(0);">返回主页</a></span>
+					<span id="logout"><a href="javascript:void(0);">退出登陆</a></span>
+					<span id="changePass"><a href="javascript:void(0);">修改密码</a></span>
+					<span id="back"><a href="javascript:void(0);">返回主页</a></span>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- 模态框 -->
+		<div class="modal fade" id="myModal1" data-toggle="modal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<!-- 模态框头部 -->
+					<div class="modal-header">
+						<h4 class="modal-title">温馨提示</h4>
+					</div>
+					<!-- 模态框主体 -->
+					<div class="modal-body">
+						用户未登录，请先登录！
+					</div>
+					<!-- 模态框底部 -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeMo1">关闭</button>
+					</div>
 				</div>
 			</div>
 		</div>
 	</body>
-	<script>
-		function homePage(e) {
-			window.location.href = "/elective/html/stuMain.html";
-		}
-	</script>
+	<script src="/elective/student/js/header.js"></script>
 </html>

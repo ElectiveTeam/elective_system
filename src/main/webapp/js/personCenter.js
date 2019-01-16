@@ -1,14 +1,33 @@
 $(()=>{
+    var jsonData = JSON.parse(sessionStorage.getItem('student'));
+    if(jsonData == null) {
+        jsonData = [];
+        $("#myModal1").modal('hide');
+        $("#myModal1").modal({backdrop: 'static', keyboard: false});
+        $("#myModal1").modal('show');
+        $("#closeMo1").click(function () {
+            window.location.href = "../html/studentLogin.html";
+        });
+    }
     let content = ``;
     let flag = 0;
     $.ajax({
         url : 'http://localhost:8080/student/personCenter/selectUserCurriculum',
         type : 'get',
         data : {
-            stuId : '16080902031'
+            stuId : jsonData.id
         },
         success : res => {
             console.log(res);
+            if(res.data.length === 0) {
+                content += `<a class="list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="history">
+                                <h3>暂无选课历史</h3>
+                                </div>
+                            </a>`;
+                $(".list-group").append(content);
+                content = ``;
+            }
             res.data.forEach((item) => {
                 console.log(item);
                 let {
@@ -47,6 +66,7 @@ $(()=>{
                 });
                 $(`#${flag}`).append(content);
                 content = ``;
+                flag++;
             })
         },
         error : () =>{

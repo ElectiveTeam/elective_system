@@ -114,4 +114,24 @@ public class SelectedCurriculumController {
     public ElectiveSystemResult chosenCurriculum(String stuId,String college) {
         return selectedCurriculumService.selectCurriculumNow(stuId, college);
     }
+
+	/**
+     * Check curriculum elective system result.
+     * 检查课程（查询学生选所有课程的ID）
+     *
+     * @param stuId the stu id  学生ID
+     * @return the elective system result  返回包含课程组ID的JSON数据
+     */
+    @RequestMapping(value = "/checkCurriculum",method = RequestMethod.POST)
+    @ResponseBody
+    public ElectiveSystemResult checkCurriculum(String stuId) {
+        return selectedCurriculumService.checkCurriculum(stuId);
+    }
+	
+	
+    @RequestMapping(value = "/selectTermName",method = RequestMethod.GET)
+    @ResponseBody
+    public ElectiveSystemResult selectTermName(String college) {
+        return selectedCurriculumService.selectTermName(college);
+    }
 }

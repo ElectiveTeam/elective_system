@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="/elective/student/css/gradeDetails.css"/>
+    <link rel="stylesheet" type="text/css" href="/elective/student/css/bootstrap.min.css"/>
+    <title>课程详情</title>
+</head>
+<body>
+<div id="bg">
+    <img src="/elective/student/images/banner.jpg">
+</div>
+<header id="hd"></header>
+<div class="list-group" style="background-color:white">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>成绩构成</th>
+            <th>比例</th>
+            <th>成绩</th>
+        </tr>
+        </thead>
+        <tbody id="body">
+        </tbody>
+    </table>
+</div>
+
+<footer id="ft"></footer>
+</body>
+</html>
+<!--<script src="../elective/student/js/jquery_2.2.4.min.js"></script>-->
+<script src="/elective/student/js/jquery_2.2.4.min.js"></script>
+<script src="/elective/student/js/gradeDetails.js"></script>
+<script src="/elective/student/js/popper.min.js"></script>
+<script src="/elective/student/js/twitter-bootstrap.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#hd").load('/elective/html/header.html');
+        $("#ft").load('/elective/html/footer.html');
+    });
+</script>

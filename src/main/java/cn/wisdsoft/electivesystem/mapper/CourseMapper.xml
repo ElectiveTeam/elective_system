@@ -82,6 +82,20 @@
       order by ${orderByClause}
     </if>
   </select>
+  
+  
+  <!-- 根据课程名称模糊查询课组 -->
+  <select id="selectByName" parameterType="String" resultMap="BaseResultMap">
+    select * from course where true
+	<if test="course_name!= null and course_name!= ''">
+		AND course_name LIKE concat('%',#{course_name},'%')
+	</if>
+	<if test="tr_id!= null and tr_id!= ''">
+		AND tr_id=#{tr_id}
+	</if>
+  </select>
+  
+  
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -98,13 +112,13 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.wisdsoft.electivesystem.pojo.Course">
+  <insert id="insert" parameterType="cn.wisdsoft.electivesystem.pojo.Course" keyProperty="id" useGeneratedKeys="true">
     insert into course (id, course_name, tr_id, 
       remark)
     values (#{id,jdbcType=INTEGER}, #{courseName,jdbcType=VARCHAR}, #{trId,jdbcType=INTEGER}, 
       #{remark,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="cn.wisdsoft.electivesystem.pojo.Course">
+  <insert id="insertSelective" parameterType="cn.wisdsoft.electivesystem.pojo.Course"  keyProperty="id" useGeneratedKeys="true">
     insert into course
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -203,4 +217,7 @@
       FROM course LEFT JOIN curriculum ON curriculum.cou_id = course.id WHERE curriculum.cou_id IS NULL) as course_Curri)
       and tr_id =(SELECT  id from term_resource WHERE college=#{college})
   </delete>
+  <select id="findCourseCount" resultType="Integer">
+  	SELECT cou_id FROM curriculum GROUP BY cou_id HAVING COUNT(*)&lt;=1;
+  </select>
 </mapper>

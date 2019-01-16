@@ -37,9 +37,9 @@
             ,upload = layui.upload;
         table.render({
             elem: '#test' //指定原始表格元素选择器（推荐id选择器）
-            , url: '${pageContext.request.contextPath}/achievement/getAll'
+            , url: 'http://localhost:8080/achievement/getAll'
             ,where:{
-                selectId:1
+                selectId:${id}
             }
             , id: 'achieveReload'
             , even: true    //隔行换色
@@ -64,11 +64,17 @@
                     fixed: 'right', title:'操作', toolbar: '#barDemo',align: 'center'
                 }]],
             done:function (res) {
-                if(res.data[1].status == 1){
+                if (res.data == null){
+                    $("#save").hide();
+                    $("#importExcel").hide();
+                    $("#theBatchExport").hide()
+                }else if(res.data[1].status == 1){
                     $("#save").hide();
                     $("#importExcel").hide()
                 }else if (res.data[1].status == 0) {
                     $("#importExcel").hide()
+                }else if (res.data[1].status == null){
+                    $("#save").hide();
                 }
             }
 
@@ -98,15 +104,7 @@
             },
             done: function (msg) {
                 var table = layui.table;
-                //执行重载
-                table.reload('achieveReload', {
-                    url: '${pageContext.request.contextPath}/achievement/test1'
-                })
-                if (msg.status == 200){
-                    layer.msg('导入成功', {icon: 6});
-                }else{
-                    layer.msg('导入失败', {icon: 5});
-                }
+                window.location.reload();
             }
         })
     })

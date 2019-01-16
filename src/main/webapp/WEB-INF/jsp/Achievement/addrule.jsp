@@ -17,55 +17,56 @@
         <div class="layui-inline">
             <label class="layui-form-label">课程</label>
             <div class="layui-input-inline">
-                <select name="quiz" id="curriculum">
+                <select id="curriculum" lay-verify="required" lay-search="">
                     <option value="">请选择课程</option>
-                    <c:forEach items="${curriculumList}" var="courseList">
+                    <c:forEach items="${curriculumList}" var="curriculumList">
                         <c:choose>
                             <c:when test="${curriculumList.cuName==cuName}">
-                                <option value="${curriculumList.selectId}" selected>${curriculumList.cuName}</option>
+                                <option value="${curriculumList.id}" selected>${curriculumList.cuName}</option>
                             </c:when>
                             <c:otherwise>
-                                <option value="${curriculumList.selectId}">${curriculumList.cuName}</option>
+                                <option value="${curriculumList.id}">${curriculumList.cuName}</option>
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
                 </select>
             </div>
         </div>
-        <label class="layui-form-label">
-            <span class="x-red">*</span>课程名称
-        </label>
-        <div class="layui-input-inline">
-            <select name="cuName" lay-filter="cuName">
-            </select>
+        <div class="layui-inline">
+            <label for="usual" class="layui-form-label">
+                <span class="x-red">*</span>平时成绩
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="usual" name="usual"
+                       autocomplete="off" class="layui-input" value=""/>
+            </div>
         </div>
-        <label for="usual" class="layui-form-label">
-            <span class="x-red">*</span>平时成绩
-        </label>
-        <div class="layui-input-inline">
-            <input type="text" id="usual" disabled name="usual"
-                   autocomplete="off" class="layui-input" value=""/>
+        <div class="layui-inline">
+            <label for="midTerm" class="layui-form-label">
+                <span class="x-red">*</span>期中成绩
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="midTerm" name="midTerm"
+                       autocomplete="off" class="layui-input" value=""/>
+            </div>
         </div>
-        <label for="midTerm" class="layui-form-label">
-            <span class="x-red">*</span>期中成绩
-        </label>
-        <div class="layui-input-inline">
-            <input type="text" id="midTerm" disabled name="midTerm"
-                   autocomplete="off" class="layui-input" value=""/>
+        <div class="layui-inline">
+            <label for="skill" class="layui-form-label">
+                <span class="x-red">*</span>技能考核
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="skill" name="skill"
+                       autocomplete="off" class="layui-input" value=""/>
+            </div>
         </div>
-        <label for="skill" class="layui-form-label">
-            <span class="x-red">*</span>技能考核
-        </label>
-        <div class="layui-input-inline">
-            <input type="text" id="skill" disabled name="skill"
-                   autocomplete="off" class="layui-input" value=""/>
-        </div>
-        <label for="finalexam" class="layui-form-label">
-            <span class="x-red">*</span>期末成绩
-        </label>
-        <div class="layui-input-inline">
-            <input type="text" id="finalexam" disabled name="finalexam"
-                   autocomplete="off" class="layui-input" value=""/>
+        <div class="layui-inline">
+            <label for="finalexam" class="layui-form-label">
+                <span class="x-red">*</span>期末成绩
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="finalexam" name="finalexam"
+                       autocomplete="off" class="layui-input" value=""/>
+            </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">

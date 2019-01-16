@@ -7,8 +7,8 @@ layui.use('form', function () {
             url: 'http://localhost:8080/rule/addRule',
             type: "post",
             data: {
-                selectId:$("#cuName").val(),
-                cuName:$("#cuName option:selected").text(),
+                selectId:$("#curriculum").val(),
+                cuName:$("#curriculum option:selected").text(),
                 usual:$("#usual").val(),
                 midTerm:$("#midTerm").val(),
                 skill:$("#skill").val(),

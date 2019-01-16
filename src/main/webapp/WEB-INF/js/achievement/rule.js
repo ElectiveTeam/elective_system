@@ -7,9 +7,6 @@ layui.use(['table','upload'] ,function () {
         , url: 'http://localhost:8080/rule/getRule'
         , id: 'ruleReload'
         , even: true    //隔行换色
-        ,where:{
-            teacherId:'2016ZR0002'
-        }
         , cols: [[
             {
                 field:'id', title:'编号', sort: true,align: 'center'
@@ -60,6 +57,14 @@ layui.use(['table','upload'] ,function () {
     $("#search").click(function () {
         reload();
     });
+    $("#add").click(function () {
+        layer.open({
+            type: 2,
+            content: 'http://localhost:8080/rule/add',
+            area: ['550px', '500px'],
+            offset: ['25px', '250px']
+        });
+    })
 });
 function reload() {
     var table = layui.table;
@@ -68,7 +73,6 @@ function reload() {
     table.reload('ruleReload', {
         url: 'http://localhost:8080/rule/getRule'
         ,where:{
-            teacherId:'2016ZR0002',
             cuName:cuName
         }
     });

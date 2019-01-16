@@ -12,6 +12,7 @@ public class ElectiveSystemConfig {
 
     public final static String PERSON_CENTER_MAPPING = "/student/personCenter";
     public final static String SELECTED_CURRICULUM_MAPPING = "/student/selectedCurriculum";
+    public final static String SELECTED_GRADE_MAPPING = "/student/selectedGrade";
     public final static String STUDENT_LOGIN_MAPPING = "/student/studentLogin";
     public final static String TEACHER_MAPPING = "/teacher";
     public final static String APPLICATION_MAPPING = "/application";

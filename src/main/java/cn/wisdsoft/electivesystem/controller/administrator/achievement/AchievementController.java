@@ -1,11 +1,11 @@
 package cn.wisdsoft.electivesystem.controller.administrator.achievement;
 
-import cn.wisdsoft.electivesystem.pojo.Achievement;
-import cn.wisdsoft.electivesystem.pojo.Rule;
-import cn.wisdsoft.electivesystem.pojo.Teacher;
+import cn.wisdsoft.electivesystem.pojo.*;
 import cn.wisdsoft.electivesystem.pojo.utils.*;
 import cn.wisdsoft.electivesystem.service.administrator.achievement.AchievementService;
 import cn.wisdsoft.electivesystem.service.administrator.rule.RuleService;
+import cn.wisdsoft.electivesystem.service.administrator.term.TermResourceService;
+import cn.wisdsoft.electivesystem.service.teacher.TeacherService;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpRequest;
@@ -24,10 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>ClassName: AchievementController</p>
@@ -49,39 +46,30 @@ public class AchievementController {
     }
     @Autowired
     private RuleService ruleService;
+    @Autowired
+    private TeacherService teacherService;
+    @Autowired
+    private TermResourceService termResourceService;
 
 
-    @RequestMapping(value = "/test")
-    public String test(){
-        return "home_page/index";
-    }
     @RequestMapping(value = "/")
-    public String test2(){
+    public String main(){
+        return "Achievement/selectionDetails";
+    }
+
+//    @RequestMapping(value = "/test1",method = RequestMethod.GET)
+//    @ResponseBody
+//    public PageResult getAllCurriculum(HttpSession session){
+//        List<Achievement> achievements = (List<Achievement>) session.getAttribute("achievements");
+//        session.removeAttribute("achievements");
+//        return PageResult.ok(achievements,achievements.size());
+//    }
+
+    @RequestMapping(value = "/toStudentDetails/{id}",method = RequestMethod.GET)
+    public String toStudentDetails(@PathVariable int id, Model model){
+        model.addAttribute(id);
         return "Achievement/achievement";
     }
-
-    @RequestMapping(value = "/test1",method = RequestMethod.GET)
-    @ResponseBody
-    public PageResult getAllCurriculum(HttpSession session){
-        List<Achievement> achievements = (List<Achievement>) session.getAttribute("achievements");
-        session.removeAttribute("achievements");
-        return PageResult.ok(achievements,achievements.size());
-    }
-    /*@RequestMapping(value = "/getAllCurriculum",method = RequestMethod.GET)
-    @ResponseBody
-    public ElectiveSystemResult getAllCurriculum(HttpSession session ,String key){
-        Teacher teacher = (Teacher) session.getAttribute(key);
-        if(teacher==null){
-            return ElectiveSystemResult.build(400,"请登录");
-        }
-        return achievementService.getAllCurriculum(teacher.getTeacherId());
-    }
-
-    @RequestMapping(value = "/getStuBySelId",method = RequestMethod.GET)
-    @ResponseBody
-    public ElectiveSystemResult getStuBySelId(int selectId){
-        return achievementService.getStuBySelId(selectId);
-    }*/
     @RequestMapping(value = "/getAchieveById/{id}",method = RequestMethod.GET)
     public String getAchieveById(@PathVariable int id, Model model){
         Achievement achievement = achievementService.getById(id);
@@ -95,7 +83,10 @@ public class AchievementController {
     @RequestMapping(value = "/getAll",method = RequestMethod.GET)
     @ResponseBody
     public PageResult getAll(int selectId){
-        return achievementService.getAll(selectId);
+        if (termResourceService.selStatusBySelId(selectId)){
+            return achievementService.getAll(selectId);
+        }
+        return PageResult.build(500,"该课程当前无法录入成绩");
     }
 
     @RequestMapping(value = "/editStuAchieve",method = RequestMethod.POST)
@@ -114,7 +105,6 @@ public class AchievementController {
     @ResponseBody
     public void exportExcel(String model, HttpServletResponse response){
         List list = JSONObject.parseArray(model, Achievement.class);
-        System.out.println(list.get(1));
         Map<String,String> map = new LinkedHashMap<>();
         map.put("stuId","学号");
         map.put("stuName","姓名");
@@ -165,11 +155,24 @@ public class AchievementController {
                 am.setAchieve((usual*u+midterm*m+skill*s+finalexam*f)/100);
                 achievements.add(am);
             }
-            session.setAttribute("achievements",achievements);
             return achievementService.insertExportList(achievements,selectId);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return ElectiveSystemResult.build(500,"导入失败");
+    }
+
+    @RequestMapping(value = "/getSelection",method = RequestMethod.GET)
+    @ResponseBody
+    public PageResult getSelection(HttpSession session){
+        Teacher teacher = (Teacher) session.getAttribute("key");
+        if (teacher==null){
+            return PageResult.build(500,"请登录");
+        }
+        List<Curriculum> curriculumList = teacherService.selectByTeacherId(teacher.getTeacherId());
+        for (int i = 0; i <curriculumList.size() ; i++) {
+            System.out.println(curriculumList.get(i));
+        }
+        return PageResult.ok(curriculumList,curriculumList.size());
     }
 }
