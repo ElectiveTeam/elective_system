@@ -307,12 +307,15 @@
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="editStuAchieve">
-    update achievement set achieve = #{achieve,jdbcType=INTEGER} where stu_id = #{stuId,jdbcType=VARCHAR} and select_id = #{selectId,jdbcType=INTEGER}
-  </update>
   <update id="saveAchieve" parameterType="Integer">
     update achievement set status = 1 where select_id = #{selectId,jdbcType=INTEGER}
   </update>
+  <select id="getAll" parameterType="Integer" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM achievement
+    WHERE select_id = #{selectId}
+  </select>
   <select id="selectGrade" parameterType="String" resultMap="BaseResultMap">
     SELECT tr.term_name,cm.teacher_id ,cm.cu_name,cm.credit,a.achieve
     FROM achievement a,curriculum cm,selection s,course c,term_resource tr
@@ -320,14 +323,17 @@
   </select>
   <insert id="insertExcelList">
     INSERT INTO achievement(
-    stu_id,
-    select_id,
-    achieve,
+    stu_id, stu_name,
+    select_id, usual, midterm,
+    skill, finalexam, achieve,
     status
     )
     VALUES
-    <foreach collection="list" index="index" separator="," item="item">
-      ('${item[0]}', #{selectId,jdbcType=INTEGER}, '${item[2]}',0)
+    <foreach collection="list" index="index" separator="," item="achievement">
+      ('${achievement.stuId}','${achievement.stuName}',
+      #{selectId,jdbcType=INTEGER},'${achievement.usual}',
+      '${achievement.midterm}','${achievement.skill}',
+      '${achievement.finalexam}', '${achievement.achieve}',0)
     </foreach>
   </insert>
 </mapper>

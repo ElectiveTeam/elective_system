@@ -37,9 +37,10 @@ public class PersonCenterController {
     /**
      * Select user curriculum elective system result.
      * 查询学生已选课程
-     *
+     * 测试完成
      *
      * @param stuId the stu id  学生ID（学号）
+     *
      * @return the elective system result  包含课程信息的JSON数据
      */
     @RequestMapping(value = "/selectUserCurriculum",method = RequestMethod.GET)
@@ -51,6 +52,7 @@ public class PersonCenterController {
     /**
      * @Author 李泽宇
      * @Description 学生退课
+     * 测试成功
      * @Date 2019/1/10 14:27
      * @Param
      * @return

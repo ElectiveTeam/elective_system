@@ -5,6 +5,8 @@ public class Rule {
 
     private Integer selectId;
 
+    private String CuName;
+
     private Integer usual;
 
     private Integer midterm;
@@ -61,11 +63,20 @@ public class Rule {
         this.finalexam = finalexam;
     }
 
+    public String getCuName() {
+        return CuName;
+    }
+
+    public void setCuName(String cuName) {
+        CuName = cuName;
+    }
+
     @Override
     public String toString() {
         return "Rule{" +
                 "id=" + id +
                 ", selectId=" + selectId +
+                ", CuName='" + CuName + '\'' +
                 ", usual=" + usual +
                 ", midterm=" + midterm +
                 ", skill=" + skill +

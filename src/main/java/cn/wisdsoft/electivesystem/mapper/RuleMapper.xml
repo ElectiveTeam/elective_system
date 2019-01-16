@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="cn.wisdsoft.electivesystem.pojo.Rule">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="select_id" jdbcType="INTEGER" property="selectId" />
+    <result column="cu_name" jdbcType="VARCHAR" property="cuName" />
     <result column="usual" jdbcType="INTEGER" property="usual" />
     <result column="midterm" jdbcType="INTEGER" property="midterm" />
     <result column="skill" jdbcType="INTEGER" property="skill" />
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, select_id, usual, midterm, skill, finalexam
+    id, select_id, cu_name, usual, midterm, skill, finalexam
   </sql>
   <select id="selectByExample" parameterType="cn.wisdsoft.electivesystem.pojo.RuleExample" resultMap="BaseResultMap">
     select
@@ -101,10 +102,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.wisdsoft.electivesystem.pojo.Rule">
-    insert into rule (id, select_id, usual, 
+    insert into rule (id, select_id, cu_name, usual,
       midterm, skill, finalexam
       )
-    values (#{id,jdbcType=INTEGER}, #{selectId,jdbcType=INTEGER}, #{usual,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER}, #{selectId,jdbcType=INTEGER}, #{cuName,jdbcType=VARCHAR}, #{usual,jdbcType=INTEGER},
       #{midterm,jdbcType=INTEGER}, #{skill,jdbcType=INTEGER}, #{finalexam,jdbcType=INTEGER}
       )
   </insert>
@@ -116,6 +117,9 @@
       </if>
       <if test="selectId != null">
         select_id,
+      </if>
+      <if test="cuName != null">
+        cu_name,
       </if>
       <if test="usual != null">
         usual,
@@ -136,6 +140,9 @@
       </if>
       <if test="selectId != null">
         #{selectId,jdbcType=INTEGER},
+      </if>
+      <if test="cuName != null">
+        #{cuName,jdbcType=VARCHAR},
       </if>
       <if test="usual != null">
         #{usual,jdbcType=INTEGER},
@@ -166,6 +173,9 @@
       <if test="record.selectId != null">
         select_id = #{record.selectId,jdbcType=INTEGER},
       </if>
+      <if test="record.cuName != null">
+        cu_name = #{record.cuName,jdbcType=VARCHAR},
+      </if>
       <if test="record.usual != null">
         usual = #{record.usual,jdbcType=INTEGER},
       </if>
@@ -187,6 +197,7 @@
     update rule
     set id = #{record.id,jdbcType=INTEGER},
       select_id = #{record.selectId,jdbcType=INTEGER},
+      cu_name = #{record.cuName,jdbcType=VARCHAR},
       usual = #{record.usual,jdbcType=INTEGER},
       midterm = #{record.midterm,jdbcType=INTEGER},
       skill = #{record.skill,jdbcType=INTEGER},
@@ -200,6 +211,9 @@
     <set>
       <if test="selectId != null">
         select_id = #{selectId,jdbcType=INTEGER},
+      </if>
+      <if test="cuName != null">
+        cu_name = #{cuName,jdbcType=VARCHAR},
       </if>
       <if test="usual != null">
         usual = #{usual,jdbcType=INTEGER},
@@ -219,10 +233,26 @@
   <update id="updateByPrimaryKey" parameterType="cn.wisdsoft.electivesystem.pojo.Rule">
     update rule
     set select_id = #{selectId,jdbcType=INTEGER},
+      cu_name = #{cuName,jdbcType=VARCHAR},
       usual = #{usual,jdbcType=INTEGER},
       midterm = #{midterm,jdbcType=INTEGER},
       skill = #{skill,jdbcType=INTEGER},
       finalexam = #{finalexam,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectBySelectId" parameterType="Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from rule
+    where select_id= #{selectId,jdbcType=INTEGER}
+  </select>
+  <select id="selByTeacherId" resultMap="BaseResultMap">
+    SELECT
+    r.id,c.cu_name,r.usual,r.midterm,r.skill,r.finalexam
+    FROM rule r,selection s,curriculum c
+    WHERE r.select_id = s.id AND s.cu_id = c.id AND c.teacher_id=#{teacherId}
+    <if test="cuName != null">
+    AND r.cu_name LIKE concat('%',#{cuName},'%')
+    </if>
+  </select>
 </mapper>

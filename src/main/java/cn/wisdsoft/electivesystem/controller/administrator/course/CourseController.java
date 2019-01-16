@@ -53,16 +53,16 @@ public class CourseController {
     }
 
     /**
-    * @Description: 通过主键删除分组
-    * @param: [id]
-    * @return: cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult
-    * @Author:  SongJunWei
-    * @CreateDate:  2019/1/9 14:52
-    */
-    @RequestMapping(value = "/deleteCourseById",method = RequestMethod.GET)
+     * @Description: 删除该学院的没有课程的课程分组
+     * @param: [college] 学院名称
+     * @return: cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult
+     * @Author:  SongJunWei
+     * @CreateDate:  2019/1/14 15:22
+     */
+    @RequestMapping(value = "/deleteCourseNotUse",method = RequestMethod.POST)
     @ResponseBody
-    public ElectiveSystemResult deleteCourseById(Integer id){
-        ElectiveSystemResult electiveSystemResult = courseService.deleteCourseById(id);
+    public ElectiveSystemResult deleteCourseNotUse(String college){
+        ElectiveSystemResult electiveSystemResult = courseService.deleteCourseNotUse(college);
         return electiveSystemResult;
     }
 
@@ -73,7 +73,7 @@ public class CourseController {
     * @Author:  SongJunWei
     * @CreateDate:  2019/1/9 15:02
     */
-    @RequestMapping(value = "/insertCourse",method = RequestMethod.GET)
+    @RequestMapping(value = "/insertCourse",method = RequestMethod.POST)
     @ResponseBody
     public ElectiveSystemResult insertCourse(Course course){
         ElectiveSystemResult electiveSystemResult = courseService.insertCourse(course);

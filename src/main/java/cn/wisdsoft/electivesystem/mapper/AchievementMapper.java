@@ -28,9 +28,9 @@ public interface AchievementMapper {
 
     int updateByPrimaryKey(Achievement record);
 
-    int editStuAchieve(@Param("stuId")String stuId,@Param("selectId") int selectId, @Param("achieve")int achieve);
-
     int saveAchieve(int selectId);
+
+    List<Achievement> getAll(int selectId);
 
     List<Achievement> selectGrade(String stuId);
 

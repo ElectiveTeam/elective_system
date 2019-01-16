@@ -12,38 +12,19 @@
     <script src="/elective/js/jquery_2.2.4.min.js" charset="UTF-8"></script>
 </head>
 <body>
-<span>下载模板前请填写各项成绩占比，例如：平时成绩：20 期中成绩：20 技能考核：0 期末成绩：60;不填则默认为0，总和须为100</span>
+<span>下载模板前请先添加该课程成绩规则</span>
 <div class="layui-btn-container" style="margin-top: 20px;">
-    <button class="layui-btn layui-btn-sm" id="importExcel">批量导入</button>
-    <button class="layui-btn layui-btn-sm" id="theBatchExport">下载模板</button>
-</div>
-<div class="layui-form-item">
-    <div class="layui-inline">
-        <label class="layui-form-label">平时成绩：</label>
-        <div class="layui-input-inline">
-            <input type="text" id="usual" style="width: 50px" name="usual" lay-verify="required" autocomplete="off" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-inline">
-        <label class="layui-form-label">期中成绩:</label>
-        <div class="layui-input-inline">
-            <input type="text" id="midterm" style="width: 50px" name="midterm" lay-verify="required" autocomplete="off" class="layui-input">
-        </div>
-    </div><div class="layui-inline">
-    <label class="layui-form-label">技能考核:</label>
-    <div class="layui-input-inline">
-        <input type="text" id="skill" style="width: 50px" name="skill" lay-verify="required" autocomplete="off" class="layui-input">
-    </div>
-</div><div class="layui-inline">
-    <label class="layui-form-label">期末成绩:</label>
-    <div class="layui-input-inline">
-        <input type="text" id="finalexam" style="width: 50px" name="finalexam" lay-verify="required" autocomplete="off" class="layui-input">
-    </div>
-</div>
+    <button class="layui-btn layui-btn-sm" id="importExcel">导入</button>
+    <button class="layui-btn layui-btn-sm" id="theBatchExport">打印</button>
+    <button class="layui-btn layui-btn-sm" id="save">发布</button>
 </div>
 <table id="test" lay-filter="test"></table>
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    {{# if (d.status == 0) { }}
+    <a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
+    {{# }else { }}
+    不可操作
+    {{# } }}
 </script>
 </body>
 </html>
@@ -56,18 +37,54 @@
             ,upload = layui.upload;
         table.render({
             elem: '#test' //指定原始表格元素选择器（推荐id选择器）
-            , url: '${pageContext.request.contextPath}/achievement/importExcel'
+            , url: '${pageContext.request.contextPath}/achievement/getAll'
+            ,where:{
+                selectId:1
+            }
             , id: 'achieveReload'
             , even: true    //隔行换色
             , cols: [[
                 {
-                    field: 'stuId', title: '学号', sort: true
+                    field: 'id', title: '编号', sort: true,align: 'center'
+                },{
+                    field: 'stuId', title: '学号',align: 'center'
                 }, {
-                    field: 'stuName', title: '姓名'
+                    field: 'stuName', title: '姓名',align: 'center'
                 }, {
-                    field: 'achieve', title: '成绩'
+                    field: 'usual', title: '平时成绩',align: 'center'
+                }, {
+                    field: 'midterm', title: '期中成绩',align: 'center'
+                }, {
+                    field: 'skill', title: '技能考核',align: 'center'
+                }, {
+                    field: 'finalexam', title: '期末成绩',align: 'center'
+                }, {
+                    field: 'achieve', title: '总成绩',align: 'center'
+                },{
+                    fixed: 'right', title:'操作', toolbar: '#barDemo',align: 'center'
                 }]],
+            done:function (res) {
+                if(res.data[1].status == 1){
+                    $("#save").hide();
+                    $("#importExcel").hide()
+                }else if (res.data[1].status == 0) {
+                    $("#importExcel").hide()
+                }
+            }
 
+        });
+        table.on('tool(test)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'edit') {
+                layer.confirm('确认修改吗', function (index) {
+                    layer.open({
+                        type: 2,
+                        content: 'http://localhost:8080/achievement/getAchieveById/'+ data.id,
+                        area: ['550px', '500px'],
+                        offset: ['25px', '250px']
+                    });
+                });
+            }
         });
         upload.render({
             elem: '#importExcel',
@@ -97,58 +114,42 @@
         layui.use('table', function () {
             var table = layui.table;
             var data = table.cache.achieveReload;
-            var usual = parseInt($("#usual").val());
-            var midterm = parseInt($("#midterm").val());
-            var skill = parseInt($("#skill").val());
-            var finalexam = parseInt($("#finalexam").val());
-            if ($("#usual").val()==null||$("#usual").val()==""){
-                usual=0;
-            }
-            if ($("#midterm").val()==null||$("#midterm").val()==""){
-                midterm=0;
-            }
-            if ($("#skill").val()==null||$("#skill").val()==""){
-                skill=0;
-            }
-            if ($("#finalexam").val()==null||$("#finalexam").val()==""){
-                finalexam=0;
-            }
             var selectId=1;
-            console.log(usual+midterm+skill+finalexam)
-            if (usual+midterm+skill+finalexam == 100) {
-                var formData = new FormData();
-                formData.append("model", JSON.stringify(data));
-                formData.append("usual", usual);
-                formData.append("midterm", midterm);
-                formData.append("skill", skill);
-                formData.append("finalexam", finalexam);
-                formData.append("selectId", selectId);
-                var url = "${pageContext.request.contextPath}/achievement/exportExcel";
-                var xhr = new XMLHttpRequest();
-                xhr.open("post", url, true);
-                xhr.responseType = "blob";
-                layer.msg('王尼玛来打个酱油', {icon: 4});
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === 4 && xhr.status === 200) {
-                        var name = xhr.getResponseHeader("Content-disposition");
-                        console.log(name);
-                        var fileName = name.substring(21, name.length);
-                        var filename = decodeURIComponent(fileName);
-                        var blob = new Blob([xhr.response], {type: 'text/xls'});
-                        var csvUrl = URL.createObjectURL(blob);
-                        var a = document.createElement('a');
-                        a.href = csvUrl;
-                        a.download = filename;
-                        a.click();
-                    }
-                };
-                xhr.send(formData);
-            }else{
-                layer.alert('请重新填写规则，规则总和必须为100', {
-                    icon: 6,
-                    skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
-                });
-            }
+            var formData = new FormData();
+            formData.append("model", JSON.stringify(data));
+            formData.append("selectId", selectId);
+            var url = "${pageContext.request.contextPath}/achievement/exportExcel";
+            var xhr = new XMLHttpRequest();
+            xhr.open("post", url, true);
+            xhr.responseType = "blob";
+            layer.msg('正在下载', {icon: 4});
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var name = xhr.getResponseHeader("Content-disposition");
+                    console.log(name);
+                    var fileName = name.substring(21, name.length);
+                    var filename = decodeURIComponent(fileName);
+                    var blob = new Blob([xhr.response], {type: 'text/xls'});
+                    var csvUrl = URL.createObjectURL(blob);
+                    var a = document.createElement('a');
+                    a.href = csvUrl;
+                    a.download = filename;
+                    a.click();
+                }
+            };
+            xhr.send(formData);
         })
     });
+    $("#save").on('click',function () {
+        $.ajax({
+            url:'http://localhost:8080/achievement/saveAchieve',
+            type:'post',
+            data:{
+                selectId: 1
+            },
+            success:function () {
+                window.location.reload()
+            }
+        })
+    })
 </script>

@@ -21,6 +21,7 @@ public class ElectiveSystemConfig {
     public final static String TERM_MAPPING = "/term";
     public final static String ACHIEVEMENT_MAPPING = "/achievement";
     public final static String STATISTICS_MAPPING = "/statistics";
+    public final static String RULE_MAPPING = "/rule";
 
     public ElectiveSystemConfig() {
 

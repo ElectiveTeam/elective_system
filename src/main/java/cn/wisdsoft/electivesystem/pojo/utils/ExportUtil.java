@@ -82,7 +82,7 @@ public class ExportUtil {
             HSSFRow hssfRow = hssfSheet.createRow(flag);
             //获取实例
             T t = iterator.next();
-            for (int i = 0; i < myHeader.size()-1; i++) {
+            for (int i = 0; i < myHeader.size(); i++) {
                 //创建单元格
                 HSSFCell hssfCell = hssfRow.createCell(i);
                 //获取字段名称
@@ -131,8 +131,6 @@ public class ExportUtil {
                         break;
                 }
             }
-//            HSSFCell hssfCell = hssfRow.createCell(myHeader.size()-1);
-//            hssfCell.setCellFormula("SUM(C2:D2)");
         }
     }
 //

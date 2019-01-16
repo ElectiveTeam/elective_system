@@ -5,6 +5,7 @@ import cn.wisdsoft.electivesystem.pojo.Rule;
 import cn.wisdsoft.electivesystem.pojo.Teacher;
 import cn.wisdsoft.electivesystem.pojo.utils.*;
 import cn.wisdsoft.electivesystem.service.administrator.achievement.AchievementService;
+import cn.wisdsoft.electivesystem.service.administrator.rule.RuleService;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpRequest;
@@ -13,6 +14,8 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -44,7 +47,8 @@ public class AchievementController {
     public AchievementController(AchievementService achievementService) {
         this.achievementService = achievementService;
     }
-
+    @Autowired
+    private RuleService ruleService;
 
 
     @RequestMapping(value = "/test")
@@ -58,8 +62,9 @@ public class AchievementController {
 
     @RequestMapping(value = "/test1",method = RequestMethod.GET)
     @ResponseBody
-    public PageResult getAllCurriculum(HttpSession session ,String key){
-        List<Achievement> achievements = (List<Achievement>) session.getAttribute("a");
+    public PageResult getAllCurriculum(HttpSession session){
+        List<Achievement> achievements = (List<Achievement>) session.getAttribute("achievements");
+        session.removeAttribute("achievements");
         return PageResult.ok(achievements,achievements.size());
     }
     /*@RequestMapping(value = "/getAllCurriculum",method = RequestMethod.GET)
@@ -77,11 +82,26 @@ public class AchievementController {
     public ElectiveSystemResult getStuBySelId(int selectId){
         return achievementService.getStuBySelId(selectId);
     }*/
+    @RequestMapping(value = "/getAchieveById/{id}",method = RequestMethod.GET)
+    public String getAchieveById(@PathVariable int id, Model model){
+        Achievement achievement = achievementService.getById(id);
+        System.out.println(achievement);
+        Rule rule = ruleService.getRuleBySelectId(achievement.getSelectId());
+        System.out.println(rule);
+        model.addAttribute("achievement",achievement);
+        model.addAttribute("rule",rule);
+        return "Achievement/editachieve";
+    }
+    @RequestMapping(value = "/getAll",method = RequestMethod.GET)
+    @ResponseBody
+    public PageResult getAll(int selectId){
+        return achievementService.getAll(selectId);
+    }
 
     @RequestMapping(value = "/editStuAchieve",method = RequestMethod.POST)
     @ResponseBody
-    public ElectiveSystemResult editStuAchieve(String stuId,int selectId,int achieve){
-        return achievementService.editStuAchieve(stuId,selectId,achieve);
+    public ElectiveSystemResult editStuAchieve(Achievement achievement){
+        return achievementService.editStuAchieve(achievement);
     }
 
     @RequestMapping(value = "/saveAchieve",method = RequestMethod.POST)
@@ -92,24 +112,16 @@ public class AchievementController {
 
     @RequestMapping(value = "/exportExcel")
     @ResponseBody
-    public void exportExcel(String model, Rule rule, HttpServletResponse response){
-
+    public void exportExcel(String model, HttpServletResponse response){
         List list = JSONObject.parseArray(model, Achievement.class);
+        System.out.println(list.get(1));
         Map<String,String> map = new LinkedHashMap<>();
         map.put("stuId","学号");
         map.put("stuName","姓名");
-        if (rule.getUsual()>0){
-            map.put("usual","平时成绩");
-        }
-        if (rule.getMidterm()>0){
-            map.put("midterm","期中成绩");
-        }
-        if (rule.getSkill()>0){
-            map.put("skill","技能考核");
-        }
-        if (rule.getFinalexam()>0){
-            map.put("finalexam","期末成绩");
-        }
+        map.put("usual","平时成绩");
+        map.put("midterm","期中成绩");
+        map.put("skill","技能考核");
+        map.put("finalexam","期末成绩");
         map.put("achieve","总成绩");
         HSSFWorkbook excel = ExportUtil.createExcel("student", map);
         HSSFSheet oneHSSFSheet = null;
@@ -118,7 +130,6 @@ public class AchievementController {
         } catch (Exception e) {
             System.out.println("没有工作簿");
         }
-//        List<Student> list = studentService.selectStudentByIds(id);
         try {
             ExportUtil.fillCell(excel,oneHSSFSheet,list);
             Common.getExcel(excel,"学生",response);
@@ -130,20 +141,32 @@ public class AchievementController {
     @RequestMapping(value = "/importExcel",method = RequestMethod.POST)
     @ResponseBody
     public ElectiveSystemResult importExcel(MultipartFile fileType, int selectId,HttpSession session){
+        Rule rule = ruleService.getRuleBySelectId(selectId);
+        int u = rule.getUsual();
+        int m = rule.getMidterm();
+        int s = rule.getSkill();
+        int f = rule.getFinalexam();
         try {
             Workbook excel = ImportUtil.getExcel(fileType.getInputStream(), fileType.getOriginalFilename());
             List<List<Object>> listByExcel = ImportUtil.getListByExcel(excel);
-            //return achievementService.insertExportList(listByExcel,selectId);
-            List<Achievement> a = new ArrayList<Achievement>();
+            List<Achievement> achievements = new ArrayList<Achievement>();
             for (List list:listByExcel){
+                int usual = Integer.parseInt(list.get(2).toString());
+                int midterm = Integer.parseInt(list.get(3).toString());
+                int skill = Integer.parseInt(list.get(4).toString());
+                int finalexam = Integer.parseInt(list.get(5).toString());
                 Achievement am = new Achievement();
                 am.setStuId(list.get(0).toString());
                 am.setStuName(list.get(1).toString());
-                am.setAchieve(Integer.parseInt(list.get(2).toString()));
-                a.add(am);
+                am.setUsual(usual);
+                am.setMidterm(midterm);
+                am.setSkill(skill);
+                am.setFinalexam(finalexam);
+                am.setAchieve((usual*u+midterm*m+skill*s+finalexam*f)/100);
+                achievements.add(am);
             }
-            session.setAttribute("a",a);
-            return ElectiveSystemResult.ok();
+            session.setAttribute("achievements",achievements);
+            return achievementService.insertExportList(achievements,selectId);
         } catch (Exception e) {
             e.printStackTrace();
         }

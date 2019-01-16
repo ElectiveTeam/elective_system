@@ -3,6 +3,7 @@ package cn.wisdsoft.electivesystem.service.administrator.achievement.impl;
 import cn.wisdsoft.electivesystem.mapper.AchievementMapper;
 import cn.wisdsoft.electivesystem.pojo.Achievement;
 import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult;
+import cn.wisdsoft.electivesystem.pojo.utils.PageResult;
 import cn.wisdsoft.electivesystem.service.administrator.achievement.AchievementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,21 @@ public class AchievementServiceImpl implements AchievementService {
     }*/
 
     @Override
+    public Achievement getById(int id) {
+        return achievementMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public PageResult getAll(int selectId) {
+        List<Achievement> achievements = achievementMapper.getAll(selectId);
+        int size = achievements.size();
+        if (size>0){
+            return PageResult.ok(achievements,size);
+        }
+        return null;
+    }
+
+    @Override
     public ElectiveSystemResult uploadAchieve(String[] stuId, int selectId, int[] achieve) {
         int size = stuId.length;
         int flag = 0;
@@ -56,8 +72,8 @@ public class AchievementServiceImpl implements AchievementService {
     }
 
     @Override
-    public ElectiveSystemResult editStuAchieve(String stuId,int selectId, int achieve) {
-        int flag = achievementMapper.editStuAchieve(stuId,selectId, achieve);
+    public ElectiveSystemResult editStuAchieve(Achievement achievement) {
+        int flag = achievementMapper.updateByPrimaryKeySelective(achievement);
         if(flag>0){
             return ElectiveSystemResult.ok();
         }
@@ -74,7 +90,7 @@ public class AchievementServiceImpl implements AchievementService {
     }
 
     @Override
-    public ElectiveSystemResult insertExportList(List<List<Object>> list, int selectId) {
+    public ElectiveSystemResult insertExportList(List<Achievement> list, int selectId) {
         int result = achievementMapper.insertExcelList(list,selectId);
         return ElectiveSystemResult.ok();
     }

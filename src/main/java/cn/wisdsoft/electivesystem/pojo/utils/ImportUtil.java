@@ -116,9 +116,10 @@ public class ImportUtil {
                 for (int k = row.getFirstCellNum(); k < row.getLastCellNum(); k++) {
                     cell = row.getCell(k);
                     if (cell==null||cell.equals("")||cell.getCellType() ==Cell.CELL_TYPE_BLANK){
-                        break;
+                        li.add(0);
+                    }else {
+                        li.add(ImportUtil.getCellValue(cell));
                     }
-                    li.add(ImportUtil.getCellValue(cell));
                 }
                 if (li.size() != 0) {
                     list.add(li);

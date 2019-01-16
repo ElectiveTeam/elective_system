@@ -205,4 +205,26 @@ public class Achievement implements Serializable {
     public void setFinalexam(Integer finalexam) {
         this.finalexam = finalexam;
     }
+
+    @Override
+    public String toString() {
+        return "Achievement{" +
+                "id=" + id +
+                ", stuId='" + stuId + '\'' +
+                ", stuName='" + stuName + '\'' +
+                ", usual=" + usual +
+                ", midterm=" + midterm +
+                ", skill=" + skill +
+                ", finalexam=" + finalexam +
+                ", selectId=" + selectId +
+                ", achieve=" + achieve +
+                ", status=" + status +
+                ", cuName='" + cuName + '\'' +
+                ", termName='" + termName + '\'' +
+                ", teacher='" + teacher + '\'' +
+                ", teacherId='" + teacherId + '\'' +
+                ", credit=" + credit +
+                ", remark='" + remark + '\'' +
+                '}';
+    }
 }

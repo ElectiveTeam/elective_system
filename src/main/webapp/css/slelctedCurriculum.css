@@ -11,12 +11,21 @@
     height:200px;
 }
 
-#cuinfo{
+.mb-1 cuinfo{
     text-indent:2rem;
 }
 
 .cutime{
     margin-left:30px;
+}
+
+.tk{
+    float:right;
+    cursor:pointer;
+}
+
+.tk span{
+    color: blue;
 }
 
 .tk1{
@@ -38,5 +47,16 @@
 
 .cugroup{
     margin-bottom:20px;
+}
+
+.nonecu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+}
+
+.nonecu h3{
+    text-align: center;
 }
 

@@ -48,19 +48,16 @@ public class CourseServiceImpl implements CourseService {
     }
 
     /**
-    * @Description: 通过主键删除分组
-    * @param: [id]
+    * @Description: 删除该学院的没有课程的课程分组
+    * @param: [college] 学院名称
     * @return: cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult
     * @Author:  SongJunWei
-    * @CreateDate:  2019/1/9 14:58
+    * @CreateDate:  2019/1/14 15:22
     */
     @Override
-    public ElectiveSystemResult deleteCourseById(Integer id) {
-        int i = courseMapper.deleteByPrimaryKey(id);
-        if(i>0){
-            return ElectiveSystemResult.ok();
-        }
-        return ElectiveSystemResult.build(420,"删除分组失败");
+    public ElectiveSystemResult deleteCourseNotUse(String college) {
+        courseMapper.deleteCourseNotUse(college);
+        return ElectiveSystemResult.ok();
     }
 
     /**

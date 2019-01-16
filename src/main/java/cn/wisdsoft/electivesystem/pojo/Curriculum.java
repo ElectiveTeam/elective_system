@@ -26,9 +26,9 @@ public class Curriculum implements Serializable {
     private String teacherId;
 
     /**
-     * 选课id
+     * 教师名称
      */
-    private int selectId;
+    private String teacherName;
 
     /**
      * 学时
@@ -62,6 +62,8 @@ public class Curriculum implements Serializable {
      */
     private String describe;
 
+    private Course course;
+
     public Integer getId() {
         return id;
     }
@@ -84,6 +86,14 @@ public class Curriculum implements Serializable {
 
     public void setTeacherId(String teacherId) {
         this.teacherId = teacherId == null ? null : teacherId.trim();
+    }
+
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName == null ? null : teacherName.trim();
     }
 
     public Integer getClassHour() {
@@ -141,12 +151,12 @@ public class Curriculum implements Serializable {
     public void setDescribe(String describe) {
         this.describe = describe == null ? null : describe.trim();
     }
-
-    public int getSelectId() {
-        return selectId;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setSelectId(int selectId) {
-        this.selectId = selectId;
+    public Curriculum setCourse(Course course) {
+        this.course = course;
+        return this;
     }
 }
