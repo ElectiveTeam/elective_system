@@ -26,7 +26,7 @@
         <div class="layui-logo">选课系统</div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-left">
-            <li class="layui-nav-item my-demo" data-id="0" data-uri="login/first">首页</li>
+            <li class="layui-nav-item my-demo" data-id="0" data-uri="/statistics/main">首页</li>
         </ul>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">

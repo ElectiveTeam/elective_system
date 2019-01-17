@@ -1,4 +1,4 @@
-$('#myFrame').attr('src','http://localhost:8080/login/first');
+$('#myFrame').attr('src','http://localhost:8080/statistics/main');
 layui.use('element', function () {
     var element = layui.element;
     active = {

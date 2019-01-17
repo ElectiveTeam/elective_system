@@ -75,7 +75,6 @@
                     }
                     // 基于准备好的dom，初始化echarts实例
                     var myChart = echarts.init(document.getElementById('main'));
-
                     // 显示标题，图例和空的坐标轴
                     myChart.setOption({
                         title: {
@@ -101,6 +100,7 @@
                         }]
                     });
                 }else {
+                    $("#main").remove();
                     alert("暂无该老师数据");
                 }
             },

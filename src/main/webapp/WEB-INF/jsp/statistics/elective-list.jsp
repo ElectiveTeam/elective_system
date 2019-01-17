@@ -99,7 +99,32 @@
                     title:"已选学生",
                     content: '${pageContext.request.contextPath }/statistics/edit?selectid='+selectid
                 });
+            }else if(layEvent === 'del'){
+                var selectid = data.selectId;
+                layer.confirm('请确认已导出选择该课程的学生', function(index){
+                    $.ajax({
+                        url:"${pageContext.request.contextPath }/statistics/delSelection",
+                        type:"GET",
+                        data:{
+                            selectid : selectid
+                        },
+                        success : function(msg){
+                            var status = msg.status;
+                            if(status==200){
+                                obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                                layer.close(index);
+                            }else if(status==411){
+                                alert("删除课程失败");
+                            }else if(status==410){
+                                alert("删除选课学生失败")
+                            }
 
+                        },
+                        error : function(){
+                            console.log("服务器响应错误");
+                        }
+                    })
+                });
             }
         });
     });

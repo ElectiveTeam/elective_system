@@ -38,4 +38,15 @@ public interface StatisticsMapper {
 	 * @return
 	 */
 	List<Relationship> findStu(@Param("selectid") int selectid);
+
+	/**
+	 * 根据选课id删除选课表和选课关系表（人数不足停课）
+	 * @param selectid
+	 * @return
+	 */
+	int delRelationship(@Param("selectid") Integer selectid);
+
+	int delSelection(@Param("id") int selectid);
+
+
 }
