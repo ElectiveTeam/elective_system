@@ -55,7 +55,13 @@ public interface RelationshipMapper {
      * @param category the category  学院类别
      * @return the term resource  返回包含开始时间和关闭时间的实体类
      */
-    TermResource selectStatus(String category);
+    TermResource selectCollegeStatus(String category);
+
+    /**
+     * 查询是否可以选择校选课程
+     * @return  返回包含开始时间和关闭时间的实体类
+     */
+    TermResource selectSchoolStatus();
 
     /**
      * Select choose status int.

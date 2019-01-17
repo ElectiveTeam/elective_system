@@ -10,4 +10,8 @@ public class index {
     public String Index(){
         return "home_page/index";
     }
+    @RequestMapping(value = "/login/first",method = RequestMethod.GET)
+    public String Login(){
+        return "home_page/first";
+    }
 }

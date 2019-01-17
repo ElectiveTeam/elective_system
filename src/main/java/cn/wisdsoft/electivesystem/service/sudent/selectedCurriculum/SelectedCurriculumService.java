@@ -46,7 +46,7 @@ public interface SelectedCurriculumService {
      * @param category the category  课程类别
      * @return the elective system result  包含课程信息的JSON数据
      */
-    ElectiveSystemResult selectAllCurriculum(String termName,String category);
+    ElectiveSystemResult selectAllCurriculum(String termName,String category,String grade);
 
     /**
      * Choose status elective system result.

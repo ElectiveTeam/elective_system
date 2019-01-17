@@ -13,6 +13,7 @@ $(() => {
         $.ajax({
             url: 'http://localhost:8080/student/selectedCurriculum/selectTermName',
             type: 'get',
+            async : false,
             data: {
                 college: jsonData.collegeName
             },
@@ -39,17 +40,22 @@ $(() => {
             personInfo(jsonData.id, jsonData.collegeName);
         });
 
-        function getContent(termName, category, content = ``) {
+        function getContent(termName, category,grade, content = ``) {
             $.ajax({
                 url: 'http://localhost:8080/student/selectedCurriculum/selectAllCurriculum',
                 type: 'get',
                 data: {
                     termName: termName,
-                    category: category
+                    category: category,
+                    grade: jsonData.id.substring(0, 2)
                 },
                 success: res => {
                     console.log(res);
-                    if (res.data.length === 0) {
+                    if (res.status !== 200){
+                        alert(res.msg);
+                        window.location.href = "http://localhost:8080/elective/html/stuMain.html";
+                    }
+                    else if (res.data.length === 0) {
                         content += `<a class="list-group-item list-group-item-action flex-column align-items-start">
                                     <div class="nonecu">
                                     <h3>暂无课程提供选择</h3>

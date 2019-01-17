@@ -44,8 +44,20 @@ public class SelectedCurriculumServiceImpl implements SelectedCurriculumService 
     }
 
     @Override
-    public ElectiveSystemResult selectAllCurriculum(String termName, String category) {
-        List<CurriculumDo> curriculumDos = curriculumMapper.selectAllCurriculum(termName, category);
+    public ElectiveSystemResult selectAllCurriculum(String termName, String category, String grade) {
+        List<CurriculumDo> curriculumDos = curriculumMapper.selectAllCurriculum(termName, category, grade);
+        if(curriculumDos.size() != 0) {
+            CurriculumDo curriculumDo = curriculumDos.get(0);
+            Date d = new Date();
+            Date closeTime = curriculumDo.getCloseTime();
+            Date openTime = curriculumDo.getOpenTime();
+            if(closeTime == null || openTime == null) {
+                return ElectiveSystemResult.build(900,"管理员失误导致的，请联系校方人员修复！");
+            }
+            if(d.compareTo(openTime) < 0 || d.compareTo(closeTime) > 0) {
+                return ElectiveSystemResult.ok(new ArrayList<>());
+            }
+        }
         curriculumDos.forEach((curriculumDo -> {
             Integer curriculumId = curriculumDo.getCurriculumId();
             int selectionId = relationshipMapper.selectSelectionId(curriculumId);
@@ -72,20 +84,37 @@ public class SelectedCurriculumServiceImpl implements SelectedCurriculumService 
 
     @Override
     public ElectiveSystemResult selectStatus(String category) {
-        TermResource termResource = relationshipMapper.selectStatus(category);
-        if (termResource == null) {
+        TermResource termResource = relationshipMapper.selectCollegeStatus(category);
+        TermResource termResource1 = relationshipMapper.selectSchoolStatus();
+        Date open = null,close = null,open1 = null,close1 = null;
+        Date now = new Date();
+        if (termResource == null && termResource1 == null) {
             return ElectiveSystemResult.build(401, category+"选课功能暂未开放");
         }
-        Date open = termResource.getOpenTime();
-        Date close = termResource.getCloseTime();
-        Date now = new Date();
-        if (now.compareTo(open) < 0) {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-            String openTime = sdf.format(open);
-            return ElectiveSystemResult.build(402, "选课时间将在"+openTime+"开启，请耐心等待");
+        if(termResource != null) {
+            open = termResource.getOpenTime();
+            close = termResource.getCloseTime();
         }
-        if (now.compareTo(close) > 0) {
-            return ElectiveSystemResult.build(401, "选课功能暂未开放");
+        if(termResource1 != null) {
+            open1 = termResource1.getOpenTime();
+            close1 = termResource1.getCloseTime();
+        }
+        if(open != null && open1 != null) {
+            Date o = open.compareTo(open1)>0?open1:open;
+            Date c = close.compareTo(close1)>0?close:close1;
+//            if (now.compareTo(o) < 0) {
+//                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+//                String openTime = sdf.format(o);
+//                return ElectiveSystemResult.build(402, "选课时间将在"+openTime+"开启，请耐心等待");
+//            }
+//            if (now.compareTo(c) > 0) {
+//                return ElectiveSystemResult.build(401, "选课功能暂未开放");
+//            }
+            judgeTime(now,o,c);
+        } else if(open != null) {
+            judgeTime(now,open,close);
+        } else {
+            judgeTime(now,open1,close1);
         }
         return ElectiveSystemResult.build(200, "可以选课");
     }
@@ -161,6 +190,16 @@ public class SelectedCurriculumServiceImpl implements SelectedCurriculumService 
                 return ElectiveSystemResult.ok();
             default:
                 return ElectiveSystemResult.build(900, "sql语句错误！");
+        }
+    }
+
+    private ElectiveSystemResult judgeTime(Date now,Date o,Date c) {
+        if (now.compareTo(o) < 0) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            String openTime = sdf.format(o);
+            return ElectiveSystemResult.build(402, "选课时间将在"+openTime+"开启，请耐心等待");
+        } else {
+            return ElectiveSystemResult.build(401, "选课功能暂未开放");
         }
     }
 }

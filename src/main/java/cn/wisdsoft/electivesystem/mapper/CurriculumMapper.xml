@@ -360,6 +360,8 @@
     select
       t.term_name as termName,
       t.college as college,
+      t.open_time as openTime,
+      t.close_time as closeTime,
       co.id as courseId,
       c.id as curriculumId,
       c.cu_name as curriculumName,
@@ -381,7 +383,8 @@
       c.status = 2 and
       (t.status = 1 or t.status = 3) and
       t.term_name = #{termName} and
-      t.college = #{category}
+      t.college = #{category} and
+      (c.grade = #{grade} or c.grade = "全部")
   </select>
   <!--
     查询最大人数

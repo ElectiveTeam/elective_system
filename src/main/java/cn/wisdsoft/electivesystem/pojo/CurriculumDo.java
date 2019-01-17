@@ -1,7 +1,11 @@
 package cn.wisdsoft.electivesystem.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * @ Author     ：高伟萌.
@@ -94,6 +98,20 @@ public class CurriculumDo implements Serializable {
     private Integer selectionId;
 
     private String remark;
+
+    /**
+     * 开始时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date openTime;
+
+    /**
+     * 结束时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date closeTime;
 
     public String getTermName() {
         return termName;
@@ -243,5 +261,21 @@ public class CurriculumDo implements Serializable {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public Date getOpenTime() {
+        return openTime;
+    }
+
+    public void setOpenTime(Date openTime) {
+        this.openTime = openTime;
+    }
+
+    public Date getCloseTime() {
+        return closeTime;
+    }
+
+    public void setCloseTime(Date closeTime) {
+        this.closeTime = closeTime;
     }
 }
