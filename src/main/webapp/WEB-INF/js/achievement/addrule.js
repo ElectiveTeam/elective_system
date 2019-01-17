@@ -7,6 +7,18 @@ layui.use('form', function () {
         var midterm=parseInt($("#midterm").val());
         var skill=parseInt($("#skill").val());
         var finalexam=parseInt($("#finalexam").val());
+        if (isNaN(usual)){
+            usual=0;
+        }
+        if (isNaN(midterm)){
+            midterm=0;
+        }
+        if (isNaN(skill)){
+            skill=0;
+        }
+        if (isNaN(finalexam)){
+            finalexam=0;
+        }
         if(usual+midterm+skill+finalexam != 100){
             layer.msg('规则总和须为100', {icon: 5, time: 1000});
         }else {
@@ -22,18 +34,17 @@ layui.use('form', function () {
                     finalexam: finalexam
                 }
                 , success: function (res) {
+                    console.log(res);
                     if(res.status==200){
-                        layer.msg('添加成功', {icon: 6, time: 1000});
-                    }else {
+                        // 获得frame索引
+                        let index = parent.layer.getFrameIndex(window.name);
+                        //实时更新
+                        window.parent.location.reload();
+                        //关闭当前frame
+                        parent.layer.close(index);
+                    }else if (res.status==500) {
                         layer.msg(res.msg, {icon: 5, time: 1000});
                     }
-
-                    // 获得frame索引
-                    let index = parent.layer.getFrameIndex(window.name);
-                    //实时更新
-                    window.parent.location.reload();
-                    //关闭当前frame
-                    parent.layer.close(index);
                 }, error: function () {
                     layer.msg('插入失败', {icon: 5, time: 1000});
                 }

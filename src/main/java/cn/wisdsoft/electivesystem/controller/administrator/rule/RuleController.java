@@ -68,7 +68,7 @@ public class RuleController {
     @RequestMapping(value = "/addRule",method = RequestMethod.POST)
     @ResponseBody
     public ElectiveSystemResult addRule(Rule rule){
-        if (ruleService.check(rule.getId())){
+        if (ruleService.check(rule.getSelectId())){
             return ruleService.insert(rule);
         }
         return ElectiveSystemResult.build(500,"该课程已存在规则");

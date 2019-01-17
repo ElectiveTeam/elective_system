@@ -80,25 +80,25 @@
             , layer = layui.layer;
         //监听提交
         form.on('submit(save)', function () {
-            var usual = parseInt($("#usual").val());
-            var midterm = parseInt($("#midterm").val());
-            var skill = parseInt($("#skill").val());
-            var finalexam = parseInt($("#finalexam").val());
+            var usual = parseFloat($("#usual").val());
+            var midterm = parseFloat($("#midterm").val());
+            var skill = parseFloat($("#skill").val());
+            var finalexam = parseFloat($("#finalexam").val());
             var u = ${rule.usual};
             var m = ${rule.midterm};
             var s = ${rule.skill};
             var f = ${rule.finalexam};
-            if(u==0){
-                usual = 0;
+            if(u==0 || isNaN(usual)){
+                usual = 0.00;
             }
-            if(m==0){
-                midterm = 0;
+            if(m==0 || isNaN(midterm)){
+                midterm = 0.00;
             }
-            if(s==0){
-                skill = 0;
+            if(s==0 || isNaN(skill)){
+                skill = 0.00;
             }
-            if(f==0){
-                finalexam = 0;
+            if(f==0 || isNaN(finalexam)){
+                finalexam = 0.00;
             }
             var achieve = (usual*u+midterm*m+skill*s+finalexam*f)/100;
             $.ajax({

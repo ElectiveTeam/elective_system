@@ -65,7 +65,7 @@ public class RuleServiceImpl implements RuleService {
 
     @Override
     public boolean check(int id) {
-        Rule rule = ruleMapper.selectByPrimaryKey(id);
+        Rule rule = ruleMapper.selectBySelectId(id);
         if (rule==null){
             return true;
         }

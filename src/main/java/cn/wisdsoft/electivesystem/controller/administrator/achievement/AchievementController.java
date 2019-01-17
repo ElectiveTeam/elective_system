@@ -131,6 +131,7 @@ public class AchievementController {
             List<List<Object>> listByExcel = ImportUtil.getListByExcel(excel);
             List<Achievement> achievements = new ArrayList<Achievement>();
             for (List list:listByExcel){
+                System.out.println(list.get(2));
                 double usual = Double.parseDouble(list.get(2).toString());
                 double midterm = Double.parseDouble(list.get(3).toString());
                 double skill = Double.parseDouble(list.get(4).toString());

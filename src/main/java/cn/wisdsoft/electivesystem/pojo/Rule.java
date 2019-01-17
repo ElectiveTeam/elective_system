@@ -36,11 +36,7 @@ public class Rule {
     }
 
     public void setUsual(Integer usual) {
-        if(usual==null){
-            this.usual=0;
-        }else {
-            this.usual = usual;
-        }
+        this.usual = usual;
     }
 
     public Integer getMidterm() {
@@ -48,11 +44,7 @@ public class Rule {
     }
 
     public void setMidterm(Integer midterm) {
-        if(midterm==null){
-            this.midterm=0;
-        }else {
-            this.midterm = midterm;
-        }
+        this.midterm = midterm;
     }
 
     public Integer getSkill() {
@@ -60,11 +52,7 @@ public class Rule {
     }
 
     public void setSkill(Integer skill) {
-        if(skill==null){
-            this.skill=0;
-        }else {
-            this.skill = skill;
-        }
+        this.skill = skill;
     }
 
     public Integer getFinalexam() {
@@ -72,11 +60,7 @@ public class Rule {
     }
 
     public void setFinalexam(Integer finalexam) {
-        if(finalexam==null){
-            this.finalexam=0;
-        }else {
-            this.finalexam = finalexam;
-        }
+        this.finalexam = finalexam;
     }
 
     public String getCuName() {
