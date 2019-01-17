@@ -29,7 +29,7 @@ import java.util.List;
 public class CurriculumServiceImpl implements CurriculumService {
 
 	private final CurriculumMapper curriculumMapper;
-	
+
 	private final HttpServletRequest request;
 
 	@Autowired

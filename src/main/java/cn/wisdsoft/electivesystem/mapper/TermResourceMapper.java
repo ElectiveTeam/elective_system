@@ -34,8 +34,10 @@ public interface TermResourceMapper {
 
     /*查询学期资源表中当前时间处于申请状态的学院*/
     List<TermResource> selectBytimetype();
+
+    int selStatusBySelId(int selectId);
     /**查询本学院本学期的学期资源信息*/
     List<TermResource> selectByCollege(String college);
-    
+
     int updateTermResourceByCloseTime();
 }

@@ -151,7 +151,6 @@ public class Curriculum implements Serializable {
     public void setDescribe(String describe) {
         this.describe = describe == null ? null : describe.trim();
     }
-
     public Course getCourse() {
         return course;
     }

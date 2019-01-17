@@ -6,8 +6,16 @@
     <result column="stu_id" jdbcType="VARCHAR" property="stuId" />
     <result column="stu_name" jdbcType="VARCHAR" property="stuName" />
     <result column="select_id" jdbcType="INTEGER" property="selectId" />
-    <result column="achieve" jdbcType="INTEGER" property="achieve" />
+    <result column="usual" jdbcType="DOUBLE" property="usual" />
+    <result column="midterm" jdbcType="DOUBLE" property="midterm" />
+    <result column="skill" jdbcType="DOUBLE" property="skill" />
+    <result column="finalexam" jdbcType="DOUBLE" property="finalexam" />
+    <result column="achieve" jdbcType="DOUBLE" property="achieve" />
     <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="term_name" jdbcType="VARCHAR" property="termName" />
+    <result column="cu_name" jdbcType="VARCHAR" property="cuName" />
+    <result column="teacher_name" jdbcType="VARCHAR" property="teacherName" />
+    <result column="credit" jdbcType="DECIMAL" property="credit" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -69,7 +77,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, stu_id, stu_name, select_id, achieve, status, remark
+    id, stu_id, stu_name, select_id, usual, midterm, skill, finalexam, achieve, status,
+    remark
   </sql>
   <select id="selectByExample" parameterType="cn.wisdsoft.electivesystem.pojo.AchievementExample" resultMap="BaseResultMap">
     select
@@ -86,7 +95,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from achievement
     where id = #{id,jdbcType=INTEGER}
@@ -102,12 +111,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.wisdsoft.electivesystem.pojo.Achievement">
-    insert into achievement (id, stu_id, stu_name, 
-      select_id, achieve, status, 
-      remark)
-    values (#{id,jdbcType=INTEGER}, #{stuId,jdbcType=VARCHAR}, #{stuName,jdbcType=VARCHAR}, 
-      #{selectId,jdbcType=INTEGER}, #{achieve,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
-      #{remark,jdbcType=VARCHAR})
+    insert into achievement (id, stu_id, stu_name,
+      select_id, usual, midterm,
+      skill, finalexam, achieve,
+      status, remark)
+    values (#{id,jdbcType=INTEGER}, #{stuId,jdbcType=VARCHAR}, #{stuName,jdbcType=VARCHAR},
+      #{selectId,jdbcType=INTEGER}, #{usual,jdbcType=INTEGER}, #{midterm,jdbcType=INTEGER},
+      #{skill,jdbcType=INTEGER}, #{finalexam,jdbcType=INTEGER}, #{achieve,jdbcType=INTEGER},
+      #{status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.wisdsoft.electivesystem.pojo.Achievement">
     insert into achievement
@@ -123,6 +134,18 @@
       </if>
       <if test="selectId != null">
         select_id,
+      </if>
+      <if test="usual != null">
+        usual,
+      </if>
+      <if test="midterm != null">
+        midterm,
+      </if>
+      <if test="skill != null">
+        skill,
+      </if>
+      <if test="finalexam != null">
+        finalexam,
       </if>
       <if test="achieve != null">
         achieve,
@@ -146,6 +169,18 @@
       </if>
       <if test="selectId != null">
         #{selectId,jdbcType=INTEGER},
+      </if>
+      <if test="usual != null">
+        #{usual,jdbcType=INTEGER},
+      </if>
+      <if test="midterm != null">
+        #{midterm,jdbcType=INTEGER},
+      </if>
+      <if test="skill != null">
+        #{skill,jdbcType=INTEGER},
+      </if>
+      <if test="finalexam != null">
+        #{finalexam,jdbcType=INTEGER},
       </if>
       <if test="achieve != null">
         #{achieve,jdbcType=INTEGER},
@@ -179,6 +214,18 @@
       <if test="record.selectId != null">
         select_id = #{record.selectId,jdbcType=INTEGER},
       </if>
+      <if test="record.usual != null">
+        usual = #{record.usual,jdbcType=INTEGER},
+      </if>
+      <if test="record.midterm != null">
+        midterm = #{record.midterm,jdbcType=INTEGER},
+      </if>
+      <if test="record.skill != null">
+        skill = #{record.skill,jdbcType=INTEGER},
+      </if>
+      <if test="record.finalexam != null">
+        finalexam = #{record.finalexam,jdbcType=INTEGER},
+      </if>
       <if test="record.achieve != null">
         achieve = #{record.achieve,jdbcType=INTEGER},
       </if>
@@ -196,12 +243,16 @@
   <update id="updateByExample" parameterType="map">
     update achievement
     set id = #{record.id,jdbcType=INTEGER},
-      stu_id = #{record.stuId,jdbcType=VARCHAR},
-      stu_name = #{record.stuName,jdbcType=VARCHAR},
-      select_id = #{record.selectId,jdbcType=INTEGER},
-      achieve = #{record.achieve,jdbcType=INTEGER},
-      status = #{record.status,jdbcType=INTEGER},
-      remark = #{record.remark,jdbcType=VARCHAR}
+    stu_id = #{record.stuId,jdbcType=VARCHAR},
+    stu_name = #{record.stuName,jdbcType=VARCHAR},
+    select_id = #{record.selectId,jdbcType=INTEGER},
+    usual = #{record.usual,jdbcType=INTEGER},
+    midterm = #{record.midterm,jdbcType=INTEGER},
+    skill = #{record.skill,jdbcType=INTEGER},
+    finalexam = #{record.finalexam,jdbcType=INTEGER},
+    achieve = #{record.achieve,jdbcType=INTEGER},
+    status = #{record.status,jdbcType=INTEGER},
+    remark = #{record.remark,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -217,6 +268,18 @@
       </if>
       <if test="selectId != null">
         select_id = #{selectId,jdbcType=INTEGER},
+      </if>
+      <if test="usual != null">
+        usual = #{usual,jdbcType=INTEGER},
+      </if>
+      <if test="midterm != null">
+        midterm = #{midterm,jdbcType=INTEGER},
+      </if>
+      <if test="skill != null">
+        skill = #{skill,jdbcType=INTEGER},
+      </if>
+      <if test="finalexam != null">
+        finalexam = #{finalexam,jdbcType=INTEGER},
       </if>
       <if test="achieve != null">
         achieve = #{achieve,jdbcType=INTEGER},
@@ -235,9 +298,50 @@
     set stu_id = #{stuId,jdbcType=VARCHAR},
       stu_name = #{stuName,jdbcType=VARCHAR},
       select_id = #{selectId,jdbcType=INTEGER},
+      usual = #{usual,jdbcType=INTEGER},
+      midterm = #{midterm,jdbcType=INTEGER},
+      skill = #{skill,jdbcType=INTEGER},
+      finalexam = #{finalexam,jdbcType=INTEGER},
       achieve = #{achieve,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <update id="saveAchieve" parameterType="Integer">
+    update achievement set status = 1 where select_id = #{selectId,jdbcType=INTEGER}
+  </update>
+  <select id="getAll" parameterType="Integer" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM achievement
+    WHERE select_id = #{selectId}
+  </select>
+  <select id="selectGrade" parameterType="String" resultMap="BaseResultMap">
+    SELECT a.select_id,a.stu_id,tr.term_name,cm.teacher_name ,cm.cu_name,a.usual,a.midterm,a.skill,a.finalexam,cm.credit,a.achieve
+    FROM achievement a,curriculum cm,selection s,course c,term_resource tr
+    WHERE a.select_id=s.id AND s.cu_id=cm.id AND cm.cou_id=c.id AND c.tr_id=tr.id AND a.stu_id=#{stuId} AND a.`status`=1
+  </select>
+  <insert id="insertExcelList">
+    INSERT INTO achievement(
+    stu_id, stu_name,
+    select_id, usual, midterm,
+    skill, finalexam, achieve,
+    status
+    )
+    VALUES
+    <foreach collection="list" index="index" separator="," item="achievement">
+      ('${achievement.stuId}','${achievement.stuName}',
+      #{selectId,jdbcType=INTEGER},'${achievement.usual}',
+      '${achievement.midterm}','${achievement.skill}',
+      '${achievement.finalexam}', '${achievement.achieve}',0)
+    </foreach>
+  </insert>
+  <select id="selByStuIdAndSelId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from achievement where stu_id = #{stuId} and select_id = #{selectId}
+  </select>
+  <select id="getStudentBySelId" parameterType="Integer" resultMap="BaseResultMap">
+    SELECT * FROM relationship WHERE select_id = #{selectId}
+  </select>
 </mapper>

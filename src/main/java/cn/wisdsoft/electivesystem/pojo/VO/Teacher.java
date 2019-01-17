@@ -1,9 +1,9 @@
 package cn.wisdsoft.electivesystem.pojo.VO;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Teacher implements Serializable{
 	

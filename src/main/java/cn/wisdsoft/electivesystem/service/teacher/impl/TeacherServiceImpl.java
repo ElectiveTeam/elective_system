@@ -1,11 +1,14 @@
 package cn.wisdsoft.electivesystem.service.teacher.impl;
 
 import cn.wisdsoft.electivesystem.mapper.CourseMapper;
+import cn.wisdsoft.electivesystem.mapper.CurriculumMapper;
 import cn.wisdsoft.electivesystem.mapper.CurriculumPageMapper;
 import cn.wisdsoft.electivesystem.mapper.TermResourceMapper;
 import cn.wisdsoft.electivesystem.pojo.Course;
+import cn.wisdsoft.electivesystem.pojo.Curriculum;
 import cn.wisdsoft.electivesystem.pojo.CurriculumPage;
 import cn.wisdsoft.electivesystem.pojo.TermResource;
+import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult;
 import cn.wisdsoft.electivesystem.pojo.utils.PageResult;
 import cn.wisdsoft.electivesystem.service.teacher.TeacherService;
 
@@ -27,14 +30,16 @@ import com.github.pagehelper.PageInfo;
  */
 @Service
 public class TeacherServiceImpl implements TeacherService {
-	
+
 	@Autowired
 	TermResourceMapper trm;
 	@Autowired
 	CourseMapper cm;
 	@Autowired
 	CurriculumPageMapper clpm;
-	
+	@Autowired
+	CurriculumMapper curriculumMapper;
+
     public TeacherServiceImpl() {
 
     }
@@ -59,6 +64,11 @@ public class TeacherServiceImpl implements TeacherService {
     	//分页
     	PageInfo<CurriculumPage> pageInfo = new PageInfo<>(cpList);
     	return PageResult.ok(cpList,pageInfo.getTotal());
+	}
+
+	@Override
+	public List<Curriculum> selectByTeacherId(int status,String teacherId) {
+		return curriculumMapper.selByTeacherId(status,teacherId);
 	}
 
 }

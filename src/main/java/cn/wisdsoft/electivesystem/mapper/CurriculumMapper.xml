@@ -356,6 +356,9 @@
       `describe` = #{describe,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selCurByTeaId" parameterType="String" resultMap="BaseResultMap">
+    SELECT s.id id,c.cu_name FROM curriculum c ,selection s WHERE c.id=s.cu_id AND c.teacher_id=#{teacherId}
+  </select>
   <select id="selectAllCurriculum" resultType="cn.wisdsoft.electivesystem.pojo.CurriculumDo">
     select
       t.term_name as termName,
@@ -418,12 +421,17 @@
 		s.cu_id = c.id AND
 		c.id = #{curriculumId}
   </select>
+    <select id="selByTeacherId" resultMap="BaseResultMap">
+    select s.id ,cc.cu_name
+    FROM selection s,curriculum cc,course c,term_resource t
+    WHERE s.cu_id = cc.id AND cc.cou_id = c.id AND c.tr_id = t.id AND t.`status` = #{status} and cc.teacher_id = #{teacherId}
+  </select>
   <select id="selectCurriculum" resultMap="BaseResultMap">
   	select <include refid="Base_Column_List"/>
   	form curriculum
   </select>
   <select id="findCurriculumByCollegeNameAndStatus" resultMap="BaseResultMap">
-  	SELECT c.* FROM curriculum c,course cou, term_resource term 
+  	SELECT c.* FROM curriculum c,course cou, term_resource term
 	WHERE term.id = cou.tr_id AND cou.id = c.cou_id AND
 	term.status != 7 AND term.college = #{ collegeName }
 	AND c.status != 0 ORDER BY c.status

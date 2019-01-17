@@ -109,6 +109,15 @@ public class TermResourceServiceImpl implements TermResourceService {
 		TermResource termResource = termResourceMapper.selectByPrimaryKey(id);
 		return termResource;
 	}
-	
+
+	@Override
+	public Boolean selStatusBySelId(int selectId) {
+		int flag = termResourceMapper.selStatusBySelId(selectId);
+		if (flag == 6){
+			return true;
+		}
+		return false;
+	}
+
 
 }

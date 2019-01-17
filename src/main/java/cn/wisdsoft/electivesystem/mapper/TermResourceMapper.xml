@@ -251,13 +251,18 @@
     select <include refid="Base_Column_List"/>
     from term_resource
   </select>
+  <select id="selStatusBySelId" parameterType="Integer" resultType="Integer">
+    SELECT tr.`status`
+    FROM term_resource tr,course c,curriculum cc,selection s
+    WHERE s.cu_id = cc.id AND cc.cou_id = c.id AND c.tr_id = tr.id AND s.id = #{selectId}
+  </select>
   <select id="selectByCollege" resultMap="BaseResultMap">
   	select <include refid="Base_Column_List"/>
   	from term_resource WHERE college=#{college} and `status` &lt;7
   </select>
-  
+
   <update id="updateTermResourceByCloseTime" >
-  	UPDATE term_resource SET status = status+1,close_time=null,open_time=null 
+  	UPDATE term_resource SET status = status+1,close_time=null,open_time=null
   		WHERE timestampdiff(HOUR,NOW(),close_time)=0
   		AND status in (1,3,5,6)
   </update>

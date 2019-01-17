@@ -3,8 +3,7 @@ package cn.wisdsoft.electivesystem.pojo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AchievementExample {
-    protected String orderByClause;
+public class AchievementExample {protected String orderByClause;
 
     protected boolean distinct;
 
@@ -361,6 +360,246 @@ public class AchievementExample {
 
         public Criteria andSelectIdNotBetween(Integer value1, Integer value2) {
             addCriterion("select_id not between", value1, value2, "selectId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsualIsNull() {
+            addCriterion("usual is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsualIsNotNull() {
+            addCriterion("usual is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsualEqualTo(Integer value) {
+            addCriterion("usual =", value, "usual");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsualNotEqualTo(Integer value) {
+            addCriterion("usual <>", value, "usual");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsualGreaterThan(Integer value) {
+            addCriterion("usual >", value, "usual");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsualGreaterThanOrEqualTo(Integer value) {
+            addCriterion("usual >=", value, "usual");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsualLessThan(Integer value) {
+            addCriterion("usual <", value, "usual");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsualLessThanOrEqualTo(Integer value) {
+            addCriterion("usual <=", value, "usual");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsualIn(List<Integer> values) {
+            addCriterion("usual in", values, "usual");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsualNotIn(List<Integer> values) {
+            addCriterion("usual not in", values, "usual");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsualBetween(Integer value1, Integer value2) {
+            addCriterion("usual between", value1, value2, "usual");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsualNotBetween(Integer value1, Integer value2) {
+            addCriterion("usual not between", value1, value2, "usual");
+            return (Criteria) this;
+        }
+
+        public Criteria andMidtermIsNull() {
+            addCriterion("midterm is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMidtermIsNotNull() {
+            addCriterion("midterm is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMidtermEqualTo(Integer value) {
+            addCriterion("midterm =", value, "midterm");
+            return (Criteria) this;
+        }
+
+        public Criteria andMidtermNotEqualTo(Integer value) {
+            addCriterion("midterm <>", value, "midterm");
+            return (Criteria) this;
+        }
+
+        public Criteria andMidtermGreaterThan(Integer value) {
+            addCriterion("midterm >", value, "midterm");
+            return (Criteria) this;
+        }
+
+        public Criteria andMidtermGreaterThanOrEqualTo(Integer value) {
+            addCriterion("midterm >=", value, "midterm");
+            return (Criteria) this;
+        }
+
+        public Criteria andMidtermLessThan(Integer value) {
+            addCriterion("midterm <", value, "midterm");
+            return (Criteria) this;
+        }
+
+        public Criteria andMidtermLessThanOrEqualTo(Integer value) {
+            addCriterion("midterm <=", value, "midterm");
+            return (Criteria) this;
+        }
+
+        public Criteria andMidtermIn(List<Integer> values) {
+            addCriterion("midterm in", values, "midterm");
+            return (Criteria) this;
+        }
+
+        public Criteria andMidtermNotIn(List<Integer> values) {
+            addCriterion("midterm not in", values, "midterm");
+            return (Criteria) this;
+        }
+
+        public Criteria andMidtermBetween(Integer value1, Integer value2) {
+            addCriterion("midterm between", value1, value2, "midterm");
+            return (Criteria) this;
+        }
+
+        public Criteria andMidtermNotBetween(Integer value1, Integer value2) {
+            addCriterion("midterm not between", value1, value2, "midterm");
+            return (Criteria) this;
+        }
+
+        public Criteria andSkillIsNull() {
+            addCriterion("skill is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSkillIsNotNull() {
+            addCriterion("skill is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSkillEqualTo(Integer value) {
+            addCriterion("skill =", value, "skill");
+            return (Criteria) this;
+        }
+
+        public Criteria andSkillNotEqualTo(Integer value) {
+            addCriterion("skill <>", value, "skill");
+            return (Criteria) this;
+        }
+
+        public Criteria andSkillGreaterThan(Integer value) {
+            addCriterion("skill >", value, "skill");
+            return (Criteria) this;
+        }
+
+        public Criteria andSkillGreaterThanOrEqualTo(Integer value) {
+            addCriterion("skill >=", value, "skill");
+            return (Criteria) this;
+        }
+
+        public Criteria andSkillLessThan(Integer value) {
+            addCriterion("skill <", value, "skill");
+            return (Criteria) this;
+        }
+
+        public Criteria andSkillLessThanOrEqualTo(Integer value) {
+            addCriterion("skill <=", value, "skill");
+            return (Criteria) this;
+        }
+
+        public Criteria andSkillIn(List<Integer> values) {
+            addCriterion("skill in", values, "skill");
+            return (Criteria) this;
+        }
+
+        public Criteria andSkillNotIn(List<Integer> values) {
+            addCriterion("skill not in", values, "skill");
+            return (Criteria) this;
+        }
+
+        public Criteria andSkillBetween(Integer value1, Integer value2) {
+            addCriterion("skill between", value1, value2, "skill");
+            return (Criteria) this;
+        }
+
+        public Criteria andSkillNotBetween(Integer value1, Integer value2) {
+            addCriterion("skill not between", value1, value2, "skill");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalexamIsNull() {
+            addCriterion("finalexam is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalexamIsNotNull() {
+            addCriterion("finalexam is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalexamEqualTo(Integer value) {
+            addCriterion("finalexam =", value, "finalexam");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalexamNotEqualTo(Integer value) {
+            addCriterion("finalexam <>", value, "finalexam");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalexamGreaterThan(Integer value) {
+            addCriterion("finalexam >", value, "finalexam");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalexamGreaterThanOrEqualTo(Integer value) {
+            addCriterion("finalexam >=", value, "finalexam");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalexamLessThan(Integer value) {
+            addCriterion("finalexam <", value, "finalexam");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalexamLessThanOrEqualTo(Integer value) {
+            addCriterion("finalexam <=", value, "finalexam");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalexamIn(List<Integer> values) {
+            addCriterion("finalexam in", values, "finalexam");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalexamNotIn(List<Integer> values) {
+            addCriterion("finalexam not in", values, "finalexam");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalexamBetween(Integer value1, Integer value2) {
+            addCriterion("finalexam between", value1, value2, "finalexam");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalexamNotBetween(Integer value1, Integer value2) {
+            addCriterion("finalexam not between", value1, value2, "finalexam");
             return (Criteria) this;
         }
 
