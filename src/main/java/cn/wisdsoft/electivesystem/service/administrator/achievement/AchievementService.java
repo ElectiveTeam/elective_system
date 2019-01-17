@@ -20,7 +20,7 @@ public interface AchievementService {
     //public ElectiveSystemResult getStuBySelId(int selectId);
     public Achievement getById(int id);
     public PageResult getAll(int selectId);
-    public ElectiveSystemResult uploadAchieve(String stuId[],int selectId,int achieve[]);
+    public ElectiveSystemResult uploadAchieve(String stuId[],int selectId,Float achieve[]);
     public ElectiveSystemResult editStuAchieve(Achievement achievement);
     public ElectiveSystemResult saveAchieve(int selectId);
     public ElectiveSystemResult insertExportList(List<Achievement> list, int selectId);

@@ -57,27 +57,7 @@ public class StatisticsServiceImpl implements StatisticsService {
 	@Override
 	public PageResult<Statistics> findElective(int page,int limit,String college, String termName) {
 		PageHelper pageHelper = new PageHelper();
-		String colleges = null;
-		if(college.equals("1") ) {
-			colleges = "校选";
-		}else if(college.equals("HGXY0001")) {
-			colleges = "软件学院";
-		}else if(college.equals("HGXY0002")) {
-			colleges = "建筑学院";
-		}else if(college.equals("HGXY0003")) {
-			colleges = "工程管理学院";
-		}else if(college.equals("HGXY0004")) {
-			colleges = "经济管理学院";
-		}else if(college.equals("HGXY0005")) {
-			colleges = "信息技术学院";
-		}else if(college.equals("HGXY0006")) {
-			colleges = "人文学院";
-		}else if(college.equals("HGXY0007")) {
-			colleges = "土木工程学院";
-		}else if(college.equals("HGXY0008")) {
-			colleges = "会计学院";
-		}
-		List<Statistics> electiveList = statisticsMapper.findElective(colleges, termName);
+		List<Statistics> electiveList = statisticsMapper.findElective(college, termName);
 		/*System.out.println(electiveList);*/
 		if(electiveList.size()>0) {
 			return PageResult.ok(electiveList,electiveList.size());
@@ -96,27 +76,7 @@ public class StatisticsServiceImpl implements StatisticsService {
 	 */
 	@Override
 	public ElectiveSystemResult findEleciveEcharts(String college, String termName, String teacherName) {
-		String colleges = null;
-		if(college.equals("1") ) {
-			colleges = "校选";
-		}else if(college.equals("HGXY0001")) {
-			colleges = "软件学院";
-		}else if(college.equals("HGXY0002")) {
-			colleges = "建筑学院";
-		}else if(college.equals("HGXY0003")) {
-			colleges = "工程管理学院";
-		}else if(college.equals("HGXY0004")) {
-			colleges = "经济管理学院";
-		}else if(college.equals("HGXY0005")) {
-			colleges = "信息技术学院";
-		}else if(college.equals("HGXY0006")) {
-			colleges = "人文学院";
-		}else if(college.equals("HGXY0007")) {
-			colleges = "土木工程学院";
-		}else if(college.equals("HGXY0008")) {
-			colleges = "会计学院";
-		}
-		List<Statistics> electiveEchartsList = statisticsMapper.findElectiveEcharts(colleges,termName,teacherName);
+		List<Statistics> electiveEchartsList = statisticsMapper.findElectiveEcharts(college,termName,teacherName);
 		if (electiveEchartsList.size()>0){
 			return ElectiveSystemResult.ok(electiveEchartsList);
 		}else{
@@ -137,6 +97,26 @@ public class StatisticsServiceImpl implements StatisticsService {
 			return PageResult.ok(stuList,stuList.size());
 		}else{
 			return PageResult.build(420, "没查到数据");
+		}
+	}
+
+	/**
+	 * 根据选课id删除选课表和选课关系表（停课）
+	 * @param selectid
+	 * @return
+	 */
+	@Override
+	public ElectiveSystemResult delSelection(Integer selectid) {
+		int relationshipRow = statisticsMapper.delRelationship(selectid);
+		if(relationshipRow>0){
+			int selectionRow = statisticsMapper.delSelection(selectid);
+			if (selectionRow>0){
+				return ElectiveSystemResult.ok();
+			}else{
+				return ElectiveSystemResult.build(411,"删除选课表失败");
+			}
+		}else{
+			return ElectiveSystemResult.build(410,"删除所选学生失败");
 		}
 	}
 

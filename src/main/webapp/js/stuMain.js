@@ -12,6 +12,18 @@ $(document).ready(function(){
         });
     }
     else{
+        $("#college").text(jsonData.collegeName);
+        $("#stu_name").text(jsonData.stuName);
+
+        $("#logout").click(function(){
+            sessionStorage.removeItem('student');
+            window.location.href = "/elective/html/studentLogin.html";
+        });
+        $("#changePass").click(function(){
+            window.location.href = "/elective/html/stuChangePassword.html";
+        });
+
+
         $("#ft").load('../html/footer.html');
         $("#one").click(function(){
             $.ajax({

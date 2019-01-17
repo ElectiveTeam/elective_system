@@ -16,6 +16,7 @@ function yzlogin(){
                 password:$("#password").val()
             },
             success:function(data){
+                console.log(data);
                 if (data.status === 200) {
                     sessionStorage.setItem("student",JSON.stringify(data.data));
                     console.log(data.data);

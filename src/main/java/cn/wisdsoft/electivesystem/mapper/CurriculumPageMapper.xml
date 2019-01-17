@@ -14,11 +14,11 @@
   <select id="selectCurriculumPage" resultMap="BaseResultMap">
     SELECT curriculum.id,curriculum.cu_name,curriculum.teacher_id,curriculum.class_hour,curriculum.credit,curriculum.grade,curriculum.`status`,curriculum.cou_id,curriculum.`describe`,curriculum.remark,course.tr_id,term_resource.college,term_resource.term_name 
     from curriculum,course,term_resource 
-    WHERE  course.id = curriculum.cou_id
+    WHERE  course.id = curriculum.cou_id AND  course.tr_id=term_resource.id
 	<if test="teacherId!= null and teacherId!= ''">
 		AND teacher_id =#{teacherId}
 	</if>
-	<if test="status!= null and status!= ''">
+	<if test="status!= null">
 		AND curriculum.`status`=#{status}
 	</if>
 	<if test="termName!= null and termName!= ''">

@@ -40,6 +40,7 @@ public class ImportUtil {
                 break;
             case STRING:
                 value = cell.getStringCellValue();
+
                 break;
             case NUMERIC:
                 if ("yyyy-mm-dd".equals(cell.getCellStyle().getDataFormatString())) {
@@ -116,7 +117,7 @@ public class ImportUtil {
                 for (int k = row.getFirstCellNum(); k < row.getLastCellNum(); k++) {
                     cell = row.getCell(k);
                     if (cell==null||cell.equals("")||cell.getCellType() ==Cell.CELL_TYPE_BLANK){
-                        li.add(0);
+                        li.add(0.00);
                     }else {
                         li.add(ImportUtil.getCellValue(cell));
                     }

@@ -40,8 +40,8 @@ public class StatisticsController {
         this.request = request;
     }
 
-    /*@RequestMapping(value="/index",method=RequestMethod.GET)
-    public String index() {return "/home_page/index";}*/
+    @RequestMapping(value="/main",method=RequestMethod.GET)
+    public String index() {return "/home_page/main";}
 
     /**
      * 打开选课统计详情表格页面并绑定后台查询的学期
@@ -64,7 +64,7 @@ public class StatisticsController {
     public PageResult<Statistics> findElective(String termName,int limit,int page){
         HttpSession session = request.getSession();
         Teacher teacher = (Teacher) session.getAttribute("key");
-        return statisticsService.findElective(page,limit,teacher.getTeaPower(), termName);
+        return statisticsService.findElective(page,limit,ElectiveSystemConfig.map.get(teacher.getTeaPower()), termName);
     }
 
     /**
@@ -89,7 +89,7 @@ public class StatisticsController {
     public ElectiveSystemResult findElectiveEcharts(String ternName,String teacherName) {
         HttpSession session = request.getSession();
         Teacher teacher = (Teacher) session.getAttribute("key");
-        return statisticsService.findEleciveEcharts(teacher.getTeaPower(),ternName,teacherName);
+        return statisticsService.findEleciveEcharts(ElectiveSystemConfig.map.get(teacher.getTeaPower()),ternName,teacherName);
     }
 
     @RequestMapping(value="/edit",method=RequestMethod.GET)
@@ -108,6 +108,17 @@ public class StatisticsController {
     @ResponseBody
     public PageResult<Relationship> findStu(int selectid,int limit,int page){
         return statisticsService.findStu(page,limit,selectid);
+    }
+
+    @RequestMapping(value="/delSelection",method = RequestMethod.GET)
+    @ResponseBody
+    /**
+     * 根据选课id停课
+     * @param selectid
+     * @return
+     */
+    public ElectiveSystemResult delSelection(Integer selectid){
+        return statisticsService.delSelection(selectid);
     }
 
 

@@ -363,6 +363,8 @@
     select
       t.term_name as termName,
       t.college as college,
+      t.open_time as openTime,
+      t.close_time as closeTime,
       co.id as courseId,
       c.id as curriculumId,
       c.cu_name as curriculumName,
@@ -384,7 +386,8 @@
       c.status = 2 and
       (t.status = 1 or t.status = 3) and
       t.term_name = #{termName} and
-      t.college = #{category}
+      t.college = #{category} and
+      (c.grade = #{grade} or c.grade = "全部")
   </select>
   <!--
     查询最大人数
@@ -418,10 +421,10 @@
 		s.cu_id = c.id AND
 		c.id = #{curriculumId}
   </select>
-    <select id="selByTeacherId" parameterType="String" resultMap="BaseResultMap">
+    <select id="selByTeacherId" resultMap="BaseResultMap">
     select s.id ,cc.cu_name
     FROM selection s,curriculum cc,course c,term_resource t
-    WHERE s.cu_id = cc.id AND cc.cou_id = c.id AND c.tr_id = t.id AND t.`status` = 5 and cc.teacher_id = #{teacherId}
+    WHERE s.cu_id = cc.id AND cc.cou_id = c.id AND c.tr_id = t.id AND t.`status` = #{status} and cc.teacher_id = #{teacherId}
   </select>
   <select id="selectCurriculum" resultMap="BaseResultMap">
   	select <include refid="Base_Column_List"/>

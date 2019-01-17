@@ -3,10 +3,12 @@ package cn.wisdsoft.electivesystem.service.teacher.impl;
 import cn.wisdsoft.electivesystem.mapper.CourseMapper;
 import cn.wisdsoft.electivesystem.mapper.CurriculumMapper;
 import cn.wisdsoft.electivesystem.mapper.CurriculumPageMapper;
+import cn.wisdsoft.electivesystem.mapper.RelationshipMapper;
 import cn.wisdsoft.electivesystem.mapper.TermResourceMapper;
 import cn.wisdsoft.electivesystem.pojo.Course;
 import cn.wisdsoft.electivesystem.pojo.Curriculum;
 import cn.wisdsoft.electivesystem.pojo.CurriculumPage;
+import cn.wisdsoft.electivesystem.pojo.Relationship;
 import cn.wisdsoft.electivesystem.pojo.TermResource;
 import cn.wisdsoft.electivesystem.pojo.utils.ElectiveSystemResult;
 import cn.wisdsoft.electivesystem.pojo.utils.PageResult;
@@ -30,7 +32,7 @@ import com.github.pagehelper.PageInfo;
  */
 @Service
 public class TeacherServiceImpl implements TeacherService {
-
+	
 	@Autowired
 	TermResourceMapper trm;
 	@Autowired
@@ -38,8 +40,9 @@ public class TeacherServiceImpl implements TeacherService {
 	@Autowired
 	CurriculumPageMapper clpm;
 	@Autowired
-	CurriculumMapper curriculumMapper;
-
+	CurriculumMapper clm;
+	@Autowired RelationshipMapper rm;
+	
     public TeacherServiceImpl() {
 
     }
@@ -51,8 +54,8 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
-	public List<Course> selectByName(String course_name,String term_id) {
-		List<Course> courselist=cm.selectByName(course_name,term_id);
+	public List<Course> selectByName(String term_id) {
+		List<Course> courselist=cm.selectByName(term_id);
 		return courselist;
 	}
 
@@ -67,8 +70,32 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
-	public List<Curriculum> selectByTeacherId(String teacherId) {
-		return curriculumMapper.selByTeacherId(teacherId);
+	public int updateStatus(Curriculum record) {
+		int ofn = clm.updateByPrimaryKeySelective(record);
+		return ofn;
+	}
+
+	@Override
+	public List<String> selectTermName() {
+		List<String> list = trm.selectTermName();
+		return list;
+	}
+
+	@Override
+	public String selectNew() {
+		// TODO 自动生成的方法存根
+		return trm.selectNew();
+	}
+
+	@Override
+	public List<Relationship> selectBycurriculumID(int curId) {
+		List<Relationship> selaList=rm.selectBycurriculumID(curId);
+		return selaList;
+	}
+	//王禹嘉-----------------
+	@Override
+	public List<Curriculum> selectByTeacherId(int status,String teacherId) {
+		return clm.selByTeacherId(status,teacherId);
 	}
 
 }

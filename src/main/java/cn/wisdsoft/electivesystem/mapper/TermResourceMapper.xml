@@ -87,10 +87,21 @@
   </select>
   
   <!-- 查询学期资源表中当前时间处于申请状态的学院 -->
+  <!-- select * from term_resource where status=0 and (select now() between open_time and close_time)  -->
   <select id="selectBytimetype" parameterType="cn.wisdsoft.electivesystem.pojo.TermResourceExample" resultMap="BaseResultMap">
-    select * from term_resource where status=0 and (select now() between open_time and close_time) 
+    select * from term_resource where status=0 AND term_name=(select term_name from term_resource ORDER BY id DESC LIMIT 0,1)
   </select>
   
+  <!-- 查询学期资源表中学期名称去重 -->
+  <!-- select distinct term_name from  term_resource -->
+  <select id="selectTermName"  resultType="java.lang.String">
+    select distinct term_name from  term_resource
+  </select>
+  
+  <!-- 查询学期资源表中最新学期名称-->
+  <select id="selectNew"  resultType="java.lang.String">
+    select term_name from term_resource ORDER BY id DESC LIMIT 0,1
+  </select>
   
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 

@@ -38,6 +38,10 @@ public interface TermResourceMapper {
     int selStatusBySelId(int selectId);
     /**查询本学院本学期的学期资源信息*/
     List<TermResource> selectByCollege(String college);
-
+    //查询学期资源表中学期名称去重
+    List<String> selectTermName();
+    //查询最新学期
+    String selectNew();
+	
     int updateTermResourceByCloseTime();
 }

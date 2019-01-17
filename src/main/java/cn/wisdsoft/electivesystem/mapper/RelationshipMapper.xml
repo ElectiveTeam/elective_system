@@ -268,10 +268,16 @@
   <!--
     判断学生是否可以选课
   -->
-  <select id="selectStatus" resultType="cn.wisdsoft.electivesystem.pojo.TermResource">
+  <select id="selectCollegeStatus" resultType="cn.wisdsoft.electivesystem.pojo.TermResource">
     select open_time,close_time from term_resource
       WHERE
-      (college = '校选' or college = #{category}) AND
+      college = #{category} AND
+      (status = 1 or status = 3);
+  </select>
+  <select id="selectSchoolStatus" resultType="cn.wisdsoft.electivesystem.pojo.TermResource">
+    select open_time,close_time from term_resource
+      WHERE
+      college = '校选' AND
       (status = 1 or status = 3);
   </select>
   <!--
@@ -339,5 +345,9 @@
       AND s.cu_id = c.id
       AND c.cou_id = co.id
       AND r.stu_id = #{stuId};
+  </select>
+  <!--根据curriculum表的id查询当前学生的学号和姓名闫亮-->
+  <select id="selectBycurriculumID" parameterType="integer" resultMap="BaseResultMap">
+    select stu_id,stu_name from relationship WHERE relationship.select_id=(SELECT selection.id FROM selection,curriculum where selection.cu_id=curriculum.id AND curriculum.id=#{curId})
   </select>
 </mapper>

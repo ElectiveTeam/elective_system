@@ -15,7 +15,7 @@
 <div style="padding: 15px;">
     <div class="layui-form">
         <div class="layui-inline">
-            <label class="layui-form-label">课程</label>
+            <label class="layui-form-label">*课程</label>
             <div class="layui-input-inline">
                 <select id="curriculum" lay-verify="required" >
                     <option value="">请选择课程</option>
@@ -34,37 +34,37 @@
         </div>
         <div class="layui-inline">
             <label for="usual" class="layui-form-label">
-                <span class="x-red">*</span>平时成绩
+                <span class="x-red"></span>平时成绩
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="usual" name="usual" lay-verify="required"
+                <input type="text" id="usual" name="usual"
                        autocomplete="off" class="layui-input" value=""/>
             </div>
         </div>
         <div class="layui-inline">
             <label for="midTerm" class="layui-form-label">
-                <span class="x-red">*</span>期中成绩
+                <span class="x-red"></span>期中成绩
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="midTerm" name="midTerm" lay-verify="required"
+                <input type="text" id="midterm" name="midterm"
                        autocomplete="off" class="layui-input" value=""/>
             </div>
         </div>
         <div class="layui-inline">
             <label for="skill" class="layui-form-label">
-                <span class="x-red">*</span>技能考核
+                <span class="x-red"></span>技能考核
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="skill" name="skill" lay-verify="required"
+                <input type="text" id="skill" name="skill"
                        autocomplete="off" class="layui-input" value=""/>
             </div>
         </div>
         <div class="layui-inline">
             <label for="finalexam" class="layui-form-label">
-                <span class="x-red">*</span>期末成绩
+                <span class="x-red"></span>期末成绩
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="finalexam" name="finalexam" lay-verify="required"
+                <input type="text" id="finalexam" name="finalexam"
                        autocomplete="off" class="layui-input" value=""/>
             </div>
         </div>

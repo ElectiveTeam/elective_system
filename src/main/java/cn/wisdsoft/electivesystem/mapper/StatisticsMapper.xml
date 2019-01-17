@@ -45,4 +45,12 @@
 	<select id="findStu" parameterType="INTEGER" resultType="cn.wisdsoft.electivesystem.pojo.Relationship">
 		SELECT stu_id AS stuId ,stu_name AS stuName from relationship where select_id = #{selectid}
 	</select>
+	<!-- 根据选课id删除选课表（停课）-->
+	<delete id="delRelationship" parameterType="INTEGER">
+		DELETE FROM relationship where select_id = #{selectid}
+	</delete>
+	<!-- 根据选课id删除选课关系表-->
+	<delete id="delSelection" parameterType="INTEGER">
+		DELETE FROM selection where id = #{id}
+	</delete>
 </mapper>

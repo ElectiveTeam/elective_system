@@ -6,11 +6,11 @@
     <result column="stu_id" jdbcType="VARCHAR" property="stuId" />
     <result column="stu_name" jdbcType="VARCHAR" property="stuName" />
     <result column="select_id" jdbcType="INTEGER" property="selectId" />
-    <result column="usual" jdbcType="INTEGER" property="usual" />
-    <result column="midterm" jdbcType="INTEGER" property="midterm" />
-    <result column="skill" jdbcType="INTEGER" property="skill" />
-    <result column="finalexam" jdbcType="INTEGER" property="finalexam" />
-    <result column="achieve" jdbcType="INTEGER" property="achieve" />
+    <result column="usual" jdbcType="DOUBLE" property="usual" />
+    <result column="midterm" jdbcType="DOUBLE" property="midterm" />
+    <result column="skill" jdbcType="DOUBLE" property="skill" />
+    <result column="finalexam" jdbcType="DOUBLE" property="finalexam" />
+    <result column="achieve" jdbcType="DOUBLE" property="achieve" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="term_name" jdbcType="VARCHAR" property="termName" />
     <result column="cu_name" jdbcType="VARCHAR" property="cuName" />

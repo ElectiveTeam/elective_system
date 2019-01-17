@@ -45,5 +45,14 @@ public interface StatisticsService {
 	 * @param selectid
 	 * @return
 	 */
-	public PageResult<Relationship> findStu(int page,int limit,int selectid);
+	PageResult<Relationship> findStu(int page,int limit,int selectid);
+
+	/**
+	 * 根据id删除选课表和选课关系表
+	 * @param selectid
+	 * @return
+	 */
+	ElectiveSystemResult delSelection(Integer selectid);
+
+
 }

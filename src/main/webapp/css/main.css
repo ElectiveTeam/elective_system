@@ -1,13 +1,30 @@
-body h1{
+.tod{
+    background-color: rgba(2, 9, 152,0.6);
+}
+
+.tod h1{
     width: 100%;
-    margin-top:5rem;
+    margin-top:4rem;
     text-align: center;
     color: white;
-    background-color: rgba(2, 9, 152,0.6);
-    padding: 20px 0;
 
+    padding: 20px 0;
+}
+
+.spd{
+    margin: 0 auto;
+    padding-bottom: 2rem;
+    width: 100%;
+    text-align: center;
+    color: white;
 
 }
+
+.spd a{
+    color: #99ccff;
+}
+
+
 .content{
     display: flex;
     flex-flow: row wrap;
@@ -46,6 +63,8 @@ body h1{
     margin:  1rem 0;
     display: block;
 }
+
+
 
 
 

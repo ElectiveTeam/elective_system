@@ -13,6 +13,7 @@ if(a == null){
 
 
 $("#chongzhi").click(function(){
+    $("#oldpassword").val("");
     $("#password").val("");
     $("#password2").val("");
 });
@@ -22,31 +23,41 @@ $("#fanhui").click(function(){
 });
 
 function yzlogin(){
-    if ($("#password").val()=="") {
-        alert("密码不能为空！");
-    } else if($("#password2").val()==""){
-        alert("密码不能为空！");
-    } else if($("#password").val()!=$("#password2").val()){
-        alert("两次输入的密码不相同！");
-    } else{
-        let c = b.id;
-        $.ajax({
-            type:"post",
-            url:"http://localhost:8080/student/studentLogin/StuUpdatePassword",
-            data:{
-                stuid:c,
-                password:$("#password").val()
-            },
-            success:function(data){
-                alert("更新密码成功,请返回登录页面重新登录！");
-                sessionStorage.removeItem("student");
-                window.location.href = "http://localhost:8080/elective/html/studentLogin.html"
+        if ($("#oldpassword").val()=="") {
+            alert("旧密码不能为空");
+        }
+        else if ($("#password").val()=="") {
+            alert("密码不能为空");
+        } else if($("#password2").val()==""){
+            alert("密码不能为空");
+        } else if($("#password").val()!=$("#password2").val()){
+            alert("两次输入的密码不相同");
+        } else{
+            var c = b.id;
+            $.ajax({
+                type:"post",
+                url:"http://localhost:8080/student/studentLogin/StuUpdatePassword",
+                data:{
+                    stuid:c,
+                    oldPassword:$("#oldpassword").val(),
+                    newPassword:$("#password2").val()
+                },
+                success:function(data){
+                    console.log(data);
+                    if(data.status === 250){
+                        alert("更新密码成功,即将返回登录页面进行登录！");
+                        sessionStorage.removeItem("student");
+                        window.location.href = "http://localhost:8080/elective/html/studentLogin.html"
+                    }
+                    else {
+                        alert("旧密码输入错误！");
+                    }
 
-            },
-            error:function(e){
-                alert("更新密码失败！");
-            }
-        });
+                },
+                error:function(e){
+                    alert("服务器错误！");
+                }
+            });
+        }
+
     }
-
-}

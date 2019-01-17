@@ -44,7 +44,7 @@ public interface CurriculumMapper {
      * @param category  课程类别
      * @return  包含课程信息的集合
      */
-    List<CurriculumDo> selectAllCurriculum(@Param("termName") String termName,@Param("category") String category);
+    List<CurriculumDo> selectAllCurriculum(@Param("termName") String termName,@Param("category") String category,@Param("grade") String grade);
 
     /**
      * 查询最大人数
@@ -66,5 +66,5 @@ public interface CurriculumMapper {
     List<Curriculum> findCurriculumByCollegeNameAndStatus(@Param("collegeName") String collegeName);
     CurriculumDo selectDetails(int curriculumId);
 
-    List<Curriculum> selByTeacherId(String teacherId);
+    List<Curriculum> selByTeacherId(@Param("status") int status,@Param("teacherId") String teacherId);
 }

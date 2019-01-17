@@ -83,8 +83,8 @@ public class SelectedCurriculumController {
      */
     @RequestMapping(value = "/selectAllCurriculum",method = RequestMethod.GET)
     @ResponseBody
-    public ElectiveSystemResult selectAllCurriculum(String termName,String category) {
-        return selectedCurriculumService.selectAllCurriculum(termName,category);
+    public ElectiveSystemResult selectAllCurriculum(String termName,String category,String grade) {
+        return selectedCurriculumService.selectAllCurriculum(termName,category,grade);
     }
 
     /**

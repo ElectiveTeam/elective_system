@@ -19,8 +19,8 @@ public interface CourseMapper {
     int insertSelective(Course record);
 
     List<Course> selectByExample(CourseExample example);
-    //根据课程名称模糊查询课组
-    List<Course> selectByName(@Param("course_name") String course_name, @Param("tr_id")String term_id);
+    //根据学院查询课组，学院下的课组
+    List<Course> selectByName(@Param("tr_id")String term_id);
 
     Course selectByPrimaryKey(Integer id);
 

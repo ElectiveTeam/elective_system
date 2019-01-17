@@ -7,9 +7,7 @@ import cn.wisdsoft.electivesystem.service.administrator.achievement.AchievementS
 import cn.wisdsoft.electivesystem.service.administrator.rule.RuleService;
 import cn.wisdsoft.electivesystem.service.administrator.term.TermResourceService;
 import cn.wisdsoft.electivesystem.service.teacher.TeacherService;
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import org.apache.http.HttpRequest;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -24,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.lang.reflect.Type;
 import java.util.*;
 
 /**
@@ -57,14 +54,6 @@ public class AchievementController {
     public String main(){
         return "Achievement/selectionDetails";
     }
-
-//    @RequestMapping(value = "/test1",method = RequestMethod.GET)
-//    @ResponseBody
-//    public PageResult getAllCurriculum(HttpSession session){
-//        List<Achievement> achievements = (List<Achievement>) session.getAttribute("achievements");
-//        session.removeAttribute("achievements");
-//        return PageResult.ok(achievements,achievements.size());
-//    }
 
     @RequestMapping(value = "/toStudentDetails/{id}",method = RequestMethod.GET)
     public String toStudentDetails(@PathVariable int id, Model model){
@@ -142,10 +131,23 @@ public class AchievementController {
             List<List<Object>> listByExcel = ImportUtil.getListByExcel(excel);
             List<Achievement> achievements = new ArrayList<Achievement>();
             for (List list:listByExcel){
-                int usual = Integer.parseInt(list.get(2).toString());
-                int midterm = Integer.parseInt(list.get(3).toString());
-                int skill = Integer.parseInt(list.get(4).toString());
-                int finalexam = Integer.parseInt(list.get(5).toString());
+                System.out.println(list.get(2));
+                double usual = Double.parseDouble(list.get(2).toString());
+                double midterm = Double.parseDouble(list.get(3).toString());
+                double skill = Double.parseDouble(list.get(4).toString());
+                double finalexam = Double.parseDouble(list.get(5).toString());
+                if(u==0){
+                    usual=0.00;
+                }
+                if(m==0){
+                    midterm = 0.00;
+                }
+                if(s==0){
+                    skill = 0.00;
+                }
+                if(f==0){
+                    finalexam = 0.00;
+                }
                 Achievement am = new Achievement();
                 am.setStuId(list.get(0).toString());
                 am.setStuName(list.get(1).toString());
@@ -170,7 +172,8 @@ public class AchievementController {
         if (teacher==null){
             return PageResult.build(500,"请登录");
         }
-        List<Curriculum> curriculumList = teacherService.selectByTeacherId(teacher.getWorknumber());
+        System.out.println(teacher.getWorknumber());
+        List<Curriculum> curriculumList = teacherService.selectByTeacherId(6,teacher.getWorknumber());
         for (int i = 0; i <curriculumList.size() ; i++) {
             System.out.println(curriculumList.get(i));
         }
