@@ -27,9 +27,10 @@ public class StuChangePassword {
     }
     @RequestMapping(value = "/StuUpdatePassword",method = RequestMethod.POST)
     @ResponseBody
-    public int StuUpdatePassword(String stuid,String password){
+    public int StuUpdatePassword(String stuid,String oldpassword,String password){
         HashMap<String,String> map = new HashMap<>();
         map.put("id",stuid);
+        map.put("oldPassword",oldpassword);
         map.put("stuPassword",password);
         int a =0;
         String i = HttpClientUtil.doGet("http://192.168.6.180:8080/info/updatastupassword",map);

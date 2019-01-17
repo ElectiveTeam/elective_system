@@ -39,7 +39,7 @@ public class ElectiveSystemConfig {
     	map.put("HGXY0006", "人文学院");
     	map.put("HGXY0007", "土木工程学院");
     	map.put("HGXY0008", "会计学院");
-    	map.put("1", "校选");
+    	map.put("1", "校级管理");
     	map.put("0", "无权限");
     }
 

@@ -57,6 +57,24 @@
                         if(data[i].teaPower=="HGXY0002"){
                             data[i].teaPower="建筑学院管理员";
                         }
+                        if(data[i].teaPower=="HGXY0003"){
+                            data[i].teaPower="工程管理管理员";
+                        }
+                        if(data[i].teaPower=="HGXY0004"){
+                            data[i].teaPower="经济管理管理员";
+                        }
+                        if(data[i].teaPower=="HGXY0005"){
+                            data[i].teaPower="信息学院管理员";
+                        }
+                        if(data[i].teaPower=="HGXY0006"){
+                            data[i].teaPower="人文学院管理员";
+                        }
+                        if(data[i].teaPower=="HGXY0007"){
+                            data[i].teaPower="土木工程管理员";
+                        }
+                        if(data[i].teaPower=="HGXY0008"){
+                            data[i].teaPower="会计学院管理员";
+                        }
                         var  res = " <div class='layui-form-item' >" +
                             "<div class='layui-input-block' style='display: flex;'>" +
                                 "<input type='text' disabled name='title' value='"+data[i].worknumber+ "' required  lay-verify='required' placeholder='请输入标题' autocomplete='off' class='layui-input' id='zhigonghao' style='width: 15%;'>" +

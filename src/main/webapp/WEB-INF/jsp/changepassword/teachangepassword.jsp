@@ -24,13 +24,19 @@
         </div>
         <form class="layui-form" action="">
             <div class="layui-form-item">
-                <label class="layui-form-label">请输入密码</label>
+                <label class="layui-form-label">请输入旧密码</label>
+                <div class="layui-input-block">
+                    <input type="password" name="title" lay-verify="title" autocomplete="off" placeholder="请输入密码" class="layui-input" id="oldpassword" style="width: 70%;">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">请输入新密码</label>
                 <div class="layui-input-block">
                     <input type="password" name="title" lay-verify="title" autocomplete="off" placeholder="请输入密码" class="layui-input" id="password" style="width: 70%;">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">请再次输入密码</label>
+                <label class="layui-form-label">请再次输入新密码</label>
                 <div class="layui-input-block">
                     <input type="password" name="title" lay-verify="title" autocomplete="off" placeholder="请再次输入密码" class="layui-input" id="password2" style="width: 70%;">
                 </div>
@@ -48,11 +54,15 @@
 <script src="/elective/student/js/jquery_2.2.4.min.js"></script>
 <script type="text/javascript">
     $("#chongzhi").click(function(){
+        $("#oldpassword").val("");
         $("#password").val("");
         $("#password2").val("");
     });
     function yzlogin(){
-        if ($("#password").val()=="") {
+        if ($("#oldpassword").val()=="") {
+            alert("旧密码不能为空");
+        }
+        else if ($("#password").val()=="") {
             alert("密码不能为空");
         } else if($("#password2").val()==""){
             alert("密码不能为空");
@@ -65,6 +75,7 @@
                 url:"http://localhost:8080/TeaUpdatePassword",
                 data:{
                     teaid:$("#id").val(),
+                    oldpassword:$("#oldpassword").val(),
                     password:$("#password").val()
                 },
                 success:function(data){

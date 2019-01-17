@@ -26,7 +26,7 @@
         <div class="layui-logo">选课系统</div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-left">
-            <li class="layui-nav-item my-demo" data-id="0" data-uri="login/first">首页</li>
+            <li class="layui-nav-item my-demo" data-id="0" data-uri="teacher/courseAdd">首页</li>
         </ul>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
@@ -35,7 +35,7 @@
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a data-id="6" data-uri="administrator/updatePwd" class="my-demo">个人信息</a></dd>
-                    <dd><a data-id="7" data-uri="administrator/updatePwd" class="my-demo">修改密码</a></dd>
+                    <dd><a data-id="7" data-uri="administrator/updatePwd" class="my-demo" onclick="update()">修改密码</a></dd>
                     <dd><a data-id="7" data-uri="administrator/updatePwd" class="my-demo" onclick="logout()">退出</a></dd>
                 </dl>
             </li>
@@ -51,7 +51,7 @@
                     <dl class="layui-nav-child">
                         <%--data-uri中填写@Controller注解下面的@RequestMapping注解的value值 加上 方法对应的@RequestMapping注解的value值--%>
                         <dd><a data-id="1" data-uri="" class="my-demo">学期模块</a></dd>
-                        <dd><a data-id="2" data-uri="" class="my-demo" onclick="power()">授权模块</a></dd>
+                        <dd><a data-id="2" data-uri="/power" class="my-demo">授权模块</a></dd>
                         <dd><a data-id="3" data-uri="/application/toPage" class="my-demo">课程模块</a></dd>
                         <dd><a data-id="4" data-uri="" class="my-demo">审核模块</a></dd>
                         <dd><a data-id="5" data-uri="" class="my-demo">统计模块</a></dd>
@@ -59,31 +59,15 @@
                     </dl>
                 </li>
                 <li class="layui-nav-item layui-nav-itemed">
-                    <a data-id="7" data-uri="" class="my-demo">统计汇总</a>
-                    <dl class="layui-nav-child">
-                        <%--data-uri中填写@Controller注解下面的@RequestMapping注解的value值 加上 方法对应的@RequestMapping注解的value值--%>
-                        <dd><a data-id="8" data-uri="/statistics/list" class="my-demo">选课情况统计表</a></dd>
-                        <dd><a data-id="9" data-uri="/statistics/Echarts" class="my-demo">选课人数统计图</a></dd>
-                        <dd><a data-id="10" data-uri="" class="my-demo">选课成绩统计表</a></dd>
-                        <dd><a data-id="11" data-uri="" class="my-demo">选课成绩统计图</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item layui-nav-itemed">
                     <a href="javascript:;">课程管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a data-id="12" data-uri="" class="my-demo">课程列表</a></dd>
-                        <dd><a data-id="13" data-uri="" class="my-demo">申请课程</a></dd>
-                        <dd><a data-id="14" data-uri="" class="my-demo">取消课程</a></dd>
-                        <dd><a data-id="15" data-uri="" class="my-demo">驳回课程</a></dd>
+                        <dd><a data-id="7" data-uri="" class="my-demo">课程列表</a></dd>
+                        <dd><a data-id="8" data-uri="" class="my-demo">申请课程</a></dd>
+                        <dd><a data-id="9" data-uri="" class="my-demo">取消课程</a></dd>
+                        <dd><a data-id="10" data-uri="" class="my-demo">驳回课程</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a href="javascript:;">成绩管理</a>
-                    <dl class="layui-nav-child">
-                        <dd><a data-id="11" data-uri="${pageContext.request.contextPath}/achievement/" class="my-demo">成绩录入</a></dd>
-                        <dd><a data-id="12" data-uri="${pageContext.request.contextPath}/rule/" class="my-demo">规则管理</a></dd>
-                    </dl>
-                </li>
+                <li class="layui-nav-item"><a data-id="11" data-uri="" class="my-demo">成绩管理</a></li>
             </ul>
         </div>
     </div>
