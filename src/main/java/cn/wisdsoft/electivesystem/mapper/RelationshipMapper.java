@@ -31,6 +31,9 @@ public interface RelationshipMapper {
     int updateByPrimaryKeySelective(Relationship record);
 
     int updateByPrimaryKey(Relationship record);
+    
+    //根据curriculum表的id查询当前学生的学号和姓名-----闫亮
+    List<Relationship> selectBycurriculumID(@Param("curId")int curId);
 
     /**
      * 查询学生已选课程

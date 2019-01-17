@@ -16,9 +16,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/elective/layui/css/layui.css"  media="all">
-  <script type="text/javascript" src="${pageContext.request.contextPath}/elective/js/jquery_2.2.4.min.js" ></script>
-  <script type="text/javascript" src="${pageContext.request.contextPath}/elective/ckeditor/ckeditor.js" ></script>
-  <script type="text/javascript" src="${pageContext.request.contextPath}/elective/ckeditor/lang/zh-cn.js" ></script>
   <style type="text/css">
 	input:-webkit-autofill {
 	  -webkit-box-shadow: 0 0 0px 1000px white inset;
@@ -37,20 +34,20 @@
 	  	
 	    <label class="layui-form-label"><span style="color:red">*</span>课程名称</label>
 	    <div class="layui-input-inline">
-	      <input type="text" name="cu_name" id="cu_name" lay-verify="cu_name" placeholder="请输入标题（4-15字符）" class="layui-input">
+	      <input type="text" name="cu_name" id="cu_name" lay-verify="cu_name" class="layui-input">
 	    </div>
 	    
 	    <div class="layui-inline">
 	      <label class="layui-form-label" ><span style="color:red">*</span>学时</label>
 	      <div class="layui-input-inline">
-	        <input type="text" name="class_hour" id="class_hour" lay-verify="class_hour" class="layui-input" placeholder="请输入学时（10-50学时）">
+	        <input type="text" name="class_hour" id="class_hour" lay-verify="class_hour" class="layui-input" >
 	      </div>
 	    </div>
 	    
 	    <div class="layui-inline">
 	      <label class="layui-form-label" ><span style="color:red">*</span>学分</label>
 	      <div class="layui-input-inline">
-	        <input type="text" name="credit" id="credit" lay-verify="credit" class="layui-input" placeholder="请输入学分（0.1-5.0学分）">
+	        <input type="text" name="credit" id="credit" lay-verify="credit" class="layui-input">
 	      </div>
 	    </div>
 	    
@@ -135,18 +132,34 @@
     </div>
   </div>
 </div>
-	 
+
+
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/elective/js/jquery_2.2.4.min.js" ></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/elective/ckeditor/ckeditor.js" ></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/elective/ckeditor/lang/zh-cn.js" ></script>	 
 <script src="${pageContext.request.contextPath}/elective/layui/layui.js" charset="utf-8"></script>
-<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
-
-
-
 	window.onload = function(){
 	    CKEDITOR.replace('describe',{  
 			filebrowserImageUploadUrl:'imageUpload',  
 			language : 'zh-cn',  
 		});
+	    
+	  //加载localsession中的信息
+	    var information = sessionStorage.getItem('editInfor');
+		var info = JSON.parse(information);//把获取到的Json字符串转换回对象
+		var id = info.id;//curriculum   id
+		var cuName = info.cuName;//课程名称 
+		var classHour = info.classHour;//学时
+		var credit = info.credit;//学分
+		var describe = info.describe;//课程描述
+		document.getElementById("cu_name").value=cuName;//课程名称 
+		document.getElementById("class_hour").value=classHour;//学时
+		document.getElementById("credit").value=credit;//学分
+		//CKEDITOR.instances.describe.getData()=describe;//课程描述
+		//ckEditor.setData(describe);
+		CKEDITOR.instances.describe.setData(describe);
     }
 	layui.use(['form','element','layer'], function(){
 	  var form = layui.form;
@@ -235,6 +248,10 @@
 	  });
 	  //监听提交申请
 	  form.on('submit(apply)', function(){
+			//获取课程基础信息id
+		  	var information = sessionStorage.getItem('editInfor');
+			var info = JSON.parse(information);//把获取到的Json字符串转换回对象
+			var id = info.id;//curriculum   id
 		  	//课程名称
 		  	var cu_name = $('#cu_name').val();
 		  	//学时
@@ -259,9 +276,9 @@
 		  	//教师姓名,从session获取
 		  	var teacher_name='<%= session.getAttribute("teacherName") %>';
 		  	
-		  	var param={cuName:cu_name,classHour:class_hour,credit:credit,termId:term_id,grade:grade,couId:cou_id,status:status,describe:describe,teacherId:teacher_id,teacherName:teacher_name};
+		  	var param={id:id,cuName:cu_name,classHour:class_hour,credit:credit,termId:term_id,grade:grade,couId:cou_id,status:status,describe:describe,teacherId:teacher_id,teacherName:teacher_name};
 	        $.ajax({
-	          url:"${pageContext.request.contextPath}/teacher/addCurriculum",
+	          url:"${pageContext.request.contextPath}/teacher/updateCurriculum",
 	          type:'post',//method请求方式，get或者post
 	          data:JSON.stringify(param),//表格数据序列化
 	          contentType: "application/json; charset=utf-8",
@@ -290,6 +307,10 @@
 	  
 	  //监听暂存申请
 	  form.on('submit(save)', function(){
+		  	//获取课程基础信息id
+		  	var information = sessionStorage.getItem('editInfor');
+			var info = JSON.parse(information);//把获取到的Json字符串转换回对象
+			var id = info.id;//curriculum   id
 		  	//课程名称
 		  	var cu_name = $('#cu_name').val();
 		  	//学时
@@ -314,9 +335,9 @@
 		  	//教师姓名,从session获取
 		  	var teacher_name='<%= session.getAttribute("teacherName") %>';
 		  	
-		  	var param={cuName:cu_name,classHour:class_hour,credit:credit,termId:term_id,grade:grade,couId:cou_id,status:status,describe:describe,teacherId:teacher_id,teacherName:teacher_name};
+		  	var param={id:id,cuName:cu_name,classHour:class_hour,credit:credit,termId:term_id,grade:grade,couId:cou_id,status:status,describe:describe,teacherId:teacher_id,teacherName:teacher_name};
 	        $.ajax({
-	          url:"${pageContext.request.contextPath}/teacher/addCurriculum",
+	          url:"${pageContext.request.contextPath}/teacher/updateCurriculum",
 	          type:'post',//method请求方式，get或者post
 	          data:JSON.stringify(param),//表格数据序列化
 	          contentType: "application/json; charset=utf-8",

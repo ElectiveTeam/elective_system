@@ -46,7 +46,7 @@
                 <span class="x-red"></span>期中成绩
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="midTerm" name="midTerm"
+                <input type="text" id="midterm" name="midterm"
                        autocomplete="off" class="layui-input" value=""/>
             </div>
         </div>

@@ -87,9 +87,9 @@
   <!-- 根据课程名称模糊查询课组 -->
   <select id="selectByName" parameterType="String" resultMap="BaseResultMap">
     select * from course where true
-	<if test="course_name!= null and course_name!= ''">
+	<!-- <if test="course_name!= null and course_name!= ''">
 		AND course_name LIKE concat('%',#{course_name},'%')
-	</if>
+	</if> -->
 	<if test="tr_id!= null and tr_id!= ''">
 		AND tr_id=#{tr_id}
 	</if>

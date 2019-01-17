@@ -71,10 +71,7 @@
                 <li class="layui-nav-item layui-nav-itemed">
                     <a href="javascript:;">课程管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a data-id="12" data-uri="" class="my-demo">课程列表</a></dd>
-                        <dd><a data-id="13" data-uri="" class="my-demo">申请课程</a></dd>
-                        <dd><a data-id="14" data-uri="" class="my-demo">取消课程</a></dd>
-                        <dd><a data-id="15" data-uri="" class="my-demo">驳回课程</a></dd>
+                        <dd><a data-id="7" data-uri="teacher/curriculumList" class="my-demo">课程列表</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item layui-nav-itemed">
