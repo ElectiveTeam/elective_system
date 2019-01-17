@@ -15,6 +15,7 @@ public class ElectiveSystemConfig {
 
     public final static String PERSON_CENTER_MAPPING = "/student/personCenter";
     public final static String SELECTED_CURRICULUM_MAPPING = "/student/selectedCurriculum";
+    public final static String SELECTED_GRADE_MAPPING = "/student/selectedGrade";
     public final static String STUDENT_LOGIN_MAPPING = "/student/studentLogin";
     public final static String TEACHER_MAPPING = "/teacher";
     public final static String APPLICATION_MAPPING = "/application";
@@ -24,9 +25,11 @@ public class ElectiveSystemConfig {
     public final static String TERM_MAPPING = "/term";
     public final static String ACHIEVEMENT_MAPPING = "/achievement";
     public final static String STATISTICS_MAPPING = "/statistics";
+    public final static String RULE_MAPPING = "/rule";
+
     //编号对应的学院
     public final static Map<String, String> map = new HashMap<>();
-    
+
     static {
     	map.put("HGXY0001", "软件学院");
     	map.put("HGXY0002", "建筑学院");
@@ -39,7 +42,7 @@ public class ElectiveSystemConfig {
     	map.put("1", "校选");
     	map.put("0", "无权限");
     }
-    
+
     public ElectiveSystemConfig() {
 
     }

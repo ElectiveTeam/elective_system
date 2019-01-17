@@ -36,6 +36,8 @@ public interface CurriculumMapper {
 
     int updateByPrimaryKey(Curriculum record);
 
+    List<Curriculum> selCurByTeaId(String teacherId);
+
     /**
      * 查询当前学期所有课程信息
      * @param termName  学期名称
@@ -63,4 +65,6 @@ public interface CurriculumMapper {
      */
     List<Curriculum> findCurriculumByCollegeNameAndStatus(@Param("collegeName") String collegeName);
     CurriculumDo selectDetails(int curriculumId);
+
+    List<Curriculum> selByTeacherId(@Param("status") int status,@Param("teacherId") String teacherId);
 }

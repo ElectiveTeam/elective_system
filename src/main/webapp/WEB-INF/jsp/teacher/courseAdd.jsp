@@ -170,7 +170,7 @@
 			   }
 			   $.ajax({
 		  		//接口地址
-		  		url : "${pageContext.request.contextPath}/teacher/selectCourse",
+		  		url : "http://localhost:8080/teacher/selectCourse",
 		  		type : "post",
 		  		data : {course_name:course_name,
 		  				term_id:term_id},
@@ -271,7 +271,7 @@
 		  	
 		  	var param={cuName:cu_name,classHour:class_hour,credit:credit,termId:term_id,grade:grade,couId:cou_id,status:status,describe:describe,teacherId:teacher_id,teacherName:teacher_name}
 	        $.ajax({
-	          url:"${pageContext.request.contextPath}/teacher/addCurriculum",
+	          url:"http://localhost:8080/teacher/addCurriculum",
 	          type:'post',//method请求方式，get或者post
 	          data:JSON.stringify(param),//表格数据序列化
 	          contentType: "application/json; charset=utf-8",

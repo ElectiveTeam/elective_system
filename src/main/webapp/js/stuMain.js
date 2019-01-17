@@ -43,7 +43,7 @@ $(document).ready(function(){
         });
 
         $("#three").click(function(){
-            location.href = "http://localhost:8080/elective/html/selectedCurriculum.html";
+            location.href = "http://localhost:8080/elective/html/studentGrade.html";
         });
     }
 });

@@ -35,7 +35,7 @@
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a data-id="6" data-uri="administrator/updatePwd" class="my-demo">个人信息</a></dd>
-                    <dd><a data-id="7" data-uri="administrator/updatePwd" class="my-demo" onclick="update()">修改密码</a></dd>
+                    <dd><a data-id="7" data-uri="administrator/updatePwd" class="my-demo">修改密码</a></dd>
                     <dd><a data-id="7" data-uri="administrator/updatePwd" class="my-demo" onclick="logout()">退出</a></dd>
                 </dl>
             </li>
@@ -77,7 +77,13 @@
                         <dd><a data-id="15" data-uri="" class="my-demo">驳回课程</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a data-id="16" data-uri="" class="my-demo">成绩管理</a></li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;">成绩管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a data-id="11" data-uri="${pageContext.request.contextPath}/achievement/" class="my-demo">成绩录入</a></dd>
+                        <dd><a data-id="12" data-uri="${pageContext.request.contextPath}/rule/" class="my-demo">规则管理</a></dd>
+                    </dl>
+                </li>
             </ul>
         </div>
     </div>

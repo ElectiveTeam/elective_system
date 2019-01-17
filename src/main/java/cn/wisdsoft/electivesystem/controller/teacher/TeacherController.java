@@ -36,14 +36,13 @@ public class TeacherController {
 	@Autowired
 	CourseMapper cm;
 
-	
     private final TeacherService teacherService;
 
     @Autowired
     public TeacherController(TeacherService teacherService) {
         this.teacherService = teacherService;
     }
-    
+
     @RequestMapping(value="/courseAdd",method=RequestMethod.GET)
     public String courseAdd(Model model) {
     	//查询当前时间内处于申请状态的学院
@@ -51,13 +50,13 @@ public class TeacherController {
     	model.addAttribute("termlist",termlist);
 		return "teacher/courseAdd";
     }
-    
+
     //测试
     @RequestMapping(value="/index",method=RequestMethod.GET)
     public String Index(Model model) {
 		return "home_page/index";
     }
-    
+
     @RequestMapping(value="/selectCourse",method=RequestMethod.POST)
     @ResponseBody
     public List<Course> selectCourse(String course_name,String term_id) {
@@ -67,7 +66,7 @@ public class TeacherController {
     	System.out.println(courseList.get(0).getCourseName());
 		return courseList;
     }
-    
+
     @RequestMapping(value="/addCurriculum",method=RequestMethod.POST)
     @ResponseBody
     public String addCurriculum(@RequestBody CurriculumFu cf) {
@@ -103,7 +102,7 @@ public class TeacherController {
     	}
     	return "no";
     }
-    
+
     //根据教师id,申请状态,学期名称查询申请信息
     //http://localhost:8080/teacher/selectCurriculumPage?teacherId=1&status=0&termName=2013-2014学年第1学期
     @RequestMapping(value="/selectCurriculumPage",method=RequestMethod.GET)

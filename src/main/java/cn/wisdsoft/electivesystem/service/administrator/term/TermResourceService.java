@@ -51,5 +51,7 @@ public interface TermResourceService {
 	 * @return
 	 */
 	TermResource seleTermById(Integer id);
+
+	Boolean selStatusBySelId(int selectId);
 	
 }
